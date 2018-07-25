@@ -32,7 +32,7 @@ export class UserService {
     this.storage.get('device')
       .then(id => {
         this.http.delete(`${this.myApi}/api/obj/equipment/${id}`)
-          .subscribe(data => this.removeDev())
+          .subscribe(() => this.removeDev())
       })
       .catch(err => console.log(err));
   }

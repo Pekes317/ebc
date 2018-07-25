@@ -138,7 +138,7 @@
     </plugin>
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
     <plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" spec="^4.0.7" />
-    <engine name="ios" spec="4.5.4" />
-    <engine name="android" spec="6.4.0" />
     <allow-navigation href="http://192.168.0.10:8100" />
+    <engine name="ios" spec="4.5.4" />
+    <engine name="android" spec="7.1.0" />
 </widget>

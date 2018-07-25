@@ -1,7 +1,6 @@
 import { AfterViewChecked, ChangeDetectorRef, Component, DoCheck, OnInit, ViewChild } from '@angular/core';
 import { IonicPage, ModalController, Slides } from 'ionic-angular';
 
-import { PictureService } from '../../providers/myservices';
 import { FormBase, PicForm, SampleForm, SelectForm, SocialForm } from './forms';
 
 @IonicPage({
@@ -29,7 +28,7 @@ export class SubmitPage implements AfterViewChecked, OnInit, DoCheck {
   loaded: boolean = false;
   subform: string;
 
-  constructor(private detect: ChangeDetectorRef, private modal: ModalController, private pic: PictureService) { }
+  constructor(private detect: ChangeDetectorRef, private modal: ModalController) { }
 
   ngAfterViewChecked() {
     this.steps.lockSwipes(true);
