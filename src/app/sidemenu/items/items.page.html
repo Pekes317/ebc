@@ -1,0 +1,52 @@
+<ebc-navbar>{{itemsPre}}&nbsp;{{itemType}}</ebc-navbar>
+
+<ion-content class="myitems">
+	<div padding *ngIf="(items | async)?.length === 0">
+		<ion-text color="tertiary">
+			<h2>Sorry You haven't Added Anything Here</h2>
+		</ion-text>
+		<p>Please Submit a New {{itemType}}</p>
+	</div>
+	<ion-list>
+		<ion-item-sliding *ngFor="let i of items | async" #slideCard>
+			<ion-card>
+				<ion-item>
+					<ion-list style="width: 100%;">
+						<ion-card-header>
+							<ion-text color="tertiary">
+								<h2>{{i.name}}</h2>
+							</ion-text>
+						</ion-card-header>
+						<ion-card-content>
+							<hr class="line">
+							<ion-item class="myItem">
+								<div slot="start" class="broken-img" *ngIf="!i?.pic">{{itemType}} is Being Created</div>
+								<ion-thumbnail slot="start" *ngIf="i.pic">
+									<img [src]="i?.pic" [title]="itemType+' is Being Created'">
+								</ion-thumbnail>
+								<ion-label class="desc">{{i?.desc}}</ion-label>
+								<ion-text slot="end" color="primary">
+									<ion-icon name="arrow-back"></ion-icon>&thinsp;Swipe&thinsp;
+									<ion-icon *ngIf="delete" name="arrow-forward"></ion-icon>
+								</ion-text>
+							</ion-item>
+						</ion-card-content>
+					</ion-list>
+				</ion-item>
+				<ion-item-options *ngIf="delete" side="start">
+					<ion-item-option color="danger" (click)="slideCard.closeOpened(); delAlert(i?.id)">
+						<ion-icon name="trash"></ion-icon>
+					</ion-item-option>
+				</ion-item-options>
+				<ion-item-options side="end">
+					<ion-item-option color="light" (click)="slideCard.closeOpened(); goTo(i)">
+						<ion-icon name="eye"></ion-icon>
+					</ion-item-option>
+					<ion-item-option *ngIf="delete" color="tertiary" (click)="slideCard.closeOpened(); share(i)">
+						<ion-icon name="share-alt"></ion-icon>
+					</ion-item-option>
+				</ion-item-options>
+			</ion-card>
+		</ion-item-sliding>
+	</ion-list>
+</ion-content>

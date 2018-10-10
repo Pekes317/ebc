@@ -1,0 +1,24 @@
+@import '../../../theme/mixins';
+
+.myitems {
+	@include heading;
+	@include broken;
+	
+	.desc {
+		max-height: 4rem;
+		white-space: normal;
+		overflow: hidden;
+	}
+
+	.line {
+		background-color: var(--ion-color-light-shade);
+	}
+
+	img {
+		object-fit: contain;
+	}
+
+	.myItem {
+		background-color: rgba(0,0,0,0);
+	}
+}

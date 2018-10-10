@@ -1,0 +1,16 @@
+<div class="svg">
+  <div *ngIf="!item?.ready" class="notAvail">
+    <div class="notReady">
+      <ion-text color="light">
+        <h3>This {{formFactor}} is not ready for use yet.</h3>
+      </ion-text>
+    </div>
+    <div>
+      <img *ngIf="isImg.test(item?.pic)" [title]="'This '+formFactor+' Being Created'" />
+      <div *ngIf="!isImg.test(item?.pic)" class="broken-img" style="height: 75px;">
+        <span>This {{formFactor}} Being Created</span>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="item?.ready" #myItem [innerHTML]="svg"></div>
+</div>

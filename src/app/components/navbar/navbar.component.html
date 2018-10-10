@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar [color]="color">
+    <ion-buttons slot="start">
+      <ion-button *ngIf="back" shape="round" (click)="goBack();">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="!back" shape="round" (click)="sideMenu();">
+        <ion-icon slot="icon-only" name="menu"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      <ng-content></ng-content>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button shape="round" (click)="menuOpen($event);">
+        <ion-icon slot="icon-only" name="more"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>

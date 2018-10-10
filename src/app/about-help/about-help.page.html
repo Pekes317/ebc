@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-button shape="round" (click)="goBack()">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>About and Help</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div class="about-logo">
+    <img alt="EBC Logo" src="assets/icon/about-logo.png">
+  </div>
+  <ion-list>
+    <ion-item-divider>
+      <strong>App Information</strong>
+    </ion-item-divider>
+    <ion-item>
+      <ion-text color="tertiary">
+        <p class="label">Name:</p>
+      </ion-text>
+      <ion-note slot="end">{{appName}}</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-text color="tertiary">
+        <p class="label">Version:</p>
+      </ion-text>
+      <ion-note slot="end">{{appVer}}</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-text color="tertiary">
+        <p class="label">Version Code:</p>
+      </ion-text>
+      <ion-note slot="end">{{appVerCode}}</ion-note>
+    </ion-item>
+    <ion-item-divider>
+      <strong>Help &amp; Feedback</strong>
+    </ion-item-divider>
+    <ion-item class="btn" (click)="helpEmail()">
+      <ion-ripple-effect></ion-ripple-effect>
+      <ion-text color="tertiary">
+        <p class="label">email:</p>
+      </ion-text>
+      <ion-note slot="end">ebc.support@ebc.beezleeart.com</ion-note>
+    </ion-item>
+    <ion-item-divider>
+      <strong>Legal</strong>
+    </ion-item-divider>
+    <ion-item class="btn" (click)="policy()">
+      <ion-ripple-effect></ion-ripple-effect>
+      <ion-text color="tertiary">
+        <p class="label">Private Policy</p>
+      </ion-text>
+      <ion-note slot="end">
+        <ion-icon name="list-box"></ion-icon>
+      </ion-note>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-note color="medium" padding>&copy;&thinsp;{{year}} by EBC: Electronic Business Card</ion-note>
+  </ion-toolbar>
+</ion-footer>

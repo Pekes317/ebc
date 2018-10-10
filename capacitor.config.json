@@ -1,0 +1,6 @@
+{
+  "appId": "io.ionic.ebc",
+  "appName": "EBC",
+  "bundledWebRuntime": false,
+  "webDir": "www"
+}

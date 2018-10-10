@@ -1,0 +1,20 @@
+<ebc-navbar>My Profile</ebc-navbar>
+
+<ion-content class="person">
+	<ion-card>
+		<div class="userImg"> <img [src]="(userData | async)?.photoUrl" /></div>
+		<ion-card-content>
+			<ion-card-title>
+				<ion-text color="tertiary">
+					<h2>{{(userData | async)?.displayName}}</h2>
+				</ion-text>
+			</ion-card-title>
+		</ion-card-content>
+		<div class="editBtn">
+			<ion-button fill="clear" (click)="editProfile();">
+				Edit
+				<ion-icon slot="end" name="build"></ion-icon>
+			</ion-button>
+		</div>
+	</ion-card>
+</ion-content>

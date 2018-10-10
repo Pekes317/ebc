@@ -1,0 +1,15 @@
+@import '../../../theme/mixins';
+
+.detail {
+	@include heading;
+	@include broken;
+	@include not;
+
+	.desc {
+		margin-top: 1rem;
+	}
+	
+	.ebc-title {
+		font-size: 1.5rem;
+	}
+}

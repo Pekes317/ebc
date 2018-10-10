@@ -1,0 +1,30 @@
+<form [formGroup]="smsForm" (ngSubmit)="sendSms(smsForm)">
+  <ion-list lines="none">
+    <ion-text color="medium">
+      <h3>Send Text<span *ngIf="set.hide"> to {{set?.name.formatted}}</span></h3>
+    </ion-text>
+    <div class="field">
+      <ion-radio-group formControlName="phone" [hidden]="!set.hide">
+        <ion-item *ngFor="let number of set?.contacts">
+          <ion-label color="medium">{{number.type}}: {{number.value}}</ion-label>
+          <ion-radio [id]="number.id" name="sms" [value]="number.value"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>Other Number</ion-label>
+          <ion-radio id="manual" name="sms" [value]="smsField" checked="true"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+      <ion-item [class.myError]="!phone.valid && phone.touched">
+        <ion-label position="stacked" color="danger"><span *ngIf="!phone.valid && phone.touched">Check the Number</span></ion-label>
+        <ion-input color="medium" id="custom" type="tel" [(ngModel)]="smsField" placeholder="Manual Selected Number"
+          [ngModelOptions]="{standalone: true}" (input)="customPhone()" clear-input="true" clear-on-edit="true"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Message</ion-label>
+        <ion-input color="medium" clear-input="true" clear-on-edit="true" formControlName="smsText" type="text"></ion-input>
+      </ion-item>
+    </div>
+    <ion-button color="primary" expand="full" [disabled]="disabled || !phone.valid" class="formBtn" type="submit">Send
+      Message</ion-button>
+  </ion-list>
+</form>

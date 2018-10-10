@@ -1,0 +1,15 @@
+@import '../../theme/mixins';
+
+.login {
+	@include heading;
+	@include inputs;
+
+	.passErr {
+		margin-left: 1.25rem;
+		margin-bottom: .2rem;
+
+		p {
+			padding-top: .25rem;
+		}
+	}
+}

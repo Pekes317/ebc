@@ -1,0 +1,83 @@
+<ebc-navbar back="true">Edit Profile</ebc-navbar>
+
+<ion-content class="edit">
+  <ion-fab *ngIf="upFile" vertical="top" horizontal="start">
+    <ion-fab-button ion-fab color="light" (click)="savePic();" class="action">
+      <ion-icon name="cloud-upload"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-fab vertical="top" horizontal="end">
+    <ion-fab-button color="tertiary" (click)="picMenu();" class="action">
+      <ion-icon name="image"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-card>
+    <div class="userImg">
+      <img *ngIf="!(newPicture | async)?.newPic" [src]="(userData | async)?.photoUrl" />
+      <img *ngIf="(newPicture | async)?.newPic" [src]="(newPicture | async)?.picFile" />
+    </div>
+    <ion-card-content>
+      <ion-card-title>
+        <ion-text color="tertiary">
+          <h2>{{(userData | async)?.displayName}}</h2>
+        </ion-text>
+      </ion-card-title>
+    </ion-card-content>
+    <div class="editbar">
+      <ion-segment color="primary" [(ngModel)]="section">
+        <ion-segment-button value="user">
+          Edit Info
+        </ion-segment-button>
+        <ion-segment-button value="password">
+          Change Password
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+  </ion-card>
+  <div [ngSwitch]="section">
+    <div *ngSwitchCase="'user'">
+      <form [formGroup]="editForm" (ngSubmit)="editInfo(editForm)">
+        <ion-list class="editForm" lines="none">
+          <div class="field">
+            <ion-item>
+              <ion-label position="stacked">Full Name</ion-label>
+              <ion-input clearInput formControlName="displayName" [placeholder]="(userData | async)?.displayName" type="text"></ion-input>
+            </ion-item>
+            <div class="passErr">
+              <ion-text *ngIf="editForm.errors" color="danger">
+                <p>Something is Wrong Please Double Check</p>
+              </ion-text>
+            </div>
+          </div>
+          <ion-button expand="block" [disabled]="!editForm.dirty" class="formBtn" type="submit">Confirm Change</ion-button>
+        </ion-list>
+      </form>
+    </div>
+    <div *ngSwitchCase="'password'">
+      <form [formGroup]="passwordForm" (ngSubmit)="editPass(passwordForm)">
+        <ion-list lines="none" class="editForm">
+          <div class="field">
+            <div [class.myError]="passwordForm.errors">
+              <ion-item>
+                <ion-label position="stacked">Password</ion-label>
+                <ion-input clearInput formControlName="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
+                  type="password"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="stacked">Confirm Password</ion-label>
+                <ion-input clearInput formControlName="confirm" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
+                  type="password"></ion-input>
+              </ion-item>
+              <div class="passErr">
+                <ion-text color="danger" *ngIf="passwordForm.errors">
+                  <p>Passwords Don't Match</p>
+                </ion-text>
+              </div>
+            </div>
+          </div>
+          <ion-button expand="block" [disabled]="!passwordForm.valid" class="formBtn" type="submit">Confirm Change</ion-button>
+        </ion-list>
+      </form>
+    </div>
+  </div>
+</ion-content>

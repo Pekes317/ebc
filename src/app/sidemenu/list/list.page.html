@@ -1,0 +1,26 @@
+<ng-container [ngSwitch]="listType">
+  <ion-tabs color="primary" *ngSwitchCase="outlet.my">
+    <ion-tab [label]="listType+' Cards'" icon="card" [href]="'/sidemenu/list/'+fragment+'/(ebc-cards:cards)'">
+      <ion-router-outlet stack name="ebc-cards"></ion-router-outlet>
+    </ion-tab>
+    <ion-tab [label]="listType+' Flyers'" icon="document" [href]="'/sidemenu/list/'+fragment+'/(ebc-flyers:flyers)'">
+      <ion-router-outlet stack name="ebc-flyers"></ion-router-outlet>
+    </ion-tab>
+  </ion-tabs>
+  <ion-tabs color="primary" *ngSwitchCase="outlet.samp">
+    <ion-tab [label]="listType+' Cards'" icon="card" [href]="'/sidemenu/list/'+fragment+'/(samp-cards:cards)'">
+      <ion-router-outlet stack name="samp-cards"></ion-router-outlet>
+    </ion-tab>
+    <ion-tab [label]="listType+' Flyers'" icon="document" [href]="'/sidemenu/list/'+fragment+'/(samp-flyers:flyers)'">
+      <ion-router-outlet stack name="samp-flyers"></ion-router-outlet>
+    </ion-tab>
+  </ion-tabs>
+  <ion-tabs color="primary" *ngSwitchCase="outlet.temp">
+    <ion-tab [label]="listType+' Cards'" icon="card" [href]="'/sidemenu/list/'+fragment+'/(temp-cards:cards)'">
+      <ion-router-outlet stack name="temp-cards"></ion-router-outlet>
+    </ion-tab>
+    <ion-tab [label]="listType+' Flyers'" icon="document" [href]="'/sidemenu/list/'+fragment+'/(temp-flyers:flyers)'">
+      <ion-router-outlet stack name="temp-flyers"></ion-router-outlet>
+    </ion-tab>
+  </ion-tabs>
+</ng-container>

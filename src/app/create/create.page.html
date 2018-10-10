@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button shape="round" (click)="goBack()">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      EBC: New User
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="create">
+  <ion-card padding>
+    <ion-card-header>
+      <ion-text color="tertiary">
+        <h2>Create New Account</h2>
+      </ion-text>
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="createForm" (ngSubmit)="createUser(createForm)">
+        <ion-list lines="none" [class.myError]="createError">
+          <ion-item [class.myError]="email.errors && email.dirty">
+            <ion-label position="stacked">Username</ion-label>
+            <ion-input clearInput formControlName="email" id="username" name="username" placeholder="example@mail.com" type="email"></ion-input>
+          </ion-item>
+          <div class="passErr">
+            <ion-text color="danger" *ngIf="email.hasError('invalidEmail') && email.dirty">
+              <p>Please Provide a Valid Email</p>
+            </ion-text>
+            <ion-text color="danger" *ngIf="createError">
+              <p>User Already Taken Please Try Again</p>
+            </ion-text>
+          </div>
+          <div class="myName">
+            <ion-item class="last">
+              <ion-label position="stacked">Full Name</ion-label>
+              <ion-input clearInput formControlName="displayName" id="displayName" name="name" placeholder="John/Jane Doe" type="text"></ion-input>
+            </ion-item>
+          </div>
+          <div formGroupName="verify" [class.myError]="verify.errors">
+            <ion-item>
+              <ion-label position="stacked">Password</ion-label>
+              <ion-input color="medium" clear-input="true" clear-on-edit="true" formControlName="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
+                type="password"></ion-input>
+            </ion-item>
+            <div class="passErr">
+              <ion-text color="danger" *ngIf="password.hasError('minlength')">
+                <p>Password must be at least 6 characters</p>
+              </ion-text>
+              <ion-text color="danger" *ngIf="verify.hasError('notEqual')">
+                <p>Passwords Don't Match</p>
+              </ion-text>
+            </div>
+            <ion-item>
+              <ion-label position="stacked">Confirm Password</ion-label>
+              <ion-input color="medium" clear-input="true" clear-on-edit="true" formControlName="confirmPassword" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
+                type="password"></ion-input>
+            </ion-item>
+          </div>
+        </ion-list>
+        <div class="createBtn">
+          <ion-button expand="block" [disabled]="!createForm.valid" type="submit">
+            <ion-icon slot="start" name="create"></ion-icon>
+            Create Account</ion-button>
+        </div>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-note color="medium" padding>&copy;&thinsp;{{year}} by EBC: Electronic Business Card</ion-note>
+  </ion-toolbar>
+</ion-footer>

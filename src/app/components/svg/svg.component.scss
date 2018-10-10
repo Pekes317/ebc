@@ -1,0 +1,7 @@
+@import '../../../theme/mixins';
+
+.svg {
+	@include heading;
+	@include broken;
+	@include not;
+}

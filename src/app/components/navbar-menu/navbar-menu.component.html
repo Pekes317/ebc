@@ -1,0 +1,17 @@
+<ion-list class="more-menu">
+  <ion-item (click)="openPage('about-help')">
+    <ion-ripple-effect></ion-ripple-effect>
+    <span>About &amp; Help</span>
+    <ion-icon slot="end" name="help-circle"></ion-icon>
+  </ion-item>
+  <ion-item (click)="openPage('settings')">
+    <ion-ripple-effect></ion-ripple-effect>
+    <span>Settings</span>
+    <ion-icon slot="end" name="settings"></ion-icon>
+  </ion-item>
+  <ion-item (click)="signOut()">
+    <ion-ripple-effect></ion-ripple-effect>
+    <ion-text color="danger">Sign Out</ion-text>
+    <ion-icon slot="end" color="danger" name="log-out"></ion-icon>
+  </ion-item>
+</ion-list>

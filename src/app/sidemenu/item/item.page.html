@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar [color]="inState ? 'primary' : 'tertiary'">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      {{(itemState | async)?.name}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="detail">
+  <ion-card>
+    <ebc-svg [formFactor]="type" [item]="(itemState | async)" [itemMedia]="(itemMedia | async)"></ebc-svg>
+    <ion-card-content>
+      <ion-card-title>
+        <ion-text color="tertiary">
+          <h2 class="ebc-title">{{(itemState | async)?.name}}</h2>
+        </ion-text>
+        <p class="desc">{{(itemState | async)?.desc}}</p>
+      </ion-card-title>
+    </ion-card-content>
+    <div>
+      <ion-segment color="primary" [(ngModel)]="message">
+        <ion-segment-button value="text">
+          <ion-icon name="text"></ion-icon>
+        </ion-segment-button>
+        <ion-segment-button value="contact" (click)="getContact()">
+          <ion-icon name="contact"></ion-icon>
+        </ion-segment-button>
+        <ion-segment-button value="mail">
+          <ion-icon name="mail"></ion-icon>
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+  </ion-card>
+  <div padding [ngSwitch]="message" class="messForm" [class.notAvail]="(itemState | async)?.disable">
+    <div class="mess" *ngIf="(itemState | async)?.disable" padding>
+      <ion-text color="danger">
+        <h3>This Feature is not Available for {{(itemState | async)?.name}}</h3>
+      </ion-text>
+    </div>
+    <div *ngSwitchCase="'text'">
+      <ebc-sms [set]="smsShare" [disable]="(itemState | async)?.disable" (method)="sentMsg($event)"></ebc-sms>
+    </div>
+    <div *ngSwitchCase="'mail'">
+      <ebc-email [set]="emailShare" [disable]="(itemState | async)?.disable" (method)="sentMsg($event)"></ebc-email>
+    </div>
+  </div>
+</ion-content>
