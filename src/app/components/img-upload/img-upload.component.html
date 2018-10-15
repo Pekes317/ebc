@@ -1,0 +1,16 @@
+<ng-container *ngIf="uploadEnable">
+  <ion-fab *ngIf="updateAction" vertical="top" horizontal="start">
+    <ion-fab-button ion-fab color="light" (click)="saveImg();" class="action">
+      <ion-icon name="cloud-upload"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-fab vertical="top" horizontal="end">
+    <ion-fab-button color="tertiary" (click)="openMenu();" class="action">
+      <ion-icon name="image"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ng-container>
+<div class="userImg">
+  <img *ngIf="!updateAction" [src]="currentImg" />
+  <img *ngIf="updateAction" [src]="newImg" />
+</div>
