@@ -7,7 +7,7 @@
       </ion-toolbar>
     </ion-header>
     <ion-content>
-      <ion-list>
+      <ion-list lines="none">
         <ion-menu-toggle auto-hide="false" *ngFor="let p of pages">
           <ion-item [routerDirection]="'root'" [routerLink]="[p.component]">
             <ion-icon slot="start"></ion-icon>

@@ -25,12 +25,8 @@ export class ImgUploadComponent implements OnDestroy, OnInit {
     this.newImg = state.picFile;
     this.updateAction = state.newPic;
   }
-  @Input()
-  set enable(show: boolean) {
-    this.uploadEnable = show;
-  }
   @Output()
-  imgAction: EventEmitter<boolean> = new EventEmitter();
+  imgAction: EventEmitter<PictureState> = new EventEmitter();
 
   private currentImg: string = '';
   private newImg: string = '';
@@ -40,13 +36,11 @@ export class ImgUploadComponent implements OnDestroy, OnInit {
   constructor(private pic: PictureService) {}
 
   ngOnInit() {
-    // this.pic.picSource.subscribe(imgSrc => this.getImg(imgSrc));
-    // this.pic.selectImg.subscribe(imgData => this.selectData(imgData));
+    this.pic.selectPic.subscribe(imgData => this.selectData(imgData));
   }
 
   ngOnDestroy() {
-    // this.pic.picSource.unsubscribe();
-    // this.pic.selectImg.unsubscribe();
+    this.pic.selectPic.unsubscribe();
   }
 
   openMenu() {
@@ -54,14 +48,14 @@ export class ImgUploadComponent implements OnDestroy, OnInit {
   }
 
   saveImg() {
-    this.imgAction.emit(false);
-  }
-
-  private getImg(src: number) {
-    this.pic.picReturn(src);
+    // this.imgAction.emit(false);
   }
 
   private selectData(img: string) {
-    console.log('data:', img);
+    const newImg: PictureState = {
+      newPic: true,
+      picFile: img,
+    }
+    this.imgAction.next(newImg);
   }
 }

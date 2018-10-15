@@ -7,11 +7,11 @@
 		</ion-text>
 		<p>Please Submit a New {{itemType}}</p>
 	</div>
-	<ion-list>
+	<ion-list lines="none">
 		<ion-item-sliding *ngFor="let i of items | async" #slideCard>
 			<ion-card>
 				<ion-item>
-					<ion-list style="width: 100%;">
+					<ion-list lines="none" style="width: 100%;">
 						<ion-card-header>
 							<ion-text color="tertiary">
 								<h2>{{i.name}}</h2>

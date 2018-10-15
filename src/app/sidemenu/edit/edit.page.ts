@@ -12,8 +12,12 @@ import { AuthUser } from '../../models/user.model';
 import { UploadOpts, UploadImg } from '../../models/app.model';
 import { UsersDataService } from '../../providers/users-data.service';
 import * as fromUser from '../../state/user-store/reducers';
-import { LoadPicture, UploadPicture } from '../../state/user-store/actions/picture.actions';
+import {
+  LoadPicture,
+  UploadPicture
+} from '../../state/user-store/actions/picture.actions';
 import { UpdateUserName } from '../../state/user-store/actions/user.actions';
+import { PictureState } from '../../state/user-store/models/picture-state.model';
 
 @Component({
   selector: 'ebc-edit',
@@ -24,10 +28,9 @@ export class EditPage implements OnInit {
   confirm: FormControl = new FormControl('', Validators.required);
   editForm: FormGroup;
   displayName: FormControl = new FormControl('');
-  newPicture: Observable<{
-    newPic: boolean;
-    picFile: string;
-  }> = this.store.pipe(select(fromUser.selectPic));
+  newPicture: Observable<PictureState> = this.store.pipe(
+    select(fromUser.selectPic)
+  );
   passwordForm: FormGroup;
   password: FormControl = new FormControl('', Validators.required);
   section: string = 'user';
@@ -58,7 +61,9 @@ export class EditPage implements OnInit {
   editInfo(info) {
     let input = info.value;
     this.user.updateUser(input).subscribe((user: UserInfo) => {
-      this.store.dispatch(new UpdateUserName({ displayName: user.displayName }));
+      this.store.dispatch(
+        new UpdateUserName({ displayName: user.displayName })
+      );
       this.profileUpdated('Username');
       this.editForm.reset();
     });
@@ -84,11 +89,8 @@ export class EditPage implements OnInit {
     errMess.present();
   }
 
-  picMenu() {
-    this.pic.selectPic
-      .pipe(take(1))
-      .subscribe(imgData => this.store.dispatch(new LoadPicture(imgData)));
-    this.pic.getPics();
+  picMenu(img: PictureState) {
+    this.store.dispatch(new LoadPicture(img));
   }
 
   async profileUpdated(action: string) {
@@ -114,5 +116,11 @@ export class EditPage implements OnInit {
     };
     this.store.dispatch(new UploadPicture(picUpload));
     this.profileUpdated('Profile');
+  }
+
+  protected imgTrigger(newImg: PictureState) {
+     if (newImg.newPic) {
+       this.picMenu(newImg);
+     }
   }
 }

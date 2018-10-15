@@ -17,7 +17,7 @@ import { Observer, Observable, Subject } from 'rxjs';
 export class PictureService {
   myApi: string = 'https://ebc.beezleeart.com';
   myLoader: HTMLIonLoadingElement;
-  selectPic: Subject<{ newPic: boolean, picFile: string }> = new Subject();
+  selectPic: Subject<string> = new Subject();
 
   constructor(
     public camera: Camera,
@@ -74,10 +74,7 @@ export class PictureService {
     this.camera
       .getPicture(opts)
       .then(imageData => {
-        const img = {
-          newPic: true,
-          picFile: `data:${this.getMimeType(imageData)};base64,${imageData}`
-        };
+        const img = `data:${this.getMimeType(imageData)};base64,${imageData}`;
         this.selectPic.next(img);
       })
       .catch(err => {

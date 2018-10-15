@@ -1,21 +1,8 @@
 <ebc-navbar back="true">Edit Profile</ebc-navbar>
 
 <ion-content class="edit">
-  <ion-fab *ngIf="upFile" vertical="top" horizontal="start">
-    <ion-fab-button ion-fab color="light" (click)="savePic();" class="action">
-      <ion-icon name="cloud-upload"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-  <ion-fab vertical="top" horizontal="end">
-    <ion-fab-button color="tertiary" (click)="picMenu();" class="action">
-      <ion-icon name="image"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
   <ion-card>
-    <div class="userImg">
-      <img *ngIf="!(newPicture | async)?.newPic" [src]="(userData | async)?.photoUrl" />
-      <img *ngIf="(newPicture | async)?.newPic" [src]="(newPicture | async)?.picFile" />
-    </div>
+    <ebc-img-upload [current]="(userData | async)?.photoUrl" [update]="(newPicture | async)" (imgAction)="imgTrigger($event);"></ebc-img-upload>
     <ion-card-content>
       <ion-card-title>
         <ion-text color="tertiary">
