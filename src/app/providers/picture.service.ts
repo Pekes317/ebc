@@ -9,7 +9,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx';
 
 import { UploadImg } from '../models/app.model';
-import { Observer, Observable, Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +37,7 @@ export class PictureService {
           icon: 'camera',
           handler: () => {
             console.log('Camera Open');
+            this.uploading('Loading...');
             this.picReturn(1);
           }
         },
@@ -45,6 +46,7 @@ export class PictureService {
           icon: 'images',
           handler: () => {
             console.log('Gallery Open');
+            this.uploading('Loading...');
             this.picReturn(2);
           }
         },
@@ -62,6 +64,10 @@ export class PictureService {
     actionPics.present();
   }
 
+  getSelected(): Observable<string> {
+    return this.selectPic.asObservable();
+  }
+
   picReturn(src: number) {
     const opts: CameraOptions = {
       allowEdit: true,
@@ -76,6 +82,7 @@ export class PictureService {
       .then(imageData => {
         const img = `data:${this.getMimeType(imageData)};base64,${imageData}`;
         this.selectPic.next(img);
+        this.myLoader.dismiss();
       })
       .catch(err => {
         console.log(err);
@@ -94,15 +101,15 @@ export class PictureService {
   }
 
   uploadImg(image: UploadImg) {
-    this.uploading();
+    this.uploading('Uploading File...');
     return this.http.request('POST', `${this.myApi}/api/upload`, {
       body: image
     });
   }
 
-  async uploading() {
+  async uploading(loadMess: string) {
     this.myLoader = await this.loader.create({
-      message: 'Uploading File...'
+      message: loadMess
     });
 
     this.myLoader.present();

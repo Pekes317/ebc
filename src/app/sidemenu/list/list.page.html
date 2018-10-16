@@ -1,5 +1,5 @@
 <ng-container [ngSwitch]="listType">
-  <ion-tabs color="primary" *ngSwitchCase="outlet.my">
+  <ion-tabs  *ngSwitchCase="outlet.my">
     <ion-tab [label]="listType+' Cards'" icon="card" [href]="'/sidemenu/list/'+fragment+'/(ebc-cards:cards)'">
       <ion-router-outlet stack name="ebc-cards"></ion-router-outlet>
     </ion-tab>

@@ -16,7 +16,7 @@ export function reducer(state = initialState, action: PictureActions): State {
       return { ...action.payload };
 
     case PictureActionTypes.UnloadPicture:
-      return state;
+      return { newPic: false,  picFile: '' };
 
     default:
       return state;

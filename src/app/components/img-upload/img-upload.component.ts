@@ -6,6 +6,7 @@ import {
   OnInit,
   Output
 } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 import { PictureService } from '../../providers/picture.service';
 import { PictureState } from '../../state/user-store/models/picture-state.model';
@@ -22,25 +23,26 @@ export class ImgUploadComponent implements OnDestroy, OnInit {
   }
   @Input()
   set update(state: PictureState) {
-    this.newImg = state.picFile;
+    this.currentImg = state.newPic ? state.picFile : this.currentImg;
     this.updateAction = state.newPic;
   }
   @Output()
   imgAction: EventEmitter<PictureState> = new EventEmitter();
 
+  private collector: Subscription;
   private currentImg: string = '';
-  private newImg: string = '';
-  private updateAction: boolean = false;
-  private uploadEnable: boolean = false;
+  protected updateAction: boolean = false;
 
   constructor(private pic: PictureService) {}
 
   ngOnInit() {
-    this.pic.selectPic.subscribe(imgData => this.selectData(imgData));
+    this.collector = this.pic
+      .getSelected()
+      .subscribe(imgData => this.selectData(imgData));
   }
 
   ngOnDestroy() {
-    this.pic.selectPic.unsubscribe();
+    this.collector.unsubscribe();
   }
 
   openMenu() {
@@ -54,8 +56,8 @@ export class ImgUploadComponent implements OnDestroy, OnInit {
   private selectData(img: string) {
     const newImg: PictureState = {
       newPic: true,
-      picFile: img,
-    }
-    this.imgAction.next(newImg);
+      picFile: img
+    };
+    this.imgAction.emit(newImg);
   }
 }

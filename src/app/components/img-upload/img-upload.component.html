@@ -5,12 +5,11 @@
     </ion-fab-button>
   </ion-fab>
   <ion-fab vertical="top" horizontal="end">
-    <ion-fab-button color="tertiary" (click)="openMenu();" class="action">
+    <ion-fab-button color="success" (click)="openMenu();" class="action">
       <ion-icon name="image"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 </ng-container>
 <div class="userImg">
-  <img *ngIf="!updateAction" [src]="currentImg" />
-  <img *ngIf="updateAction" [src]="newImg" />
+  <img [src]="currentImg" />
 </div>

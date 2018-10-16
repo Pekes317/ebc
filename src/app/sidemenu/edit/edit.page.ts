@@ -1,10 +1,9 @@
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Validators, FormControl, FormGroup } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { select, Store } from '@ngrx/store';
 import { UserInfo } from 'firebase';
 import { Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
 
 import { FormHandlerService } from '../../providers/form-handler.service';
 import { PictureService } from '../../providers/picture.service';
@@ -14,7 +13,8 @@ import { UsersDataService } from '../../providers/users-data.service';
 import * as fromUser from '../../state/user-store/reducers';
 import {
   LoadPicture,
-  UploadPicture
+  UploadPicture,
+  UnloadPicture
 } from '../../state/user-store/actions/picture.actions';
 import { UpdateUserName } from '../../state/user-store/actions/user.actions';
 import { PictureState } from '../../state/user-store/models/picture-state.model';
@@ -24,7 +24,7 @@ import { PictureState } from '../../state/user-store/models/picture-state.model'
   templateUrl: './edit.page.html',
   styleUrls: ['./edit.page.scss']
 })
-export class EditPage implements OnInit {
+export class EditPage implements OnDestroy, OnInit {
   confirm: FormControl = new FormControl('', Validators.required);
   editForm: FormGroup;
   displayName: FormControl = new FormControl('');
@@ -38,6 +38,7 @@ export class EditPage implements OnInit {
   userData: Observable<AuthUser> = this.store.pipe(select(fromUser.selectUser));
 
   constructor(
+    private changeRef: ChangeDetectorRef,
     private form: FormHandlerService,
     private pic: PictureService,
     private store: Store<fromUser.UserState>,
@@ -56,6 +57,10 @@ export class EditPage implements OnInit {
       },
       this.form.areEqual
     );
+  }
+
+  ngOnDestroy() {
+    this.store.dispatch(new UnloadPicture());
   }
 
   editInfo(info) {
@@ -91,6 +96,7 @@ export class EditPage implements OnInit {
 
   picMenu(img: PictureState) {
     this.store.dispatch(new LoadPicture(img));
+    this.changeRef.detectChanges();
   }
 
   async profileUpdated(action: string) {
@@ -119,8 +125,8 @@ export class EditPage implements OnInit {
   }
 
   protected imgTrigger(newImg: PictureState) {
-     if (newImg.newPic) {
-       this.picMenu(newImg);
-     }
+    if (newImg.newPic) {
+      this.picMenu(newImg);
+    }
   }
 }
