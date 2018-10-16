@@ -37,7 +37,6 @@ export class PictureService {
           icon: 'camera',
           handler: () => {
             console.log('Camera Open');
-            this.uploading('Loading...');
             this.picReturn(1);
           }
         },
@@ -46,7 +45,6 @@ export class PictureService {
           icon: 'images',
           handler: () => {
             console.log('Gallery Open');
-            this.uploading('Loading...');
             this.picReturn(2);
           }
         },
@@ -69,6 +67,7 @@ export class PictureService {
   }
 
   picReturn(src: number) {
+    this.showLoader('Loading …');
     const opts: CameraOptions = {
       allowEdit: true,
       destinationType: 0,
@@ -101,13 +100,13 @@ export class PictureService {
   }
 
   uploadImg(image: UploadImg) {
-    this.uploading('Uploading File...');
+    this.showLoader('Uploading File …');
     return this.http.request('POST', `${this.myApi}/api/upload`, {
       body: image
     });
   }
 
-  async uploading(loadMess: string) {
+  async showLoader(loadMess: string) {
     this.myLoader = await this.loader.create({
       message: loadMess
     });
@@ -116,17 +115,12 @@ export class PictureService {
   }
 
   private getMimeType(base64: string) {
-    let startChar = base64.charAt(0);
-
-    switch (startChar) {
-      case '/':
-        return 'image/jpeg';
-      case 'R':
-        return 'image/gif';
-      case 'i':
-        return 'image/png';
-      default:
-        return 'image/png';
+    const startChar = base64.charAt(0);
+    const mimeTypes = {
+      '/': 'image/jpeg',
+      'R': 'image/gif',
+      'i': 'image/png'
     }
+    return mimeTypes[startChar];
   }
 }
