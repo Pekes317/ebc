@@ -6,7 +6,6 @@ import { UserInfo } from 'firebase';
 import { Observable } from 'rxjs';
 
 import { FormHandlerService } from '../../providers/form-handler.service';
-import { PictureService } from '../../providers/picture.service';
 import { AuthUser } from '../../models/user.model';
 import { UploadOpts, UploadImg } from '../../models/app.model';
 import { UsersDataService } from '../../providers/users-data.service';
@@ -40,7 +39,6 @@ export class EditPage implements OnDestroy, OnInit {
   constructor(
     private changeRef: ChangeDetectorRef,
     private form: FormHandlerService,
-    private pic: PictureService,
     private store: Store<fromUser.UserState>,
     private toast: ToastController,
     private user: UsersDataService
@@ -126,7 +124,8 @@ export class EditPage implements OnDestroy, OnInit {
 
   protected imgTrigger(newImg: PictureState) {
     if (newImg.newPic) {
-      this.picMenu(newImg);
+      return this.picMenu(newImg);
     }
+    return this.savePic();
   }
 }

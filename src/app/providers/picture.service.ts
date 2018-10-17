@@ -118,9 +118,9 @@ export class PictureService {
     const startChar = base64.charAt(0);
     const mimeTypes = {
       '/': 'image/jpeg',
-      'R': 'image/gif',
-      'i': 'image/png'
-    }
+      R: 'image/gif',
+      i: 'image/png'
+    };
     return mimeTypes[startChar];
   }
 }
