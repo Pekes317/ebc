@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
-import { AngularFireAuth } from 'angularfire2/auth';
 import { PopoverController } from '@ionic/angular';
 
 @Component({

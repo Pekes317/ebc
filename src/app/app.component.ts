@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { Events, Platform } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { Deeplinks } from '@ionic-native/deeplinks/ngx';
@@ -6,7 +7,6 @@ import { Firebase } from '@ionic-native/firebase/ngx';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Store } from '@ngrx/store';
-import { AngularFireAuth } from 'angularfire2/auth';
 import { Subscription } from 'rxjs';
 
 import { UsersDataService } from './providers/users-data.service';

@@ -1,9 +1,9 @@
 import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { Component, DoCheck, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { AlertController, ToastController } from '@ionic/angular';
 import { Store } from '@ngrx/store';
-import { AngularFireAuth } from 'angularfire2/auth';
 
 import { AuthService } from '../providers/auth.service';
 import { FormHandlerService } from '../providers/form-handler.service';

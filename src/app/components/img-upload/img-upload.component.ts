@@ -49,8 +49,12 @@ export class ImgUploadComponent implements OnDestroy, OnInit {
     this.pic.getPics();
   }
 
-  saveImg() {
-    // this.imgAction.emit(false);
+  saveCurrent() {
+    const saveImg: PictureState = {
+      newPic: false,
+      picFile: this.currentImg
+    }
+    this.imgAction.emit(saveImg);
   }
 
   private selectData(img: string) {

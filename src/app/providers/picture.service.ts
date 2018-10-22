@@ -101,7 +101,7 @@ export class PictureService {
 
   uploadImg(image: UploadImg) {
     this.showLoader('Uploading File …');
-    return this.http.request('POST', `${this.myApi}/api/upload`, {
+    return this.http.request('POST', `${this.myApi}/api/user/img`, {
       body: image
     });
   }

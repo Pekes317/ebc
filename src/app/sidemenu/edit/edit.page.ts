@@ -107,25 +107,22 @@ export class EditPage implements OnDestroy, OnInit {
     editSuccess.present();
   }
 
-  async savePic() {
-    const picData = await this.newPicture.toPromise();
-    const user = await this.userData.toPromise();
+  savePic(img: PictureState) {
     const picOpt: UploadOpts = {
       upload_preset: 'usersPic',
-      tags: [user.displayName]
+      tags: ['profile']
     };
     const picUpload: UploadImg = {
-      img: picData.picFile,
+      img: img.picFile,
       opts: picOpt
     };
     this.store.dispatch(new UploadPicture(picUpload));
-    this.profileUpdated('Profile');
   }
 
   protected imgTrigger(newImg: PictureState) {
     if (newImg.newPic) {
       return this.picMenu(newImg);
     }
-    return this.savePic();
+    return this.savePic(newImg);
   }
 }
