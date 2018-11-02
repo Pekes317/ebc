@@ -1,5 +1,6 @@
+import { Location } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { IonRouterOutlet, MenuController, PopoverController } from '@ionic/angular';
+import { MenuController, PopoverController } from '@ionic/angular';
 
 import { NavbarMenuComponent } from '../navbar-menu/navbar-menu.component';
 
@@ -15,12 +16,12 @@ export class NavbarComponent implements OnInit {
   @Input()
   color: string = 'primary';
 
-  constructor(private menu: MenuController, private nav: IonRouterOutlet, private pop: PopoverController) {}
+  constructor(private menu: MenuController, private nav: Location, private pop: PopoverController) {}
 
   ngOnInit() {}
 
   goBack() {
-    this.nav.pop();
+    this.nav.back();
   }
 
   async menuOpen(click: Event) {

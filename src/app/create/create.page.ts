@@ -1,6 +1,7 @@
-import { Validators, FormControl, FormGroup } from '@angular/forms';
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Events, IonRouterOutlet } from '@ionic/angular';
+import { Validators, FormControl, FormGroup } from '@angular/forms';
+import { Events } from '@ionic/angular';
 import { Store } from '@ngrx/store';
 
 import { FormHandlerService } from '../providers/form-handler.service';
@@ -32,7 +33,7 @@ export class CreatePage implements OnInit {
   constructor(
     private events: Events,
     private form: FormHandlerService,
-    private nav: IonRouterOutlet,
+    private nav: Location,
     private store: Store<fromUser.State>
   ) {}
 
@@ -70,6 +71,6 @@ export class CreatePage implements OnInit {
 
   goBack() {
     this.events.unsubscribe('toast-dismiss');
-    this.nav.pop();
+    this.nav.back();
   }
 }

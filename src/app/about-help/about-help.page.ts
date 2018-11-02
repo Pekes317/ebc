@@ -1,5 +1,6 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { AlertController, IonRouterOutlet, ModalController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { PrivatePolicyComponent } from '../components/private-policy/private-policy.component';
@@ -19,7 +20,7 @@ export class AboutHelpPage implements OnInit {
     private alert: AlertController,
     private appVersion: AppVersion,
     private model: ModalController,
-    private nav: IonRouterOutlet,
+    private nav: Location,
     private social: SocialSharing
   ) {}
 
@@ -47,7 +48,7 @@ export class AboutHelpPage implements OnInit {
   }
 
   goBack() {
-    this.nav.pop();
+    this.nav.back();
   }
 
   async helpEmail() {
