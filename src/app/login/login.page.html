@@ -15,7 +15,7 @@
     </ion-card-header>
     <ion-card-content>
       <form [class.myError]="isAuthError" [formGroup]="loginForm" (ngSubmit)="signIn(loginForm)">
-        <ion-list lines="none">
+        <ion-list>
           <div class="field">
             <ion-item [class.myError]="!username.valid && username.touched">
               <ion-label position="stacked" for="username">Username</ion-label>

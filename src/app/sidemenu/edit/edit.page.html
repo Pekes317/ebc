@@ -24,7 +24,7 @@
   <div [ngSwitch]="section">
     <div *ngSwitchCase="'user'">
       <form [formGroup]="editForm" (ngSubmit)="editInfo(editForm)">
-        <ion-list class="editForm" lines="none">
+        <ion-list class="editForm">
           <div class="field">
             <ion-item>
               <ion-label position="stacked">Full Name</ion-label>
@@ -42,7 +42,7 @@
     </div>
     <div *ngSwitchCase="'password'">
       <form [formGroup]="passwordForm" (ngSubmit)="editPass(passwordForm)">
-        <ion-list lines="none" class="editForm">
+        <ion-list class="editForm">
           <div class="field">
             <div [class.myError]="passwordForm.errors">
               <ion-item>

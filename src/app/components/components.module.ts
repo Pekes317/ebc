@@ -16,6 +16,7 @@ import { SocialFormComponent } from './social-form/social-form.component';
 import { SmsComponent } from './sms/sms.component';
 import { SubmitModalComponent } from './submit-modal/submit-modal.component';
 import { SvgComponent } from './svg/svg.component';
+import { TabsComponent } from './tabs/tabs.component';
 
 @NgModule({
   imports: [CommonModule, FormsModule, ReactiveFormsModule, IonicModule],
@@ -32,7 +33,8 @@ import { SvgComponent } from './svg/svg.component';
     SocialFormComponent,
     SmsComponent,
     SubmitModalComponent,
-    SvgComponent
+    SvgComponent,
+    TabsComponent
   ],
   entryComponents: [
     NavbarMenuComponent,
@@ -45,7 +47,8 @@ import { SvgComponent } from './svg/svg.component';
     NavbarComponent,
     NavbarMenuComponent,
     SmsComponent,
-    SvgComponent
+    SvgComponent,
+    TabsComponent
   ]
 })
 export class ComponentsModule {}

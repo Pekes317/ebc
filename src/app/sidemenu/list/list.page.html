@@ -1,36 +1,26 @@
 <ng-container [ngSwitch]="listType">
-  <ion-tabs *ngSwitchCase="outlet.my">
-    <ion-tab-bar color="primary" slot="bottom" highlight="true">
-      <ion-tab-button [tab]="listType+'card'" [href]="'/sidemenu/list/'+fragment+'/(ebc-cards:cards)'">
-        <ion-icon name="card"></ion-icon>
-        <ion-label>{{listType}} Cards</ion-label>
-      </ion-tab-button>
-      <ion-tab-button [tab]="listType+'flyer'" [href]="'/sidemenu/list/'+fragment+'/(ebc-flyers:flyers)'">
-        <ion-icon name="document"></ion-icon>
-        <ion-label>{{listType}} Flyers</ion-label>
-      </ion-tab-button>
-    </ion-tab-bar>
-    <ion-tab [tab]="listType+'card'">
-      <ion-router-outlet stack name="ebc-cards"></ion-router-outlet>
+  <ebc-tabs *ngSwitchCase="outlet.my" [listType]="listType" [segment]="fragment" outlet="ebc">
+    <ion-tab tab="card">
+      <ion-router-outlet name="ebc-cards"></ion-router-outlet>
     </ion-tab>
-    <ion-tab [tab]="listType+'flyer'">
-      <ion-router-outlet stack name="ebc-flyers"></ion-router-outlet>
+    <ion-tab tab="flyer">
+      <ion-router-outlet name="ebc-flyers"></ion-router-outlet>
     </ion-tab>
-  </ion-tabs>
-  <!-- <ion-tabs color="primary" *ngSwitchCase="outlet.samp">
-    <ion-tab [name]="listType+' Cards'" icon="card" [href]="'/sidemenu/list/'+fragment+'/(samp-cards:cards)'">
-      <ion-router-outlet stack name="samp-cards"></ion-router-outlet>
+  </ebc-tabs>
+  <ebc-tabs *ngSwitchCase="outlet.samp" [listType]="listType" [segment]="fragment" outlet="samp">
+    <ion-tab tab="card">
+      <ion-router-outlet name="samp-cards"></ion-router-outlet>
     </ion-tab>
-    <ion-tab [name]="listType+' Flyers'" icon="document" [href]="'/sidemenu/list/'+fragment+'/(samp-flyers:flyers)'">
-      <ion-router-outlet stack name="samp-flyers"></ion-router-outlet>
+    <ion-tab tab="flyer">
+      <ion-router-outlet name="samp-flyers"></ion-router-outlet>
     </ion-tab>
-  </ion-tabs>
-  <ion-tabs color="primary" *ngSwitchCase="outlet.temp">
-    <ion-tab [name]="listType+' Cards'" icon="card" [href]="'/sidemenu/list/'+fragment+'/(temp-cards:cards)'">
-      <ion-router-outlet stack name="temp-cards"></ion-router-outlet>
+  </ebc-tabs>
+  <ebc-tabs *ngSwitchCase="outlet.temp" [listType]="listType" [segment]="fragment" outlet="temp">
+    <ion-tab tab="card">
+      <ion-router-outlet name="temp-cards"></ion-router-outlet>
     </ion-tab>
-    <ion-tab [name]="listType+' Flyers'" icon="document" [href]="'/sidemenu/list/'+fragment+'/(temp-flyers:flyers)'">
-      <ion-router-outlet stack name="temp-flyers"></ion-router-outlet>
+    <ion-tab tab="flyer">
+      <ion-router-outlet name="temp-flyers"></ion-router-outlet>
     </ion-tab>
-  </ion-tabs> -->
+  </ebc-tabs>
 </ng-container>

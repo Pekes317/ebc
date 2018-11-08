@@ -24,16 +24,11 @@ export class ListPage implements OnInit {
 
   setType(current: string) {
     this.fragment = current;
-    switch (current) {
-      case 'my-stuff':
-        this.listType = List.my;
-        break;
-      case 'samples':
-        this.listType = List.samp;
-        break;
-      case 'templates':
-        this.listType = List.temp;
-        break;
+    const types = {
+      'my-stuff': List.my,
+      'samples': List.samp,
+      'templates': List.temp,
     }
+    this.listType = types[current];
   }
 }

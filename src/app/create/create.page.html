@@ -20,7 +20,7 @@
     </ion-card-header>
     <ion-card-content>
       <form [formGroup]="createForm" (ngSubmit)="createUser(createForm)">
-        <ion-list lines="none" [class.myError]="createError">
+        <ion-list [class.myError]="createError">
           <ion-item [class.myError]="email.errors && email.dirty">
             <ion-label position="stacked">Username</ion-label>
             <ion-input clearInput formControlName="email" id="username" name="username" placeholder="example@mail.com" type="email"></ion-input>

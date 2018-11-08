@@ -4,8 +4,10 @@
 	@include heading;
 	@include inputs;
 
+	--ion-background-color: var(--ion-color-light);
+
 	.createBtn {
-		padding-top: 1.5rem;
+		padding: 1.5rem 0;
 	}
 
 	.passErr {

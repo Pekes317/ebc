@@ -4,6 +4,8 @@
 	@include heading;
 	@include inputs;
 
+	--ion-background-color: var(--ion-color-light);
+
 	.passErr {
 		margin-left: 1.25rem;
 		margin-bottom: .2rem;

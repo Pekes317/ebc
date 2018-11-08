@@ -1,5 +1,5 @@
 <form [formGroup]="smsForm" (ngSubmit)="sendSms(smsForm)">
-  <ion-list lines="none">
+  <ion-list>
     <ion-text color="medium">
       <h3>Send Text<span *ngIf="set.hide"> to {{set?.name.formatted}}</span></h3>
     </ion-text>

@@ -11,22 +11,16 @@
 }
 
 @mixin inputs {
-
-  ion-input,
-  ion-textarea {
-    border-bottom: var(--ion-color-primary) 1px solid;
-  }
-
   .field {
     transform: translateX(-.25rem);
   }
 
-  .myError {
+  .item-has-focus > ion-label {
+    color: var(--ion-color-primary);
+  }
 
-    ion-input,
-    ion-textarea {
-      border-bottom: var(--ion-color-danger) 1px solid;
-    }
+  .myError {
+    --ion-item-border-color: var(--ion-color-danger);
   }
 
   .formBtn {
