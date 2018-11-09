@@ -17,6 +17,7 @@ import { SmsComponent } from './sms/sms.component';
 import { SubmitModalComponent } from './submit-modal/submit-modal.component';
 import { SvgComponent } from './svg/svg.component';
 import { TabsComponent } from './tabs/tabs.component';
+import { ShareButtonsComponent } from './share-buttons/share-buttons.component';
 
 @NgModule({
   imports: [CommonModule, FormsModule, ReactiveFormsModule, IonicModule],
@@ -30,6 +31,7 @@ import { TabsComponent } from './tabs/tabs.component';
     PrivatePolicyComponent,
     SelectFormComponent,
     ShareComponent,
+    ShareButtonsComponent,
     SocialFormComponent,
     SmsComponent,
     SubmitModalComponent,
@@ -42,6 +44,7 @@ import { TabsComponent } from './tabs/tabs.component';
     ShareComponent
   ],
   exports: [
+    ShareButtonsComponent,
     EmailComponent,
     ImgUploadComponent,
     NavbarComponent,

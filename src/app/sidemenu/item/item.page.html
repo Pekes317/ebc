@@ -20,19 +20,7 @@
         <p class="desc">{{(itemState | async)?.desc}}</p>
       </ion-card-title>
     </ion-card-content>
-    <div>
-      <ion-segment color="primary" [(ngModel)]="message">
-        <ion-segment-button value="text">
-          <ion-icon name="text"></ion-icon>
-        </ion-segment-button>
-        <ion-segment-button value="contact" (click)="getContact()">
-          <ion-icon name="contact"></ion-icon>
-        </ion-segment-button>
-        <ion-segment-button value="mail">
-          <ion-icon name="mail"></ion-icon>
-        </ion-segment-button>
-      </ion-segment>
-    </div>
+    <ebc-share-buttons (mode)="section($event);" (selected)="getContact($event);"></ebc-share-buttons>
   </ion-card>
   <div padding [ngSwitch]="message" class="messForm" [class.notAvail]="(itemState | async)?.disable">
     <div class="mess" *ngIf="(itemState | async)?.disable" padding>

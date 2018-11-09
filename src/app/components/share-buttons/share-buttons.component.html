@@ -1,0 +1,13 @@
+<div>
+  <ion-segment color="primary" (ionChange)="shareType($event.detail);">
+    <ion-segment-button value="text">
+      <ion-icon name="text"></ion-icon>
+    </ion-segment-button>
+    <ion-segment-button value="contact" (click)="getContact()">
+      <ion-icon name="contact"></ion-icon>
+    </ion-segment-button>
+    <ion-segment-button value="mail">
+      <ion-icon name="mail"></ion-icon>
+    </ion-segment-button>
+  </ion-segment>
+</div>

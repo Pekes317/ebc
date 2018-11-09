@@ -1,3 +1,14 @@
-<p>
-  share works!
-</p>
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-title>Share Card/Flyer</ion-title>
+    <ion-buttons slot="end">
+      <ion-button shape="round" icon-only (click)="closeModal()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ebc-share-buttons></ebc-share-buttons>
+</ion-content>

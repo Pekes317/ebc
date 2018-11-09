@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastController } from '@ionic/angular';
-import { Contacts, Contact } from '@ionic-native/contacts/ngx';
+import { Contact } from '@ionic-native/contacts/ngx';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
@@ -25,12 +25,12 @@ export class ItemPage implements OnInit {
   itemMedia: Observable<string> = this.store.pipe(select(fromItems.selectSvg));
   inState: boolean = true;
   itemState: Observable<Item>;
+  message: string = 'contact';
   smsShare: ShareInput;
   type: string = '';
 
   constructor(
     private route: ActivatedRoute,
-    private contacts: Contacts,
     private store: Store<fromItems.ItemState>,
     private toast: ToastController
   ) {}
@@ -49,11 +49,9 @@ export class ItemPage implements OnInit {
     this.setMessage();
   }
 
-  getContact() {
-    this.contacts.pickContact().then(contact => {
-      this.setEmail(contact);
-      this.setMessage(contact);
-    });
+  getContact(contact: Contact) {
+    this.setEmail(contact);
+    this.setMessage(contact);
   }
 
   getItem(params) {
@@ -79,9 +77,13 @@ export class ItemPage implements OnInit {
 
   async getMedia() {
     const mediaUrl = await this.itemState.pipe(take(1)).toPromise();
-    if(mediaUrl.media) {
+    if (mediaUrl.media) {
       this.store.dispatch(new GetMedia(mediaUrl.media));
     }
+  }
+
+  section(segment: string) {
+    this.message = segment;
   }
 
   async sentMsg(type: string) {
