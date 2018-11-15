@@ -29,10 +29,10 @@
       </ion-text>
     </div>
     <div *ngSwitchCase="'text'">
-      <ebc-sms [set]="smsShare" [disable]="(itemState | async)?.disable" (method)="sentMsg($event)"></ebc-sms>
+      <ebc-sms [set]="share" [disable]="(itemState | async)?.disable" (method)="sentMsg($event)"></ebc-sms>
     </div>
     <div *ngSwitchCase="'mail'">
-      <ebc-email [set]="emailShare" [disable]="(itemState | async)?.disable" (method)="sentMsg($event)"></ebc-email>
+      <ebc-email [set]="share" [disable]="(itemState | async)?.disable" (method)="sentMsg($event)"></ebc-email>
     </div>
   </div>
 </ion-content>

@@ -1,0 +1,7 @@
+@import '../../../theme/mixins';
+
+.share-padding {
+	@include not;
+
+	padding-top: 1.5rem;
+}

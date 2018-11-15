@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="tertiary">
-    <ion-title>Share Card/Flyer</ion-title>
+    <ion-title>Share {{ebc.flyer ? 'Flyer' : 'Card'}} &ndash; {{ebc.name}}</ion-title>
     <ion-buttons slot="end">
       <ion-button shape="round" icon-only (click)="closeModal()">
         <ion-icon name="close"></ion-icon>
@@ -10,5 +10,20 @@
 </ion-header>
 
 <ion-content>
-  <ebc-share-buttons></ebc-share-buttons>
+  <div class="share-padding">
+    <ebc-share-buttons (mode)="section($event);" (selected)="getContact($event);"></ebc-share-buttons>
+    <div padding [ngSwitch]="message" class="messForm" [class.notAvail]="ebc.disable">
+      <div class="mess" *ngIf="ebc.disable" padding>
+        <ion-text color="danger">
+          <h3>This Feature is not Available for {{ebc.name}}</h3>
+        </ion-text>
+      </div>
+      <div *ngSwitchCase="'text'">
+        <ebc-sms [set]="share" [disable]="ebc.disable" (method)="sentMsg($event)"></ebc-sms>
+      </div>
+      <div *ngSwitchCase="'mail'">
+        <ebc-email [set]="share" [disable]="ebc.disable" (method)="sentMsg($event)"></ebc-email>
+      </div>
+    </div>
+  </div>
 </ion-content>

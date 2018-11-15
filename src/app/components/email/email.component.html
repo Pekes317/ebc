@@ -4,7 +4,7 @@
       <h3>Send Email<span *ngIf="set.hide"> to {{set?.name.formatted}}</span></h3>
     </ion-text>
     <div class="field">
-      <ion-radio-group formControlName="email" [hidden]="!set.hide">
+      <ion-radio-group formControlName="email" [hidden]="!set.show">
         <ion-item *ngFor="let addy of set?.contacts">
           <ion-label color="medium">{{addy.type}}: {{addy.value}}</ion-label>
           <ion-radio [id]="email.id" name="email" [value]="addy.value"></ion-radio>
@@ -17,7 +17,7 @@
       <ion-item [class.myError]="!email.valid && email.touched">
         <ion-label position="stacked" color="danger"><span *ngIf="!email.valid && email.touched">Check Email Address</span></ion-label>
         <ion-input color="medium" id="custom" name="custom" type="email" [(ngModel)]="emailField" placeholder="Manual Selected Email"
-          [ngModelOptions]="{standalone: true}" (input)="customEmail()" clear-input="true" clear-on-edit="true" ></ion-input>
+          [ngModelOptions]="{standalone: true}" (ionChange)="customEmail($event.detail)" clear-input="true" clear-on-edit="true" ></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="stacked">Subject</ion-label>
@@ -28,7 +28,7 @@
         <ion-textarea color="medium" formControlName="body" id="body" type="text"></ion-textarea>
       </ion-item>
     </div>
-    <ion-button color="primary" expand="full" [disabled]="disabled || !email.valid" class="formBtn" type="submit">Send
+    <ion-button color="primary" expand="full" [disabled]="avail" class="formBtn" type="submit">Send
       Email</ion-button>
   </ion-list>
 </form>

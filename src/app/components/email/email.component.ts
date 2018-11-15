@@ -1,5 +1,6 @@
 import {
   Component,
+  DoCheck,
   EventEmitter,
   Input,
   OnInit,
@@ -16,7 +17,7 @@ import { FormHandlerService } from '../../providers/form-handler.service';
   templateUrl: './email.component.html',
   styleUrls: ['./email.component.scss']
 })
-export class EmailComponent implements OnInit {
+export class EmailComponent implements OnInit, DoCheck {
   @Input()
   set: ShareInput;
   @Input()
@@ -24,12 +25,12 @@ export class EmailComponent implements OnInit {
   @Output()
   method: EventEmitter<string> = new EventEmitter();
 
+  avail = true;
   body: FormControl = new FormControl('');
   email: FormControl = new FormControl('', [
     this.form.emailValidator,
     Validators.required
   ]);
-  emailField: string;
   emailForm: FormGroup;
   emailText: FormControl = new FormControl('');
 
@@ -50,14 +51,18 @@ export class EmailComponent implements OnInit {
     }
   }
 
-  customEmail() {
-    this.email.setValue(this.emailField);
+  ngDoCheck() {
+    this.avail = this.disable ? this.disable : !this.email.valid;
+  }
+
+  customEmail(email: { value: string }) {
+    this.email.setValue(email.value);
   }
 
   sendEmail(form) {
-    let myInput = form.value;
-    let link: string = this.set.ebcUrl;
-    let myEmail = `<p>${myInput['body']}</p> <p>${link}</p>`;
+    const myInput = form.value;
+    const link: string = this.set.ebcUrl;
+    const myEmail = `<p>${myInput['body']}</p> <p>${link}</p>`;
 
     this.social
       .shareViaEmail(myEmail, myInput['emailText'], myInput['email'])

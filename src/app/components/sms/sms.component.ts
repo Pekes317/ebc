@@ -1,5 +1,6 @@
 import {
   Component,
+  DoCheck,
   EventEmitter,
   Input,
   OnInit,
@@ -16,7 +17,7 @@ import { FormHandlerService } from '../../providers/form-handler.service';
   templateUrl: './sms.component.html',
   styleUrls: ['./sms.component.scss']
 })
-export class SmsComponent implements OnInit {
+export class SmsComponent implements OnInit, DoCheck {
   @Input()
   set: ShareInput;
   @Input()
@@ -24,11 +25,12 @@ export class SmsComponent implements OnInit {
   @Output()
   method: EventEmitter<string> = new EventEmitter();
 
+  avail = true;
   phone: FormControl = new FormControl('', [
     this.form.phoneValidator,
     Validators.required
   ]);
-  smsField: string;
+  smsField = '';
   smsForm: FormGroup;
   smsText: FormControl = new FormControl('');
 
@@ -48,19 +50,22 @@ export class SmsComponent implements OnInit {
     }
   }
 
-  customPhone() {
-    this.phone.setValue(this.smsField);
+  ngDoCheck() {
+    this.avail = this.disable ? this.disable : !this.phone.valid;
+  }
+
+  customPhone(number: { value: string }) {
+    this.phone.setValue(number.value);
   }
 
   sendSms(form) {
     const mySms = form.value;
     const link: string = this.set.ebcUrl;
     const body = `${mySms['smsText']} ${link}`;
-    console.log(body, mySms);
 
-    // this.social
-    //   .shareViaSMS(body, mySms.phone)
-    //   .then(() => this.method.emit('SMS Text'))
-    //   .catch(err => console.log(err, 'Fail'));
+    this.social
+      .shareViaSMS(body, mySms.phone)
+      .then(() => this.method.emit('SMS Text'))
+      .catch(err => console.log(err, 'Fail'));
   }
 }

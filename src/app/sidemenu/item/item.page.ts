@@ -19,15 +19,15 @@ import * as fromItems from '../../state/item-store/reducers';
   styleUrls: ['./item.page.scss']
 })
 export class ItemPage implements OnInit {
-  ebcUrl: string = 'https://ebc.beezleeart.com/card/';
-  emailShare: ShareInput;
+  ebcUrl = 'https://ebc.beezleeart.com/card/';
   itemId: number;
   itemMedia: Observable<string> = this.store.pipe(select(fromItems.selectSvg));
-  inState: boolean = true;
+  inState = true;
   itemState: Observable<Item>;
-  message: string = 'contact';
-  smsShare: ShareInput;
-  type: string = '';
+  message = 'contact';
+  selected: Contact;
+  share: ShareInput;
+  type = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -45,13 +45,10 @@ export class ItemPage implements OnInit {
       this.getItem(params);
     });
     this.getMedia();
-    this.setEmail();
-    this.setMessage();
   }
 
   getContact(contact: Contact) {
-    this.setEmail(contact);
-    this.setMessage(contact);
+    this.selected = contact;
   }
 
   getItem(params) {
@@ -84,10 +81,24 @@ export class ItemPage implements OnInit {
 
   section(segment: string) {
     this.message = segment;
+    this.share = {
+      ebcUrl: `${this.ebcUrl}${this.itemId}`,
+      show: false,
+      messText: this.setText()
+    };
+    if (this.selected) {
+      this.share.contacts =
+        this.message === 'mail'
+          ? this.selected.emails
+          : this.selected.phoneNumbers;
+      this.share.show = true;
+      this.share.name = this.selected.name;
+    }
+    console.log(this.share);
   }
 
   async sentMsg(type: string) {
-    let isSent = await this.toast.create({
+    const isSent = await this.toast.create({
       message: `Your ${type} as been Sent`,
       position: 'top',
       duration: 5000
@@ -96,34 +107,8 @@ export class ItemPage implements OnInit {
     isSent.present();
   }
 
-  setEmail(contact?: Contact) {
-    this.emailShare = {
-      ebcUrl: `${this.ebcUrl}${this.itemId}`,
-      hide: false,
-      messText: this.setText()
-    };
-    if (contact) {
-      this.emailShare.contacts = contact.emails;
-      this.emailShare.hide = true;
-      this.emailShare.name = contact.name;
-    }
-  }
-
-  setMessage(contact?: Contact) {
-    this.smsShare = {
-      ebcUrl: `${this.ebcUrl}${this.itemId}`,
-      hide: false,
-      messText: this.setText()
-    };
-    if (contact) {
-      this.smsShare.contacts = contact.phoneNumbers;
-      this.smsShare.hide = true;
-      this.smsShare.name = contact.name;
-    }
-  }
-
   setText(): string {
-    let startText: string = `Check out my interactive EBC ${
+    const startText = `Check out my interactive EBC ${
       this.type
     }, just touch to connect.`;
     return startText;
