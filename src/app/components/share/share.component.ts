@@ -1,4 +1,3 @@
-ls
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams, ToastController } from '@ionic/angular';
 import { Contact } from '@ionic-native/contacts';
