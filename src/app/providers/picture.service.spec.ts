@@ -9,7 +9,10 @@ describe('PictureService', () => {
     });
   });
 
-  it('should be created', inject([PictureService], (service: PictureService) => {
-    expect(service).toBeTruthy();
-  }));
+  it('should be created', inject(
+    [PictureService],
+    (service: PictureService) => {
+      expect(service).toBeTruthy();
+    }
+  ));
 });

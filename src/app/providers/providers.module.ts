@@ -1,4 +1,9 @@
-import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
+import {
+  ModuleWithProviders,
+  NgModule,
+  Optional,
+  SkipSelf
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouteReuseStrategy } from '@angular/router';
@@ -20,18 +25,15 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AuthInterceptorService } from './auth-interceptor.service';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    HttpClientModule,
-    IonicModule
-  ],
+  imports: [CommonModule, HttpClientModule, IonicModule],
   declarations: []
 })
 export class ProvidersModule {
   public constructor(@Optional() @SkipSelf() parentModule: ProvidersModule) {
     if (parentModule) {
       throw new Error(
-        'ProvidersModule is already loaded. Import it in the AppModule only');
+        'ProvidersModule is already loaded. Import it in the AppModule only'
+      );
     }
   }
 
@@ -39,7 +41,11 @@ export class ProvidersModule {
     return {
       ngModule: ProvidersModule,
       providers: [
-        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService,  multi: true },        
+        {
+          provide: HTTP_INTERCEPTORS,
+          useClass: AuthInterceptorService,
+          multi: true
+        },
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
         AppAvailability,
         AppRate,
@@ -56,7 +62,7 @@ export class ProvidersModule {
         SocialSharing,
         SplashScreen,
         StatusBar
-       ],
+      ]
     };
   }
- }
+}

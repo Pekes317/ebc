@@ -4,7 +4,7 @@ import {
   ElementRef,
   Input,
   OnInit,
-  Renderer,
+  Renderer2,
   ViewChild
 } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
@@ -41,7 +41,7 @@ export class SvgComponent implements AfterViewInit, OnInit {
     private dom: DomSanitizer,
     private launch: LaunchNavigator,
     private platform: Platform,
-    private render: Renderer
+    private render: Renderer2
   ) {}
 
   ngOnInit() {}
@@ -53,15 +53,15 @@ export class SvgComponent implements AfterViewInit, OnInit {
   clickCheck() {
     let app = {};
     if (this.item.ready) {
-      let my = this.myItem.nativeElement;
+      const my = this.myItem.nativeElement;
 
-      this.render.listen(my, 'click', e => {
-        let clicked = e.target['parentNode'];
+      this.render.listen(my, 'click', (e: Event) => {
+        const clicked = e.target['parentNode'];
         if (clicked['href']) {
-          let link = clicked['href']['baseVal'];
-          let attr = Array.from(clicked['attributes']);
-          let data = attr[2]['value'];
-          let insta = new RegExp('w$');
+          const link = clicked['href']['baseVal'];
+          const attr = Array.from(clicked['attributes']);
+          const data = attr[2]['value'];
+          const insta = new RegExp('w$');
           if (e.target['id'] === 'address') {
             e.preventDefault();
             this.launch
@@ -97,7 +97,7 @@ export class SvgComponent implements AfterViewInit, OnInit {
   }
 
   isAvail(app: Object) {
-    let myApp: Object = app;
+    const myApp: Object = app;
     let fb: string;
     let dm: string;
 

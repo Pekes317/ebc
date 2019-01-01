@@ -15,7 +15,7 @@ export class SidemenuPage implements OnInit {
     { title: 'Templates', component: 'list/templates' },
     { title: 'Submit Item', component: 'submit' }
   ];
-  
+
   constructor() {}
 
   ngOnInit() {}

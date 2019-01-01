@@ -11,7 +11,10 @@ import { Subscription } from 'rxjs';
 
 import { UsersDataService } from './providers/users-data.service';
 import * as fromUser from './state/user-store/reducers';
-import { LoadUser, RedirectUser } from './state/user-store/actions/user.actions';
+import {
+  LoadUser,
+  RedirectUser
+} from './state/user-store/actions/user.actions';
 
 @Component({
   selector: 'ebc-root',
@@ -57,9 +60,9 @@ export class AppComponent implements OnInit {
 
   authCheck() {
     this.fireAuth.idToken.subscribe(token => {
-      let user = this.fireAuth.auth.currentUser;
+      const user = this.fireAuth.auth.currentUser;
       if (token) {
-        let authUser = {
+        const authUser = {
           displayName: user.displayName,
           email: user.email,
           photoUrl: user.photoURL
@@ -85,9 +88,9 @@ export class AppComponent implements OnInit {
     });
   }
 
-  noitified(on) {
-    let push: Subscription = this.pushStream();
-    let refresh = this.refreshStream();
+  noitified(on: boolean) {
+    const push: Subscription = this.pushStream();
+    const refresh = this.refreshStream();
     if (!on) {
       console.log('Notification Off');
       push.unsubscribe();
@@ -149,9 +152,9 @@ export class AppComponent implements OnInit {
       .catch(err => console.log(err));
   }
 
-  private setAuthState(status: boolean, authToken?, user?) {
+  private setAuthState(status: boolean, authToken?: string, user?: any) {
     if (status) {
-      let authUser = {
+      const authUser = {
         ...user,
         token: authToken
       };

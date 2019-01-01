@@ -11,12 +11,16 @@ import { NavbarMenuComponent } from '../navbar-menu/navbar-menu.component';
 })
 export class NavbarComponent implements OnInit {
   @Input()
-  back: boolean = false;
+  back = false;
 
   @Input()
-  color: string = 'primary';
+  color = 'primary';
 
-  constructor(private menu: MenuController, private nav: Location, private pop: PopoverController) {}
+  constructor(
+    private menu: MenuController,
+    private nav: Location,
+    private pop: PopoverController
+  ) {}
 
   ngOnInit() {}
 
@@ -34,6 +38,6 @@ export class NavbarComponent implements OnInit {
   }
 
   async sideMenu() {
-    await this.menu.open()
+    await this.menu.open();
   }
 }

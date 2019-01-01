@@ -1,15 +1,15 @@
 @import '../../../theme/mixins';
 
 .edit {
-	@include heading;
+  @include heading;
   @include inputs;
-  
+
   --ion-background-color: var(--ion-color-light);
 
-	h2 {
-		font-size: 1.4rem;
-		font-weight: 500;
-		margin-bottom: .75rem;
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-bottom: .75rem;
     text-align: center;
   }
 
@@ -27,6 +27,7 @@
   .editbar {
     padding-bottom: .01rem;
   }
+
   .editForm {
     --ion-item-background: transparent;
     padding: 0 1.5rem;

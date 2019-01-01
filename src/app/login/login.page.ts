@@ -17,9 +17,9 @@ import * as fromUser from '../state/user-store/reducers';
   styleUrls: ['./login.page.scss']
 })
 export class LoginPage implements DoCheck, OnInit {
-  isAuthError: boolean = false;
-  newRun: boolean = true;
-  signUp: string = 'create-account';
+  isAuthError = false;
+  newRun = true;
+  signUp = 'create-account';
   loginForm: FormGroup;
   username: FormControl = new FormControl('', [
     Validators.required,
@@ -50,7 +50,7 @@ export class LoginPage implements DoCheck, OnInit {
   ngDoCheck() {
     this.isAuthError = this.authUser.isAuthError;
   }
-  
+
   openPage(page: string) {
     this.router.navigate([page]);
   }
@@ -75,7 +75,7 @@ export class LoginPage implements DoCheck, OnInit {
         {
           text: 'Submit',
           handler: data => {
-            let email = data.username;
+            const email = data.username;
             this.sendReset(email);
           }
         }
@@ -84,7 +84,7 @@ export class LoginPage implements DoCheck, OnInit {
     sets.present();
   }
 
-  async resetVerify(mess) {
+  async resetVerify(mess: string) {
     const resVerify = await this.toast.create({
       message: mess,
       position: 'top',
@@ -93,8 +93,8 @@ export class LoginPage implements DoCheck, OnInit {
     resVerify.present();
   }
 
-  signIn(login) {
-    let auth = login.value;
+  signIn(login: FormGroup) {
+    const auth = login.value;
     this.store.dispatch(new LoginUser(auth));
     this.loginForm.reset();
   }

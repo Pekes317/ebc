@@ -6,25 +6,27 @@ import { Events } from '@ionic/angular';
   providedIn: 'root'
 })
 export class ItemsService {
+  myApi = 'https://ebc.beezleeart.com';
 
-  myApi: string = 'https://ebc.beezleeart.com';
+  constructor(private http: HttpClient, private events: Events) {}
 
-  constructor(private http: HttpClient, private events: Events) { }
-  
-  createItem(newItem) {
+  createItem(newItem: any) {
     return this.http.post(`${this.myApi}/api/mobile/create`, newItem);
   }
-  
-  deleteItem(obj, id) {
-    return this.http.delete(`${this.myApi}/api/obj/${obj}/${id}`)
+
+  deleteItem(obj: string, id: number) {
+    return this.http.delete(`${this.myApi}/api/obj/${obj}/${id}`);
   }
 
-  getList(table, type) {
-    let path: string = (table === 'item') ? `${type.toLowerCase()}` : `${table}/${type.toLowerCase()}`;
-    return this.http.get(`${this.myApi}/api/mobile/${path}`)
+  getList(table: string, type: string) {
+    const path: string =
+      table === 'item'
+        ? `${type.toLowerCase()}`
+        : `${table}/${type.toLowerCase()}`;
+    return this.http.get(`${this.myApi}/api/mobile/${path}`);
   }
 
-  getOne(id) {
+  getOne(id: number) {
     return this.http.get(`${this.myApi}/api/obj/items/${id}`);
   }
 

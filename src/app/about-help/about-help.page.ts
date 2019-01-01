@@ -11,8 +11,8 @@ import { PrivatePolicyComponent } from '../components/private-policy/private-pol
   styleUrls: ['./about-help.page.scss']
 })
 export class AboutHelpPage implements OnInit {
-  appName: string = 'EBC';
-  appVer: string = '2.1.0';
+  appName = 'EBC';
+  appVer = '2.1.0';
   appVerCode: string | number = '20100';
   year: number = new Date().getFullYear();
 
@@ -52,8 +52,8 @@ export class AboutHelpPage implements OnInit {
   }
 
   async helpEmail() {
-    let email = ['ebc.support@ebc.beezleeart.com'];
-    let emailAlert = await this.alert.create({
+    const email = ['ebc.support@ebc.beezleeart.com'];
+    const emailAlert = await this.alert.create({
       header: 'Feedback/Help Email',
       inputs: [
         {
@@ -71,7 +71,7 @@ export class AboutHelpPage implements OnInit {
         {
           text: 'Cancel',
           role: 'cancel',
-          cssClass: 'reset-cancel',
+          cssClass: 'reset-cancel'
         },
         {
           text: 'Send',
@@ -93,7 +93,7 @@ export class AboutHelpPage implements OnInit {
     const policyModel = await this.model.create({
       component: PrivatePolicyComponent
     });
-    
-    policyModel.present();   
+
+    policyModel.present();
   }
 }

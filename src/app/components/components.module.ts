@@ -16,7 +16,6 @@ import { SocialFormComponent } from './social-form/social-form.component';
 import { SmsComponent } from './sms/sms.component';
 import { SubmitModalComponent } from './submit-modal/submit-modal.component';
 import { SvgComponent } from './svg/svg.component';
-import { TabsComponent } from './tabs/tabs.component';
 import { ShareButtonsComponent } from './share-buttons/share-buttons.component';
 
 @NgModule({
@@ -35,8 +34,7 @@ import { ShareButtonsComponent } from './share-buttons/share-buttons.component';
     SocialFormComponent,
     SmsComponent,
     SubmitModalComponent,
-    SvgComponent,
-    TabsComponent
+    SvgComponent
   ],
   entryComponents: [
     NavbarMenuComponent,
@@ -50,8 +48,7 @@ import { ShareButtonsComponent } from './share-buttons/share-buttons.component';
     NavbarComponent,
     NavbarMenuComponent,
     SmsComponent,
-    SvgComponent,
-    TabsComponent
+    SvgComponent
   ]
 })
 export class ComponentsModule {}

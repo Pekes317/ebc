@@ -10,7 +10,7 @@ import { User } from '../models/user.model';
   providedIn: 'root'
 })
 export class UsersDataService {
-  myApi: string = 'https://ebc.beezleeart.com';
+  myApi = 'https://ebc.beezleeart.com';
   myUser: User;
 
   constructor(
@@ -26,17 +26,17 @@ export class UsersDataService {
       .catch(err => console.log(err));
   }
 
-  notifyEnroll(token) {
-    let deviceData = {
+  notifyEnroll(token: string) {
+    const deviceData = {
       token: token
     };
 
     this.http
       .post(`${this.myApi}/api/mobile/register`, deviceData)
-      .subscribe(id => this.saveDev(id), err => console.log(err));
+      .subscribe((id: number) => this.saveDev(id), err => console.log(err));
   }
 
-  notifyRemove(id) {
+  notifyRemove(id: string) {
     this.storage
       .get('device')
       .then(() => {
@@ -47,14 +47,14 @@ export class UsersDataService {
       .catch(err => console.log(err));
   }
 
-  notifyUpdate(token) {
+  notifyUpdate(token: string) {
     this.storage
       .get('device')
       .then(id => this.upDev(id, token))
       .catch(err => console.log(err));
   }
 
-  setUser(userUpdate) {
+  setUser(userUpdate: any) {
     if (userUpdate) {
       this.myUser = {
         displayName: userUpdate.displayName,
@@ -66,13 +66,13 @@ export class UsersDataService {
     this.events.publish('myUser', this.myUser);
   }
 
-  updateUser(newUser) {
-    return this.http
-      .post(`${this.myApi}/api/auth/update`, newUser)
-      .pipe(catchError((err, caught)=> {
+  updateUser(newUser: any) {
+    return this.http.post(`${this.myApi}/api/auth/update`, newUser).pipe(
+      catchError((err, caught) => {
         console.log(err);
         return caught;
-      }))
+      })
+    );
   }
 
   private removeDev() {
@@ -82,15 +82,15 @@ export class UsersDataService {
       .catch(err => console.log(err));
   }
 
-  private saveDev(id) {
+  private saveDev(id: number) {
     this.storage
       .set('device', id)
       .then(res => console.log(res))
       .catch(err => console.log(err));
   }
 
-  private upDev(id, data) {
-    let newToken = {
+  private upDev(id: number, data: string) {
+    const newToken = {
       token: data
     };
     console.log(newToken, id);

@@ -27,11 +27,11 @@ import * as fromFlyers from '../../state/item-store/reducers/flyer.reducer';
   styleUrls: ['./items.page.scss']
 })
 export class ItemsPage implements OnInit {
-  public dbTable: string = '';
-  public delete: boolean = false;
+  public dbTable = '';
+  public delete = false;
   public items: Observable<Item[]>;
-  public itemsPre: string = '';
-  public itemType: string = '';
+  public itemsPre = '';
+  public itemType = '';
 
   constructor(
     private alert: AlertController,
@@ -56,7 +56,7 @@ export class ItemsPage implements OnInit {
   }
 
   async delAlert(id: number) {
-    let confirm = await this.alert.create({
+    const confirm = await this.alert.create({
       header: `Delete ${this.itemType}`,
       message: 'Are you sure?',
       buttons: [
@@ -76,7 +76,7 @@ export class ItemsPage implements OnInit {
   }
 
   async deleteToast() {
-    let del = await this.toast.create({
+    const del = await this.toast.create({
       message: `The ${this.itemType} has been deleted.`,
       position: 'top',
       duration: 5000
@@ -105,7 +105,7 @@ export class ItemsPage implements OnInit {
   }
 
   async share(ebc: Item) {
-    let shareMod = await this.modal.create({
+    const shareMod = await this.modal.create({
       component: ShareComponent,
       componentProps: ebc
     });

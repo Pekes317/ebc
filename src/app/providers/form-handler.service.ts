@@ -9,7 +9,9 @@ export class FormHandlerService {
   constructor() {}
 
   static isPhone(number: string) {
-    const usa = new RegExp(/^(?:\+?1[-. ]?)?\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/);
+    const usa = new RegExp(
+      /^(?:\+?1[-. ]?)?\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/
+    );
     const oneStart = new RegExp(/^1/);
     const phone = new AsYouType().input(number);
     if (oneStart.test(number) && usa.test(number)) {

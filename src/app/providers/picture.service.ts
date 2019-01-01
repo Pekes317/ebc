@@ -15,7 +15,7 @@ import { Subject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class PictureService {
-  myApi: string = 'https://ebc.beezleeart.com';
+  myApi = 'https://ebc.beezleeart.com';
   myLoader: HTMLIonLoadingElement;
   selectPic: Subject<string> = new Subject();
 
@@ -29,7 +29,7 @@ export class PictureService {
   ) {}
 
   async getPics() {
-    let actionPics = await this.action.create({
+    const actionPics = await this.action.create({
       header: 'Get Pictures',
       buttons: [
         {
@@ -89,7 +89,7 @@ export class PictureService {
   }
 
   async picSaved() {
-    let myImg = await this.toast.create({
+    const myImg = await this.toast.create({
       message: 'Your Profile Pic has been Saved',
       position: 'top',
       duration: 2000

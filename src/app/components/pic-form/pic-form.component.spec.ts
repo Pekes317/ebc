@@ -8,9 +8,8 @@ describe('PicFormComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PicFormComponent ]
-    })
-    .compileComponents();
+      declarations: [PicFormComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

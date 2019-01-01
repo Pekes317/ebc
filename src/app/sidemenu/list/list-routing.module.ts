@@ -1,42 +1,81 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ItemsPage } from '../items/items.page';
+import { ItemType } from '../../util/item-type.enum';
+import { List } from '../../util/list.enum';
 import { ListPage } from './list.page';
 
-const routes: Routes = [  
-  {    
+const routes: Routes = [
+  {
     path: 'my-stuff',
+    data: { list: List.my },
     component: ListPage,
     children: [
       {
-        path: '', redirectTo: '/sidemenu/list/my-stuff/(ebc-cards:cards)', pathMatch: 'full'
+        path: '',
+        redirectTo: 'cards',
+        pathMatch: 'full'
       },
-      { path: 'cards', component: ItemsPage, outlet: 'ebc-cards', data: { list: 'My', itemType: 'Cards' } },
-      { path: 'flyers', component: ItemsPage, outlet: 'ebc-flyers', data: { list: 'My', itemType: 'Flyers' } }
+      {
+        path: 'cards',
+        loadChildren: '../items/items.module#ItemsPageModule',
+        data: { list: List.my, itemType: ItemType.cards }
+      },
+      {
+        path: 'flyers',
+        loadChildren: '../items/items.module#ItemsPageModule',
+        data: { list: List.my, itemType: ItemType.fylers }
+      }
     ]
   },
   {
     path: 'samples',
+    data: { list: List.samp },
     component: ListPage,
     children: [
       {
-        path: '', redirectTo: '/sidemenu/list/samples/(samp-cards:cards)', pathMatch: 'full'
+        path: '',
+        redirectTo: 'cards',
+        pathMatch: 'full'
       },
-      { path: 'cards', component: ItemsPage, outlet: 'samp-cards', data: { list: 'Sample', itemType: 'Cards' } },
-      { path: 'flyers', component: ItemsPage, outlet: 'samp-flyers', data: { list: 'Sample', itemType: 'Flyers' } }
+      {
+        path: 'cards',
+        loadChildren: '../items/items.module#ItemsPageModule',
+        data: { list: List.samp, itemType: ItemType.cards }
+      },
+      {
+        path: 'flyers',
+        loadChildren: '../items/items.module#ItemsPageModule',
+        data: { list: List.samp, itemType: ItemType.fylers }
+      }
     ]
   },
   {
     path: 'templates',
+    data: { list: List.temp },
     component: ListPage,
     children: [
       {
-        path: '', redirectTo: '/sidemenu/list/templates/(temp-cards:cards)', pathMatch: 'full'
+        path: '',
+        redirectTo: 'cards',
+        pathMatch: 'full'
       },
-      { path: 'cards', component: ItemsPage, outlet: 'temp-cards', data: { list: 'Template', itemType: 'Cards' } },
-      { path: 'flyers', component: ItemsPage, outlet: 'temp-flyers', data: { list: 'Template', itemType: 'Flyers' } }
+      {
+        path: 'cards',
+        loadChildren: '../items/items.module#ItemsPageModule',
+        data: { list: List.temp, itemType: ItemType.cards }
+      },
+      {
+        path: 'flyers',
+        loadChildren: '../items/items.module#ItemsPageModule',
+        data: { list: List.temp, itemType: ItemType.fylers }
+      }
     ]
+  },
+  {
+    path: '',
+    redirectTo: 'my-stuff/cards',
+    pathMatch: 'full'
   }
 ];
 

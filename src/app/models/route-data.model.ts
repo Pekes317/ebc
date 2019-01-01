@@ -1,4 +1,4 @@
 export interface ListModel {
-	list: string;
-	itemType: string;
+  list: string;
+  itemType: string;
 }

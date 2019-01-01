@@ -17,11 +17,12 @@
       <ion-item [class.myError]="!email.valid && email.touched">
         <ion-label position="stacked" color="danger"><span *ngIf="!email.valid && email.touched">Check Email Address</span></ion-label>
         <ion-input color="medium" id="custom" name="custom" type="email" [(ngModel)]="emailField" placeholder="Manual Selected Email"
-          [ngModelOptions]="{standalone: true}" (ionChange)="customEmail($event.detail)" clear-input="true" clear-on-edit="true" ></ion-input>
+          [ngModelOptions]="{standalone: true}" (ionChange)="customEmail($event.detail)" clear-input="true"
+          clear-on-edit="true"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="stacked">Subject</ion-label>
-        <ion-input color="medium" formControlName="emailText" id="text" type="text" clear-input="true" clear-on-edit="true" ></ion-input>
+        <ion-input color="medium" formControlName="emailText" id="text" type="text" clear-input="true" clear-on-edit="true"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="stacked">Message</ion-label>

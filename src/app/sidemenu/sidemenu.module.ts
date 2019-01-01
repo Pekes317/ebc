@@ -7,12 +7,7 @@ import { SidemenuPage } from './sidemenu.page';
 import { SidemenuRoutingModule } from './sidemenu-routing.module';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    SidemenuRoutingModule
-  ],
+  imports: [CommonModule, FormsModule, IonicModule, SidemenuRoutingModule],
   declarations: [SidemenuPage]
 })
 export class SidemenuPageModule {}

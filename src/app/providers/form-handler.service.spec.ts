@@ -9,7 +9,10 @@ describe('FormHandlerService', () => {
     });
   });
 
-  it('should be created', inject([FormHandlerService], (service: FormHandlerService) => {
-    expect(service).toBeTruthy();
-  }));
+  it('should be created', inject(
+    [FormHandlerService],
+    (service: FormHandlerService) => {
+      expect(service).toBeTruthy();
+    }
+  ));
 });

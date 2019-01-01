@@ -30,8 +30,8 @@ export class ImgUploadComponent implements OnDestroy, OnInit {
   imgAction: EventEmitter<PictureState> = new EventEmitter();
 
   private collector: Subscription;
-  private currentImg: string = '';
-  protected updateAction: boolean = false;
+  private currentImg = '';
+  protected updateAction = false;
 
   constructor(private pic: PictureService) {}
 
@@ -53,7 +53,7 @@ export class ImgUploadComponent implements OnDestroy, OnInit {
     const saveImg: PictureState = {
       newPic: false,
       picFile: this.currentImg
-    }
+    };
     this.imgAction.emit(saveImg);
   }
 

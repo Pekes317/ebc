@@ -12,7 +12,10 @@ import { info } from './policy';
 export class PrivatePolicyComponent implements OnInit {
   policy: SafeHtml;
 
-  constructor(private modal: ModalController, private stanitize: DomSanitizer) {}
+  constructor(
+    private modal: ModalController,
+    private stanitize: DomSanitizer
+  ) {}
 
   ngOnInit() {
     this.policy = this.stanitize.bypassSecurityTrustHtml(info);

@@ -32,8 +32,8 @@ export class EditPage implements OnDestroy, OnInit {
   );
   passwordForm: FormGroup;
   password: FormControl = new FormControl('', Validators.required);
-  section: string = 'user';
-  upFile: boolean = false;
+  section = 'user';
+  upFile = false;
   userData: Observable<AuthUser> = this.store.pipe(select(fromUser.selectUser));
 
   constructor(
@@ -62,7 +62,7 @@ export class EditPage implements OnDestroy, OnInit {
   }
 
   editInfo(info) {
-    let input = info.value;
+    const input = info.value;
     this.user.updateUser(input).subscribe((user: UserInfo) => {
       this.store.dispatch(
         new UpdateUserName({ displayName: user.displayName })
@@ -73,7 +73,7 @@ export class EditPage implements OnDestroy, OnInit {
   }
 
   editPass(pass) {
-    let newPass = {
+    const newPass = {
       password: pass.value.password
     };
     this.user.updateUser(newPass).subscribe(() => {
@@ -83,7 +83,7 @@ export class EditPage implements OnDestroy, OnInit {
   }
 
   async errorToast(message: string) {
-    let errMess = await this.toast.create({
+    const errMess = await this.toast.create({
       message: message,
       position: 'top',
       duration: 5000
@@ -98,7 +98,7 @@ export class EditPage implements OnDestroy, OnInit {
   }
 
   async profileUpdated(action: string) {
-    let editSuccess = await this.toast.create({
+    const editSuccess = await this.toast.create({
       message: `Your ${action} has been updated`,
       position: 'top',
       duration: 5000

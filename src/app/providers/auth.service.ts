@@ -10,9 +10,9 @@ import { from } from 'rxjs';
 })
 export class AuthService {
   authStatus: string = null;
-  authType: string = 'N/A';
-  myApi: string = 'https://ebc.beezleeart.com';
-  isAuthError: boolean = false;
+  authType = 'N/A';
+  myApi = 'https://ebc.beezleeart.com';
+  isAuthError = false;
 
   constructor(
     private events: Events,
@@ -34,22 +34,22 @@ export class AuthService {
     made.present();
   }
 
-  authGood(res) {
+  authGood(res: any) {
     this.authStatus = res['statusText'];
-    this.authType = res.data.token_type == 'Anonymous' ? 'Anonymous' : 'Token';
+    this.authType = res.data.token_type === 'Anonymous' ? 'Anonymous' : 'Token';
     this.isAuthError = false;
     this.storage.set('auth', true);
     this.events.publish('login');
   }
 
-  authErr(err) {
+  authErr(err: any) {
     this.authStatus = err['statusText'];
     this.authType = 'Fail';
     this.isAuthError = true;
     this.storage.set('auth', false);
   }
 
-  createUser(userData) {
+  createUser(userData: any) {
     return this.http.post(`${this.myApi}/api/auth/signup`, userData);
   }
 

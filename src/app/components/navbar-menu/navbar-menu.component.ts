@@ -14,7 +14,7 @@ export class NavbarMenuComponent implements OnInit {
     private fireAuth: AngularFireAuth,
     private pop: PopoverController,
     private router: Router,
-    private storage: Storage,
+    private storage: Storage
   ) {}
 
   ngOnInit() {}
@@ -24,7 +24,7 @@ export class NavbarMenuComponent implements OnInit {
     this.pop.dismiss();
   }
 
-  signOut() { 
+  signOut() {
     this.fireAuth.auth.signOut();
     this.storage.clear();
     this.pop.dismiss();

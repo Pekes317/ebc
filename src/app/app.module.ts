@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
-import { AngularFireAuthModule }from '@angular/fire/auth';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicModule } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
@@ -30,7 +30,7 @@ import { StateModule } from './state/state.module';
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
     ProvidersModule.forRoot(),
-    StateModule,
+    StateModule
   ],
   bootstrap: [AppComponent]
 })

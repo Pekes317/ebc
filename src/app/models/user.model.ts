@@ -1,3 +1,9 @@
+export interface User {
+  email: string;
+  displayName: string;
+  photoUrl: string;
+}
+
 export interface AuthUser extends User {
   token: string;
 }
@@ -8,15 +14,9 @@ export interface NewUser extends User {
   password: string;
 }
 
-export interface User {
-	email: string;
-	displayName: string;
-	photoUrl: string;
-}
-
 export interface Svg {
-	id: number;
-	path: string;
-	disable: boolean;
-	itemID: number;
+  id: number;
+  path: string;
+  disable: boolean;
+  itemID: number;
 }
