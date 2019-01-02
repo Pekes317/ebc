@@ -15,13 +15,11 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../../environments/environment';
 import { RouterStateUtil } from './shared/router-state-util';
 import { metaReducers, reducers } from './reducers';
-import { ItemStoreModule } from './item-store/item-store.module';
 import { UserStoreModule } from './user-store/user-store.module';
 
 @NgModule({
   imports: [
     EffectsModule.forRoot([]),
-    ItemStoreModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
     UserStoreModule,

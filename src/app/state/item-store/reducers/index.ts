@@ -1,20 +1,20 @@
 import { ActionReducerMap, createSelector, MetaReducer } from '@ngrx/store';
 
 import { environment } from '../../../../environments/environment';
+import { State as RootState } from '../../reducers';
 import * as fromCards from './card.reducer';
 import * as fromFlyers from './flyer.reducer';
 import * as fromItem from './item.reducer';
-import * as fromRoot from '../../reducers';
 import * as selectors from './items.selectors';
+
+export interface State extends RootState {
+  itemStore: ItemState;
+}
 
 export interface ItemState {
   currentCards: fromCards.State;
   currentFylers: fromFlyers.State;
-  currentItem: fromItem.State
-}
-
-export interface State extends fromRoot.State {
-  itemStore: ItemState;
+  currentItem: fromItem.State;
 }
 
 export const reducers: ActionReducerMap<ItemState> = {

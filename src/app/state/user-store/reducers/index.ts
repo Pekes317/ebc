@@ -6,11 +6,11 @@ import {
 } from '@ngrx/store';
 
 import { environment } from '../../../../environments/environment';
+import { State as RootState } from '../../reducers';
 import * as fromPic from './picture.reducer';
-import * as fromRoot from '../../reducers';
 import * as fromUser from './user.reducer';
 
-export interface State extends fromRoot.State {
+export interface State extends RootState {
   current: UserState;
 }
 
