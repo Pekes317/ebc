@@ -2,14 +2,14 @@ import { RouterStateSerializer } from '@ngrx/router-store';
 import { Data, RouterStateSnapshot, Params } from '@angular/router';
 
 export interface RouterState {
-	data: Data;
+  data: Data;
   url: string;
   params: Params;
   queryParams: Params;
 }
 
 export class RouterStateUtil implements RouterStateSerializer<RouterState> {
-	serialize(routerState: RouterStateSnapshot): RouterState {
+  serialize(routerState: RouterStateSnapshot): RouterState {
     let route = routerState.root;
 
     while (route.firstChild) {
@@ -18,9 +18,9 @@ export class RouterStateUtil implements RouterStateSerializer<RouterState> {
 
     const {
       url,
-      root: { queryParams },
+      root: { queryParams }
     } = routerState;
-		const { data, params } = route;
+    const { data, params } = route;
 
     // Only return an object including the URL, params and query params
     // instead of the entire snapshot

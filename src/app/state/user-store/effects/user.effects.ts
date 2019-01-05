@@ -10,8 +10,7 @@ import {
   LoginUser,
   LogoutUser,
   RedirectUser,
-  UserActionTypes,
-  UpdateUserName
+  UserActionTypes
 } from '../actions/user.actions';
 import { AuthService } from '../../../providers/auth.service';
 
@@ -53,10 +52,8 @@ export class UserEffects {
   logout$ = this.actions$.pipe(
     ofType<LogoutUser>(UserActionTypes.LogoutUser),
     map(action => action.type),
-    tap(() => {
-      this.authUser.logout();
-      new RedirectUser('/login');
-    })
+    map(() => new RedirectUser('/login')),
+    tap(() => this.authUser.logout())
   );
 
   @Effect({ dispatch: false })

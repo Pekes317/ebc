@@ -52,7 +52,7 @@ export class ProvidersModule {
         AppVersion,
         AuthInterceptorService,
         Camera,
-        Contacts,
+        Contacts, // tslint:disable-line:deprecation
         Deeplinks,
         File,
         Firebase,

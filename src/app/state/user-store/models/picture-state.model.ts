@@ -1,4 +1,4 @@
 export interface PictureState {
-	newPic: boolean;
-	picFile: string;
+  newPic: boolean;
+  picFile: string;
 }

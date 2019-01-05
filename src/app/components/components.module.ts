@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
-import { BaseFormComponent } from './base-form/base-form.component';
+import { CatFormComponent } from './cat-form/cat-form.component';
 import { EmailComponent } from './email/email.component';
 import { ImgUploadComponent } from './img-upload/img-upload.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -17,11 +17,12 @@ import { SmsComponent } from './sms/sms.component';
 import { SubmitModalComponent } from './submit-modal/submit-modal.component';
 import { SvgComponent } from './svg/svg.component';
 import { ShareButtonsComponent } from './share-buttons/share-buttons.component';
+import { TypeFormComponent } from './type-form/type-form.component';
 
 @NgModule({
   imports: [CommonModule, FormsModule, ReactiveFormsModule, IonicModule],
   declarations: [
-    BaseFormComponent,
+    CatFormComponent,
     EmailComponent,
     ImgUploadComponent,
     NavbarComponent,
@@ -34,7 +35,8 @@ import { ShareButtonsComponent } from './share-buttons/share-buttons.component';
     SocialFormComponent,
     SmsComponent,
     SubmitModalComponent,
-    SvgComponent
+    SvgComponent,
+    TypeFormComponent
   ],
   entryComponents: [
     NavbarMenuComponent,

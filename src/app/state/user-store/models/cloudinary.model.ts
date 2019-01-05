@@ -1,14 +1,14 @@
-export interface Cloudinary { 
+export interface Cloudinary {
   public_id: string;
   version: number;
-  signature:  string;
+  signature: string;
   width: number;
   height: number;
-  format:  string;
-  resource_type:  string;
-  created_at:  string;
+  format: string;
+  resource_type: string;
+  created_at: string;
   bytes: number;
-  type:  string;
-  url:  string;
-  secure_url:  string;
+  type: string;
+  url: string;
+  secure_url: string;
 }

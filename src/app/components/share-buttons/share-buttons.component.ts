@@ -12,7 +12,7 @@ export class ShareButtonsComponent implements OnInit {
   @Output()
   mode: EventEmitter<string> = new EventEmitter();
 
-  constructor(private contacts: Contacts) {}
+  constructor(private contacts: Contacts) {} // tslint:disable-line:deprecation
 
   ngOnInit() {}
 
