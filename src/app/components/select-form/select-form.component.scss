@@ -1,0 +1,10 @@
+@import '../../../theme/mixins';
+
+.temp-form {
+    @include heading;
+    @include broken;
+
+    ion-title {
+        font-size: 1rem;
+    }
+}

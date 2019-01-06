@@ -1,3 +1,32 @@
-<p>
-  select-form works!
-</p>
+<form class="temp-form" [formGroup]="selectForm" (ngSubmit)="submitTemp();">
+  <ion-toolbar color="white">
+    <ion-title color="dark">Please Select {{itemType}} Template:</ion-title>
+  </ion-toolbar>
+  <ion-list lines="none">
+    <ion-item>
+      <ion-label>{{itemType}} Templates</ion-label>
+      <ion-select *ngFor="let temp of templates; let i=index" formControlName="selectType" placeholder="Select One"
+        (ionChange)="setPreview($event);">
+        <ion-select-option [value]="temp.pic">{{i+1}} {{temp.name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ng-container *ngIf="previewImg; else noImg">
+        <ion-img [src]="previewImg"></ion-img>
+      </ng-container>
+      <ng-template #noImg>
+        <div class="broken-img">
+          No {{itemType}} Template Selected
+        </div>
+      </ng-template>
+    </ion-item>
+  </ion-list>
+  <ion-toolbar color="white">
+    <ion-buttons slot="start">
+      <ion-button fill="clear" color="danger" (click)="goBack();">Back</ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" color="primary" type="submit" [disabled]="selectForm.invalid">Next</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</form>

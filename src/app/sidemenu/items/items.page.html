@@ -5,7 +5,7 @@
 		<ion-text color="tertiary">
 			<h2>Sorry You haven't Added Anything Here</h2>
 		</ion-text>
-		<p>Please Submit a New {{ itemType }}</p>
+		<p>Please Submit a New {{itemType}}</p>
 	</div>
 	<ion-list class="list-wrap" lines="none">
 		<ion-item-sliding *ngFor="let i of (items | async)" #slideCard>
@@ -14,19 +14,23 @@
 					<ion-list lines="none" style="width: 100%;">
 						<ion-card-header>
 							<ion-card-title color="tertiary">
-								<h2>{{ i.name }}</h2>
+								<h2>{{i.name}}</h2>
 							</ion-card-title>
 						</ion-card-header>
 						<ion-card-content>
 							<hr class="line" />
 							<ion-item class="myItem">
-								<div slot="start" class="broken-img" *ngIf="!i?.pic">
-									{{ itemType }} is Being Created
-								</div>
-								<ion-thumbnail slot="start" *ngIf="i.pic">
-									<img [src]="i?.pic" [title]="itemType + ' is Being Created'" />
-								</ion-thumbnail>
-								<ion-label class="desc">{{ i?.desc }}</ion-label>
+								<ng-container *ngIf="i.pic; else noImg">
+									<ion-thumbnail slot="start">
+										<img [src]="i?.pic" [title]="itemType + ' is Being Created'" />
+									</ion-thumbnail>
+								</ng-container>
+								<ng-template #noImg>
+									<div slot="start" class="broken-img">
+										{{itemType}} is Being Created
+									</div>
+								</ng-template>
+								<ion-label class="desc">{{i?.desc}}</ion-label>
 								<ion-text slot="end" color="primary">
 									<ion-icon name="arrow-back"></ion-icon>&thinsp;Swipe&thinsp;
 									<ion-icon *ngIf="delete" name="arrow-forward"></ion-icon>
