@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
+import { AddFormComponent } from './add-form/add-form.component';
 import { DetailFormComponent } from './detail-form/detail-form.component';
 import { CatFormComponent } from './cat-form/cat-form.component';
 import { EmailComponent } from './email/email.component';
@@ -24,6 +25,7 @@ import { TypeFormComponent } from './type-form/type-form.component';
 @NgModule({
   imports: [CommonModule, FormsModule, ReactiveFormsModule, IonicModule],
   declarations: [
+    AddFormComponent,
     CatFormComponent,
     DetailFormComponent,
     EmailComponent,
@@ -48,6 +50,7 @@ import { TypeFormComponent } from './type-form/type-form.component';
     ShareComponent,
   ],
   exports: [
+    AddFormComponent,
     CatFormComponent,
     DetailFormComponent,
     EmailComponent,
@@ -55,6 +58,9 @@ import { TypeFormComponent } from './type-form/type-form.component';
     MetadataFormComponent,
     NavbarComponent,
     NavbarMenuComponent,
+    PicFormComponent,
+    SelectFormComponent,
+    SocialFormComponent,
     SmsComponent,
     SvgComponent,
     ShareButtonsComponent,

@@ -1,21 +1,22 @@
 <form class="temp-form" [formGroup]="selectForm" (ngSubmit)="submitTemp();">
   <ion-toolbar color="white">
-    <ion-title color="dark">Please Select {{itemType}} Template:</ion-title>
+    <ion-title color="dark" slot="start">Please Select {{itemType}} Template:</ion-title>
   </ion-toolbar>
   <ion-list lines="none">
     <ion-item>
-      <ion-label>{{itemType}} Templates</ion-label>
-      <ion-select *ngFor="let temp of templates; let i=index" formControlName="selectType" placeholder="Select One"
-        (ionChange)="setPreview($event);">
-        <ion-select-option [value]="temp.pic">{{i+1}} {{temp.name}}</ion-select-option>
+      <ion-label color="medium">{{itemType}} Templates</ion-label>
+      <ion-select formControlName="selectType" placeholder="Select One" (ionChange)="setPreview($event);">
+        <ng-container *ngFor="let temp of templates; let i=index">
+          <ion-select-option [value]="temp.pic">{{i+1}} {{temp.name}}</ion-select-option>
+        </ng-container>
       </ion-select>
     </ion-item>
-    <ion-item>
+    <ion-item class="temp-prev">
       <ng-container *ngIf="previewImg; else noImg">
         <ion-img [src]="previewImg"></ion-img>
       </ng-container>
       <ng-template #noImg>
-        <div class="broken-img">
+        <div class="broken-img temp-pic">
           No {{itemType}} Template Selected
         </div>
       </ng-template>

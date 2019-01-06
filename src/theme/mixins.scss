@@ -16,13 +16,13 @@
   }
 }
 
-@mixin inputs {
+@mixin inputs($color: var(--ion-color-primary)) {
   .field {
     transform: translateX(-.25rem);
   }
 
   .item-has-focus>ion-label {
-    color: var(--ion-color-primary);
+    color: $color;
   }
 
   .myError {

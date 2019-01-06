@@ -1,3 +1,27 @@
-<p>
-  metadata-form works!
-</p>
+<form class="meta-form" [formGroup]="metaForm" (ngSubmit)="submitMeta();">
+  <ion-toolbar color="white">
+    <ion-title color="dark" slot="start">About the {{itemType}}</ion-title>
+  </ion-toolbar>
+  <ion-list>
+    <ion-item [class.myError]="!name.valid && name.touched">
+      <ion-label position="stacked">{{titleName}} name*</ion-label>
+      <ion-input color="medium" clear-input="true" clear-on-edit="true" [placeholder]="itemType+ ' Title'"
+        formControlName="name">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Creation Instructions</ion-label>
+      <ion-textarea color="medium" clear-on-edit="true" placeholder="Where does your Interactive Info Go?"
+        formControlName="desc">
+      </ion-textarea>
+    </ion-item>
+  </ion-list>
+  <ion-toolbar color="white">
+    <ion-buttons slot="start">
+      <ion-button fill="clear" color="danger" (click)="goBack();">Back</ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" color="primary" type="submit" [disabled]="metaForm.invalid">Next</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</form>

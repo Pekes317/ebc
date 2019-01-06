@@ -19,17 +19,18 @@
           <div class="field">
             <ion-item [class.myError]="!username.valid && username.touched">
               <ion-label position="stacked" for="username">Username</ion-label>
-              <ion-input color="medium" clear-input="true" clear-on-edit="true" formControlName="username" placeholder="email" type="email"></ion-input>
+              <ion-input color="medium" clear-input="true" clear-on-edit="true" formControlName="username" placeholder="email"
+                type="email"></ion-input>
             </ion-item>
             <div class="passErr">
               <ion-text color="danger" *ngIf="username.hasError('invalidEmail') && username.touched">
-              <p>Please Provide a Valid Email</p>
-              </ion-text>   
+                <p>Please Provide a Valid Email</p>
+              </ion-text>
             </div>
             <ion-item>
               <ion-label position="stacked" for="password">Password</ion-label>
-              <ion-input color="medium" clear-input="true" clear-on-edit="true" formControlName="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
-              type="password"></ion-input>
+              <ion-input color="medium" clear-input="true" formControlName="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
+                type="password"></ion-input>
             </ion-item>
             <div class="passErr">
               <ion-text color="danger" *ngIf="isAuthError">
@@ -47,7 +48,8 @@
       <ion-button fill="clear" expand="full" (click)="openPage('create')" type="button">or Create an Account</ion-button>
       <ion-note>
         <ion-button fill="clear" color="danger" (click)="resetPass()">
-          <ion-icon slot="start" name="unlock"></ion-icon>&ensp;Reset</ion-button>
+          <ion-icon slot="start" name="unlock"></ion-icon>&ensp;Reset
+        </ion-button>
       </ion-note>
     </ion-card-content>
   </ion-card>
