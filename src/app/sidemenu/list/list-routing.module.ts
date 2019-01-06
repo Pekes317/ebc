@@ -19,12 +19,12 @@ const routes: Routes = [
       {
         path: 'cards',
         loadChildren: '../items/items.module#ItemsPageModule',
-        data: { list: List.my, itemType: ItemType.cards }
+        data: { list: List.my, itemType: ItemType.card }
       },
       {
         path: 'flyers',
         loadChildren: '../items/items.module#ItemsPageModule',
-        data: { list: List.my, itemType: ItemType.fylers }
+        data: { list: List.my, itemType: ItemType.flyer }
       }
     ]
   },
@@ -41,12 +41,12 @@ const routes: Routes = [
       {
         path: 'cards',
         loadChildren: '../items/items.module#ItemsPageModule',
-        data: { list: List.samp, itemType: ItemType.cards }
+        data: { list: List.samp, itemType: ItemType.card }
       },
       {
         path: 'flyers',
         loadChildren: '../items/items.module#ItemsPageModule',
-        data: { list: List.samp, itemType: ItemType.fylers }
+        data: { list: List.samp, itemType: ItemType.flyer }
       }
     ]
   },
@@ -63,12 +63,12 @@ const routes: Routes = [
       {
         path: 'cards',
         loadChildren: '../items/items.module#ItemsPageModule',
-        data: { list: List.temp, itemType: ItemType.cards }
+        data: { list: List.temp, itemType: ItemType.card }
       },
       {
         path: 'flyers',
         loadChildren: '../items/items.module#ItemsPageModule',
-        data: { list: List.temp, itemType: ItemType.fylers }
+        data: { list: List.temp, itemType: ItemType.flyer }
       }
     ]
   },

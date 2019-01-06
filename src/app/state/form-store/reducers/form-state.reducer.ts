@@ -16,7 +16,7 @@ export const initialState: State = {
   cat: null,
   pic: false,
   social: false,
-  type: ItemType.cards
+  type: ItemType.card
 };
 
 export function reducer(state = initialState, action: FormStateActions): State {

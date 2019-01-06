@@ -1,4 +1,4 @@
 export enum ItemType {
-  cards = 'Cards',
-  fylers = 'Flyers'
+  card = 'Card',
+  flyer = 'Flyer'
 }

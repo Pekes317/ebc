@@ -1,3 +1,23 @@
-<p>
-  cat-form works!
-</p>
+<form class="cat-form" [formGroup]="catForm" (ngSubmit)="submitCat();">
+  <ion-toolbar color="white">
+    <ion-title color="dark" slot="start">Choose One Method:</ion-title>
+  </ion-toolbar>
+  <ion-list lines="none">
+    <ion-radio-group formControlName="catType">
+      <ng-container *ngFor="let option of optionCat">
+        <ion-item class="cat-radio">
+          <ion-radio color="tertiary" slot="end" [value]="option.type"></ion-radio>
+          <ion-label>{{setLabel(option.type)}}</ion-label>
+        </ion-item>
+      </ng-container>
+    </ion-radio-group>
+  </ion-list>
+  <ion-toolbar color="white">
+    <ion-buttons slot="start">
+      <ion-button fill="clear" color="danger" (click)="goBack();">Back</ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" color="primary" type="submit" [disabled]="catForm.invalid">Next</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</form>

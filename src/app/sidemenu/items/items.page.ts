@@ -20,6 +20,7 @@ import {
 import { ItemState } from '../../state/item-store/reducers';
 import * as fromCards from '../../state/item-store/reducers/card.reducer';
 import * as fromFlyers from '../../state/item-store/reducers/flyer.reducer';
+import { ItemType } from '../../util/item-type.enum';
 
 @Component({
   selector: 'ebc-items',
@@ -49,7 +50,7 @@ export class ItemsPage implements OnInit {
       this.itemType = data.itemType;
       this.itemsFetch();
       this.items =
-        this.itemType === 'Cards'
+        this.itemType === ItemType.card
           ? this.store.pipe(select(fromCards.selectAll))
           : this.store.pipe(select(fromFlyers.selectAll));
     });
@@ -100,7 +101,7 @@ export class ItemsPage implements OnInit {
 
   itemsFetch() {
     this.store.dispatch(
-      new GetItems({ list: this.dbTable, form: this.itemType })
+      new GetItems({ list: this.dbTable, form: `${this.itemType}s` })
     );
   }
 

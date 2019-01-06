@@ -1,0 +1,11 @@
+@import '../../../theme/mixins';
+
+.submit-page {
+    @include heading;
+
+    --ion-background-color: var(--ion-color-light);
+
+    .form-slide {
+        width: 85%;
+    }
+}

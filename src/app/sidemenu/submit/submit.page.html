@@ -1,5 +1,25 @@
-<ebc-navbar>Submit Item</ebc-navbar>
+<ebc-navbar>Create New Item</ebc-navbar>
 
-<ion-content padding>
-
+<ion-content class="submit-page">
+    <ion-card>
+        <ion-card-header>
+            <ion-card-title color="tertiary">
+                <h2>Submit Item</h2>
+            </ion-card-title>
+        </ion-card-header>
+        <ion-card-content padding>
+            <ion-slides [options]="stepOptions">
+                <ion-slide>
+                    <div class="form-slide">
+                        <ebc-type-form></ebc-type-form>
+                    </div>
+                </ion-slide>
+                <ion-slide>
+                    <div class="form-slide">
+                        <ebc-cat-form></ebc-cat-form>
+                    </div>
+                </ion-slide>
+            </ion-slides>
+        </ion-card-content>
+    </ion-card>
 </ion-content>

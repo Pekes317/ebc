@@ -1,4 +1,4 @@
-<ebc-navbar>{{ itemsPre }}&nbsp;{{ itemType }}</ebc-navbar>
+<ebc-navbar>{{ itemsPre }}&nbsp;{{ itemType }}s</ebc-navbar>
 
 <ion-content class="myitems">
 	<div padding *ngIf="(items | async)?.length === 0">
@@ -13,9 +13,9 @@
 				<ion-item>
 					<ion-list lines="none" style="width: 100%;">
 						<ion-card-header>
-							<ion-text color="tertiary">
+							<ion-card-title color="tertiary">
 								<h2>{{ i.name }}</h2>
-							</ion-text>
+							</ion-card-title>
 						</ion-card-header>
 						<ion-card-content>
 							<hr class="line" />

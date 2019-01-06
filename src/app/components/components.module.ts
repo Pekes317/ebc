@@ -3,9 +3,11 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
+import { DetailFormComponent } from './detail-form/detail-form.component';
 import { CatFormComponent } from './cat-form/cat-form.component';
 import { EmailComponent } from './email/email.component';
 import { ImgUploadComponent } from './img-upload/img-upload.component';
+import { MetadataFormComponent } from './metadata-form/metadata-form.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NavbarMenuComponent } from './navbar-menu/navbar-menu.component';
 import { PicFormComponent } from './pic-form/pic-form.component';
@@ -23,8 +25,10 @@ import { TypeFormComponent } from './type-form/type-form.component';
   imports: [CommonModule, FormsModule, ReactiveFormsModule, IonicModule],
   declarations: [
     CatFormComponent,
+    DetailFormComponent,
     EmailComponent,
     ImgUploadComponent,
+    MetadataFormComponent,
     NavbarComponent,
     NavbarMenuComponent,
     PicFormComponent,
@@ -36,21 +40,25 @@ import { TypeFormComponent } from './type-form/type-form.component';
     SmsComponent,
     SubmitModalComponent,
     SvgComponent,
-    TypeFormComponent
+    TypeFormComponent,
   ],
   entryComponents: [
     NavbarMenuComponent,
     PrivatePolicyComponent,
-    ShareComponent
+    ShareComponent,
   ],
   exports: [
-    ShareButtonsComponent,
+    CatFormComponent,
+    DetailFormComponent,
     EmailComponent,
     ImgUploadComponent,
+    MetadataFormComponent,
     NavbarComponent,
     NavbarMenuComponent,
     SmsComponent,
-    SvgComponent
-  ]
+    SvgComponent,
+    ShareButtonsComponent,
+    TypeFormComponent,
+  ],
 })
 export class ComponentsModule {}

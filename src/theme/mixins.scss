@@ -10,12 +10,18 @@
   }
 }
 
+@mixin selectLabel($color: var(--ion-color-tertiary)) {
+  .radio-checked+ion-label {
+    color: $color;
+  }
+}
+
 @mixin inputs {
   .field {
     transform: translateX(-.25rem);
   }
 
-  .item-has-focus > ion-label {
+  .item-has-focus>ion-label {
     color: var(--ion-color-primary);
   }
 

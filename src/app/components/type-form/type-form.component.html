@@ -1,3 +1,20 @@
-<p>
-  type-form works!
-</p>
+<form class="type-form" [formGroup]="typeForm" (ngSubmit)="submitType();">
+  <ion-toolbar color="white">
+    <ion-title color="dark" slot="start">What are we creating?</ion-title>
+  </ion-toolbar>
+  <ion-list lines="none">
+    <ion-radio-group formControlName="itemType">
+      <ng-container *ngFor="let option of itemOptions">
+        <ion-item class="type-radio">
+          <ion-radio slot="end" color="tertiary" [value]="option.type"></ion-radio>
+          <ion-label>{{option.type}}</ion-label>
+        </ion-item>
+      </ng-container>
+    </ion-radio-group>
+  </ion-list>
+  <ion-toolbar color="white">
+    <ion-buttons slot="end">
+      <ion-button fill="clear" color="primary" type="submit">Next</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</form>
