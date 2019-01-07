@@ -1,11 +1,8 @@
-@import '../../../theme/mixins';
+@import '../../../../../theme//mixins.scss';
 
 .cat-form {
     @include heading;
-
-    ion-title {
-        font-size: 1rem;
-    }
+    @include formHeading;
 
     .cat-radio {
         @include selectLabel;

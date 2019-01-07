@@ -1,11 +1,8 @@
-@import '../../../theme/mixins';
+@import '../../../../../theme//mixins.scss';
 
 .type-form {
     @include heading;
-
-    ion-title {
-        font-size: 1rem;
-    }
+    @include formHeading;
 
     .type-radio {
         @include selectLabel;

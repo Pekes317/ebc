@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { Item } from '../../state/item-store/models/item.model';
-import { ItemType } from '../../util/item-type.enum';
+import { Item } from '../../../../state/item-store/models/item.model';
+import { ItemType } from '../../../../util/item-type.enum';
 
 @Component({
   selector: 'ebc-select-form',

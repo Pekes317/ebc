@@ -1,12 +1,9 @@
-@import '../../../theme/mixins';
+@import '../../../../../theme//mixins.scss';
 
 .temp-form {
     @include heading;
     @include broken;
-
-    ion-title {
-        font-size: 1rem;
-    }
+    @include formHeading;
 
     .temp-prev {
         padding-top: 1rem;

@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
-import { ItemType } from '../../util/item-type.enum';
+import { ItemType } from '../../../../util/item-type.enum';
 
 @Component({
   selector: 'ebc-type-form',
   templateUrl: './type-form.component.html',
-  styleUrls: ['./type-form.component.scss']
+  styleUrls: ['./type-form.component.scss'],
 })
 export class TypeFormComponent implements OnInit {
   itemOptions = [
     {
-      type: ItemType.card
+      type: ItemType.card,
     },
     {
-      type: ItemType.flyer
-    }
+      type: ItemType.flyer,
+    },
   ];
   itemType: FormControl = new FormControl('');
   typeForm: FormGroup;
@@ -24,7 +24,7 @@ export class TypeFormComponent implements OnInit {
 
   ngOnInit() {
     this.typeForm = new FormGroup({
-      itemType: this.itemType
+      itemType: this.itemType,
     });
   }
 

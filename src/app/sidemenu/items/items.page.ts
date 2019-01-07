@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {
   AlertController,
   ModalController,
-  ToastController
+  ToastController,
 } from '@ionic/angular';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -12,10 +12,10 @@ import { take } from 'rxjs/operators';
 import { ListModel } from '../../models/route-data.model';
 import { List } from '../../util/list.enum';
 import { Item } from '../../state/item-store/models/item.model';
-import { ShareComponent } from '../../components/share/share.component';
+import { ShareComponent } from '../../shared/share/share.component';
 import {
   DeleteItem,
-  GetItems
+  GetItems,
 } from '../../state/item-store/actions/item.actions';
 import { ItemState } from '../../state/item-store/reducers';
 import * as fromCards from '../../state/item-store/reducers/card.reducer';
@@ -25,7 +25,7 @@ import { ItemType } from '../../util/item-type.enum';
 @Component({
   selector: 'ebc-items',
   templateUrl: './items.page.html',
-  styleUrls: ['./items.page.scss']
+  styleUrls: ['./items.page.scss'],
 })
 export class ItemsPage implements OnInit {
   public dbTable = '';
@@ -40,7 +40,7 @@ export class ItemsPage implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private store: Store<ItemState>,
-    private toast: ToastController
+    private toast: ToastController,
   ) {}
 
   ngOnInit() {
@@ -62,15 +62,15 @@ export class ItemsPage implements OnInit {
       message: 'Are you sure?',
       buttons: [
         {
-          text: 'No'
+          text: 'No',
         },
         {
           text: 'Yes, Delete',
           handler: () => {
             this.ebcDel(id);
-          }
-        }
-      ]
+          },
+        },
+      ],
     });
 
     confirm.present();
@@ -80,7 +80,7 @@ export class ItemsPage implements OnInit {
     const del = await this.toast.create({
       message: `The ${this.itemType} has been deleted.`,
       position: 'top',
-      duration: 5000
+      duration: 5000,
     });
 
     del.present();
@@ -92,23 +92,25 @@ export class ItemsPage implements OnInit {
   }
 
   goTo(ebc: Item) {
-    this.router.navigateByUrl(
-      `/sidemenu/item/${this.itemsPre.toLocaleLowerCase()}/${this.itemType.toLocaleLowerCase()}/${
-        ebc.id
-      }`
-    );
+    this.router.navigate([
+      'sidemenu',
+      'item',
+      this.itemsPre.toLowerCase(),
+      this.itemType.toLowerCase(),
+      ebc.id,
+    ]);
   }
 
   itemsFetch() {
     this.store.dispatch(
-      new GetItems({ list: this.dbTable, form: `${this.itemType}s` })
+      new GetItems({ list: this.dbTable, form: `${this.itemType}s` }),
     );
   }
 
   async share(ebc: Item) {
     const shareMod = await this.modal.create({
       component: ShareComponent,
-      componentProps: ebc
+      componentProps: ebc,
     });
 
     shareMod.present();

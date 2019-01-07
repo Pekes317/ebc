@@ -10,9 +10,15 @@
       </ion-input>
     </ion-item>
     <ion-item>
+      <ion-label position="stacked">Description</ion-label>
+      <ion-textarea color="medium" clear-input="true" clear-on-edit="true" [placeholder]="itemType+ ' Info'"
+        formControlName="desc">
+      </ion-textarea>
+    </ion-item>
+    <ion-item>
       <ion-label position="stacked">Creation Instructions</ion-label>
       <ion-textarea color="medium" clear-on-edit="true" placeholder="Where does your Interactive Info Go?"
-        formControlName="desc">
+        formControlName="details">
       </ion-textarea>
     </ion-item>
   </ion-list>

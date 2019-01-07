@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { ItemType } from '../../util/item-type.enum';
+import { ItemType } from '../../../../util/item-type.enum';
 
 @Component({
   selector: 'ebc-metadata-form',
@@ -10,6 +10,7 @@ import { ItemType } from '../../util/item-type.enum';
 })
 export class MetadataFormComponent implements OnInit {
   description: FormControl = new FormControl('');
+  details: FormControl = new FormControl('');
   itemType: ItemType = ItemType.card;
   metaForm: FormGroup;
   name: FormControl = new FormControl('', Validators.required);
@@ -21,6 +22,7 @@ export class MetadataFormComponent implements OnInit {
     this.metaForm = new FormGroup({
       name: this.name,
       desc: this.description,
+      details: this.details,
     });
   }
 

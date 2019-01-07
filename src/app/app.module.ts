@@ -7,9 +7,9 @@ import { IonicStorageModule } from '@ionic/storage';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { ComponentsModule } from './components/components.module';
 import { creds } from './util/ebc-client';
 import { ProvidersModule } from './providers/providers.module';
+import { SharedModule } from './shared/shared.module';
 import { StateModule } from './state/state.module';
 
 // const config = {
@@ -26,12 +26,12 @@ import { StateModule } from './state/state.module';
     AngularFireAuthModule,
     AppRoutingModule,
     BrowserModule,
-    ComponentsModule,
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
     ProvidersModule.forRoot(),
-    StateModule
+    SharedModule,
+    StateModule,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { ItemCat } from '../../util/item-cat.enum';
-import { ItemType } from '../../util/item-type.enum';
+import { ItemCat } from '../../../../util/item-cat.enum';
+import { ItemType } from '../../../../util/item-type.enum';
 
 @Component({
   selector: 'ebc-cat-form',

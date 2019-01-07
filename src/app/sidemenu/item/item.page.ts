@@ -16,7 +16,7 @@ import * as fromItems from '../../state/item-store/reducers';
 @Component({
   selector: 'ebc-item',
   templateUrl: './item.page.html',
-  styleUrls: ['./item.page.scss']
+  styleUrls: ['./item.page.scss'],
 })
 export class ItemPage implements OnInit {
   ebcUrl = 'https://ebc.beezleeart.com/card/';
@@ -32,7 +32,7 @@ export class ItemPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private store: Store<fromItems.ItemState>,
-    private toast: ToastController
+    private toast: ToastController,
   ) {}
 
   ngOnInit() {
@@ -54,20 +54,20 @@ export class ItemPage implements OnInit {
   getItem(params) {
     if (this.inState) {
       this.itemState =
-        params.form === 'cards'
+        params.form === 'card'
           ? this.store.pipe(
               select(fromCards.selectEntities),
-              map(item => item[params.id])
+              map(item => item[params.id]),
             )
           : this.store.pipe(
               select(fromFlyers.selectEntities),
-              map(item => item[params.id])
+              map(item => item[params.id]),
             );
     } else {
       this.store.dispatch(new GetItem({ id: params.id }));
       this.itemState = this.store.pipe(
         select(fromItems.selectItem),
-        map(items => items[0])
+        map(items => items[0]),
       );
     }
   }
@@ -84,7 +84,7 @@ export class ItemPage implements OnInit {
     this.share = {
       ebcUrl: `${this.ebcUrl}${this.itemId}`,
       show: false,
-      messText: this.setText()
+      messText: this.setText(),
     };
     if (this.selected) {
       this.share.contacts =
@@ -101,7 +101,7 @@ export class ItemPage implements OnInit {
     const isSent = await this.toast.create({
       message: `Your ${type} as been Sent`,
       position: 'top',
-      duration: 5000
+      duration: 5000,
     });
 
     isSent.present();

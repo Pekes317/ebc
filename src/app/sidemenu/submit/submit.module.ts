@@ -5,14 +5,15 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ComponentsModule } from '../../components/components.module';
+import { ComponentsModule } from './components/components.module';
 import { SubmitPage } from './submit.page';
+import { SharedModule } from '../../shared/shared.module';
 
 const routes: Routes = [
   {
     path: '',
-    component: SubmitPage
-  }
+    component: SubmitPage,
+  },
 ];
 
 @NgModule({
@@ -21,8 +22,9 @@ const routes: Routes = [
     ComponentsModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    SharedModule,
   ],
-  declarations: [SubmitPage]
+  declarations: [SubmitPage],
 })
 export class SubmitPageModule {}

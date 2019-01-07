@@ -3,12 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController, ModalController } from '@ionic/angular';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
-import { PrivatePolicyComponent } from '../components/private-policy/private-policy.component';
+import { PrivatePolicyComponent } from '../shared/private-policy/private-policy.component';
 
 @Component({
   selector: 'ebc-about-help',
   templateUrl: './about-help.page.html',
-  styleUrls: ['./about-help.page.scss']
+  styleUrls: ['./about-help.page.scss'],
 })
 export class AboutHelpPage implements OnInit {
   appName = 'EBC';
@@ -21,7 +21,7 @@ export class AboutHelpPage implements OnInit {
     private appVersion: AppVersion,
     private model: ModalController,
     private nav: Location,
-    private social: SocialSharing
+    private social: SocialSharing,
   ) {}
 
   ngOnInit() {}
@@ -59,19 +59,19 @@ export class AboutHelpPage implements OnInit {
         {
           name: 'subject',
           placeholder: 'Subject',
-          type: 'text'
+          type: 'text',
         },
         {
           name: 'message',
           placeholder: 'Brief Message',
-          type: 'text'
-        }
+          type: 'text',
+        },
       ],
       buttons: [
         {
           text: 'Cancel',
           role: 'cancel',
-          cssClass: 'reset-cancel'
+          cssClass: 'reset-cancel',
         },
         {
           text: 'Send',
@@ -79,11 +79,11 @@ export class AboutHelpPage implements OnInit {
             await this.social.shareViaEmail(
               data['message'],
               data['subject'],
-              email
+              email,
             );
-          }
-        }
-      ]
+          },
+        },
+      ],
     });
 
     emailAlert.present();
@@ -91,7 +91,7 @@ export class AboutHelpPage implements OnInit {
 
   async policy() {
     const policyModel = await this.model.create({
-      component: PrivatePolicyComponent
+      component: PrivatePolicyComponent,
     });
 
     policyModel.present();

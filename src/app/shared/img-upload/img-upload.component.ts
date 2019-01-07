@@ -4,7 +4,7 @@ import {
   Input,
   OnDestroy,
   OnInit,
-  Output
+  Output,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 
@@ -14,7 +14,7 @@ import { PictureState } from '../../state/user-store/models/picture-state.model'
 @Component({
   selector: 'ebc-img-upload',
   templateUrl: './img-upload.component.html',
-  styleUrls: ['./img-upload.component.scss']
+  styleUrls: ['./img-upload.component.scss'],
 })
 export class ImgUploadComponent implements OnDestroy, OnInit {
   @Input()
@@ -30,7 +30,7 @@ export class ImgUploadComponent implements OnDestroy, OnInit {
   imgAction: EventEmitter<PictureState> = new EventEmitter();
 
   private collector: Subscription;
-  private currentImg = '';
+  protected currentImg = '';
   protected updateAction = false;
 
   constructor(private pic: PictureService) {}
@@ -52,7 +52,7 @@ export class ImgUploadComponent implements OnDestroy, OnInit {
   saveCurrent() {
     const saveImg: PictureState = {
       newPic: false,
-      picFile: this.currentImg
+      picFile: this.currentImg,
     };
     this.imgAction.emit(saveImg);
   }
@@ -60,7 +60,7 @@ export class ImgUploadComponent implements OnDestroy, OnInit {
   private selectData(img: string) {
     const newImg: PictureState = {
       newPic: true,
-      picFile: img
+      picFile: img,
     };
     this.imgAction.emit(newImg);
   }

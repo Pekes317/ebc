@@ -10,6 +10,13 @@
   }
 }
 
+@mixin formHeading {
+  ion-title {
+    font-size: 1rem;
+    text-align: left;
+  }
+}
+
 @mixin selectLabel($color: var(--ion-color-tertiary)) {
   .radio-checked+ion-label {
     color: $color;
