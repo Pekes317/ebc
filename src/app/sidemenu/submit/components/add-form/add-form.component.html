@@ -1,3 +1,13 @@
-<p>
-  add-form works!
-</p>
+<div class="add-form">
+  <ion-toolbar color="white">
+    <ion-title color="dark" slot="start">Add Extra Information?</ion-title>
+  </ion-toolbar>
+  <ion-list lines="none">
+    <ng-container *ngFor="let choice of choices">
+      <ion-item class="add-check">
+        <ion-checkbox color="tertiary" slot="end" [(ngModel)]="choice.value"></ion-checkbox>
+        <ion-label>{{choice.label}}</ion-label>
+      </ion-item>
+    </ng-container>
+  </ion-list>
+</div>

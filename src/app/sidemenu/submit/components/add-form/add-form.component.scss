@@ -1,0 +1,10 @@
+@import '../../../../../theme//mixins.scss';
+
+.add-from {
+    @include heading;
+    @include formHeading;
+
+    .add-check {
+        @include selectLabel;
+    }
+}
