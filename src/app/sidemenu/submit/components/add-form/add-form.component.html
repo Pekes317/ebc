@@ -1,13 +1,21 @@
-<div class="add-form">
+<form class="add-form" [formGroup]="addForm" (ngSubmit)="next();">
   <ion-toolbar color="white">
     <ion-title color="dark" slot="start">Add Extra Information?</ion-title>
   </ion-toolbar>
   <ion-list lines="none">
     <ng-container *ngFor="let choice of choices">
-      <ion-item class="add-check">
-        <ion-checkbox color="tertiary" slot="end" [(ngModel)]="choice.value"></ion-checkbox>
+      <ion-item *ngIf="choice.display" class="add-check">
+        <ion-checkbox color="tertiary" slot="end" [formControlName]="choice.control" (ionChange)="enableConfirm();"></ion-checkbox>
         <ion-label>{{choice.label}}</ion-label>
       </ion-item>
     </ng-container>
   </ion-list>
-</div>
+  <ion-toolbar color="white">
+    <ion-buttons slot="start">
+      <ion-button fill="clear" color="danger" (click)="goBack();">Back</ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" color="primary" type="submit" [disabled]="!enableCheck">Next</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</form>

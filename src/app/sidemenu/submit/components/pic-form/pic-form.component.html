@@ -1,3 +1,24 @@
-<p>
-  pic-form works!
-</p>
+<ion-list class="pic-form" lines="none">
+  <ion-toolbar color="white">
+    <ion-title color="dark" slot="start">Add Image / Logo</ion-title>
+  </ion-toolbar>
+  <ebc-img-upload></ebc-img-upload>
+  <ion-item class="pic-prev">
+    <ng-container *ngIf="previewImg; else noImg">
+      <ion-img [src]="previewImg"></ion-img>
+    </ng-container>
+    <ng-template #noImg>
+      <div class="broken-img pic-preview">
+        No image Selected
+      </div>
+    </ng-template>
+  </ion-item>
+  <ion-toolbar color="white">
+    <ion-buttons slot="start">
+      <ion-button fill="clear" color="danger" (click)="goBack();">Back</ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" color="primary" (click)="next();">Next</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-list>

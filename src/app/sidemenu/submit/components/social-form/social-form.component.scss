@@ -1,0 +1,10 @@
+@import '../../../../../theme//mixins.scss';
+
+.social-form {
+    @include heading;
+    @include inputs;
+
+    .social-add {
+        padding-top: .75rem;
+    }
+}

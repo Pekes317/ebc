@@ -18,7 +18,9 @@
 }
 
 @mixin selectLabel($color: var(--ion-color-tertiary)) {
-  .radio-checked+ion-label {
+
+  .radio-checked+ion-label,
+  .checkbox-checked+ion-label {
     color: $color;
   }
 }

@@ -1,3 +1,23 @@
-<p>
-  social-form works!
-</p>
+<form class="social-form" [formGroup]="socialForm">
+  <ion-toolbar color="white">
+    <ion-title color="dark" slot="start">Add Social Media / Other Links</ion-title>
+  </ion-toolbar>
+  <ng-container formArrayName="social">
+    <ion-list>
+      <ng-container *ngFor="let control of socials.controls; let i=index">
+        <ion-item>
+          <ion-label position="stacked" for="i">Social/URL</ion-label>
+          <ion-input [formControlName]="i" placeholder="Ex. Facebook: Username"></ion-input>
+        </ion-item>
+      </ng-container>
+      <ion-button class="social-add" color="success" expand="full" shape="round" (click)="addField();">
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-list>
+  </ng-container>
+  <ion-toolbar color="white">
+    <ion-buttons slot="start">
+      <ion-button fill="clear" color="danger" (click)="goBack();">Back</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</form>

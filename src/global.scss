@@ -12,4 +12,8 @@
 
 .reset-cancel {
 	color: var(--ion-color-danger) !important;
+
+	ion-icon {
+		color: var(--ion-color-danger) !important;
+	}
 }

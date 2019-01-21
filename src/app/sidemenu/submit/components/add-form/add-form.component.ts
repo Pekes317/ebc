@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'ebc-add-form',
@@ -6,20 +7,39 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-form.component.scss'],
 })
 export class AddFormComponent implements OnInit {
-  picAdd = false;
-  socialAdd = false;
+  addForm: FormGroup;
+  enableCheck = false;
+  picAdd: FormControl = new FormControl(false);
+  socialAdd: FormControl = new FormControl(false);
   choices = [
     {
-      label: '',
-      value: this.socialAdd,
+      control: 'social',
+      display: true,
+      label: 'Add Social Media/URL',
     },
     {
-      label: '',
-      value: this.picAdd,
+      control: 'pic',
+      display: true,
+      label: 'Add Logo/Picture',
     },
   ];
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.addForm = new FormGroup({
+      pic: this.picAdd,
+      social: this.socialAdd,
+    });
+    this.enableConfirm();
+  }
+
+  enableConfirm() {
+    const selection: boolean[] = [this.picAdd.value, this.socialAdd.value];
+    this.enableCheck = selection.some(select => select);
+  }
+
+  goBack() {}
+
+  next() {}
 }

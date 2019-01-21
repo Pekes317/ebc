@@ -12,9 +12,16 @@ import { SelectFormComponent } from './select-form/select-form.component';
 import { SocialFormComponent } from './social-form/social-form.component';
 import { SubmitModalComponent } from './submit-modal/submit-modal.component';
 import { TypeFormComponent } from './type-form/type-form.component';
+import { SharedModule } from '../../../shared/shared.module';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, IonicModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    ReactiveFormsModule,
+    SharedModule,
+  ],
   declarations: [
     AddFormComponent,
     CatFormComponent,

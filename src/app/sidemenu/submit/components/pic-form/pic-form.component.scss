@@ -1,0 +1,16 @@
+@import '../../../../../theme//mixins.scss';
+
+.pic-form {
+    @include heading;
+    @include broken;
+    @include formHeading;
+
+    .pic-prev {
+        padding-top: 1rem;
+
+        .pic-preview {
+            max-width: 100%;
+            padding: 2rem;
+        }
+    }
+}
