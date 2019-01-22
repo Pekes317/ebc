@@ -1,11 +1,19 @@
 import { Action } from '@ngrx/store';
+import { State } from '../reducers/form-state.reducer';
 
 export enum FormStateActionTypes {
-  ResetState = '[FormState] ResetState'
+  ResetFormState = '[FormState] ResetFormState',
+  UpdateFormState = '[FormState] UpdateFormState',
 }
 
-export class ResetState implements Action {
-  readonly type = FormStateActionTypes.ResetState;
+export class ResetFormState implements Action {
+  readonly type = FormStateActionTypes.ResetFormState;
 }
 
-export type FormStateActions = ResetState;
+export class UpdateFormState implements Action {
+  readonly type = FormStateActionTypes.UpdateFormState;
+
+  constructor(public payload: Partial<State>) {}
+}
+
+export type FormStateActions = ResetFormState | UpdateFormState;

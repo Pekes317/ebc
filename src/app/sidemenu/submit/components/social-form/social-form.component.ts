@@ -66,15 +66,6 @@ export class SocialFormComponent implements OnInit {
 
   goBack() {}
 
-  socialAdded() {
-    const added = this.socialForm.dirty;
-    return added;
-  }
-
-  socialData() {
-    return this.socialForm.value;
-  }
-
   private newField(type: string) {
     this.socials.push(new FormControl(type));
   }

@@ -1,6 +1,6 @@
 import {
   FormStateActions,
-  FormStateActionTypes
+  FormStateActionTypes,
 } from '../actions/form-state.actions';
 import { ItemCat } from '../../../util/item-cat.enum';
 import { ItemType } from '../../../util/item-type.enum';
@@ -16,12 +16,15 @@ export const initialState: State = {
   cat: null,
   pic: false,
   social: false,
-  type: ItemType.card
+  type: ItemType.card,
 };
 
 export function reducer(state = initialState, action: FormStateActions): State {
   switch (action.type) {
-    case FormStateActionTypes.ResetState:
+    case FormStateActionTypes.UpdateFormState:
+      return { ...state, ...action.payload };
+
+    case FormStateActionTypes.ResetFormState:
       return initialState;
 
     default:

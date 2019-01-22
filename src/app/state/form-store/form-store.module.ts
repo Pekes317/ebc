@@ -4,7 +4,6 @@ import { StoreModule } from '@ngrx/store';
 import { metaReducers, reducers } from './reducers';
 
 @NgModule({
-  declarations: [],
-  imports: [StoreModule.forFeature('formStore', reducers, { metaReducers })]
+  imports: [StoreModule.forFeature('formStore', reducers, { metaReducers })],
 })
 export class FormStoreModule {}
