@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IonSlides } from '@ionic/angular';
+import { select, Store } from '@ngrx/store';
 import { SwiperOptions } from 'swiper';
+
+import { SubmitEvent } from '../../models/submit-event.model';
+import * as fromForm from '../../state/form-store/reducers';
 
 @Component({
   selector: 'ebc-submit',
@@ -7,12 +12,22 @@ import { SwiperOptions } from 'swiper';
   styleUrls: ['./submit.page.scss'],
 })
 export class SubmitPage implements OnInit {
+  @ViewChild('steps') steps: IonSlides;
+
+  formPic = this.store.pipe(select(fromForm.selectPic));
+  formState = this.store.pipe(select(fromForm.selectStatus));
   stepOptions: SwiperOptions = {
     autoHeight: true,
     centeredSlides: true,
   };
 
-  constructor() {}
+  constructor(private store: Store<fromForm.FormStore>) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+   this.lockSlides();
+  }
+
+  private async lockSlides() {
+    await this.steps.lockSwipeToNext(true);
+  }
 }
