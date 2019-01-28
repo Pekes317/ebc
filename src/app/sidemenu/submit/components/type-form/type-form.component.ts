@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
+import { SubmitEvent } from '../../../../models/submit-event.model';
 import { ItemType } from '../../../../util/item-type.enum';
 
 @Component({
@@ -9,6 +10,11 @@ import { ItemType } from '../../../../util/item-type.enum';
   styleUrls: ['./type-form.component.scss'],
 })
 export class TypeFormComponent implements OnInit {
+  @Input() set type(item: ItemType) {
+    this.itemType.setValue(item);
+  }
+  @Output() selected: EventEmitter<SubmitEvent> = new EventEmitter();
+
   itemOptions = [
     {
       type: ItemType.card,
@@ -28,5 +34,12 @@ export class TypeFormComponent implements OnInit {
     });
   }
 
-  submitType() {}
+  submitType() {
+    const update: SubmitEvent = {
+      state: {
+        type: this.itemType.value,
+      },
+    };
+    this.selected.emit(update);
+  }
 }

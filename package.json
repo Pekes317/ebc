@@ -76,7 +76,7 @@
     "es6-promise-plugin": "^4.2.2",
     "firebase": "^5.7.2",
     "ionic-plugin-deeplinks": "^1.0.17",
-    "ionicons": "^4.5.1",
+    "ionicons": "^4.5.5",
     "libphonenumber-js": "^1.7.4",
     "ngrx-store-freeze": "^0.2.4",
     "rxjs": "6.3.3",

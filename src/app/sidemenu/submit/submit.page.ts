@@ -4,6 +4,8 @@ import { select, Store } from '@ngrx/store';
 import { SwiperOptions } from 'swiper';
 
 import { SubmitEvent } from '../../models/submit-event.model';
+import { UpdateFormData } from '../../state/form-store/actions/form-data.actions';
+import { UpdateFormState } from '../../state/form-store/actions/form-state.actions';
 import * as fromForm from '../../state/form-store/reducers';
 
 @Component({
@@ -24,10 +26,24 @@ export class SubmitPage implements OnInit {
   constructor(private store: Store<fromForm.FormStore>) {}
 
   ngOnInit() {
-   this.lockSlides();
+    this.steps.lockSwipeToNext(true);
   }
 
-  private async lockSlides() {
+  prevSlide() {
+    this.steps.slidePrev();
+  }
+
+  async updateState(event: SubmitEvent) {
+    if (event.state) {
+      await this.store.dispatch(new UpdateFormState(event.state));
+    }
+    await this.nextSlide();
+  }
+
+  private async nextSlide() {
+    await this.steps.update();
+    await this.steps.lockSwipeToNext(false);
+    await this.steps.slideNext();
     await this.steps.lockSwipeToNext(true);
   }
 }

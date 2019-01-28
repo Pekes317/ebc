@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { ItemCat } from '../../../../util/item-cat.enum';
@@ -10,6 +10,10 @@ import { ItemType } from '../../../../util/item-type.enum';
   styleUrls: ['./cat-form.component.scss'],
 })
 export class CatFormComponent implements OnInit {
+  @Input() set type(item: ItemType) {
+    this.itemType = item;
+  }
+
   catForm: FormGroup;
   catType: FormControl = new FormControl('', Validators.required);
   itemType: ItemType = ItemType.card;

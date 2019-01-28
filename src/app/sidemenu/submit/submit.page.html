@@ -3,33 +3,51 @@
 <ion-content class="submit-page">
   <ion-card>
     <ion-card-header>
-      <ion-card-title color="tertiary"> <h2>Submit Item</h2> </ion-card-title>
+      <ion-card-title color="tertiary">
+        <h2>Submit Item</h2>
+      </ion-card-title>
     </ion-card-header>
     <ion-card-content padding>
       <ion-slides #steps [options]="stepOptions">
         <ion-slide>
-          <div class="form-slide"><ebc-type-form></ebc-type-form></div>
+          <div class="form-slide">
+            <ebc-type-form [type]="(formState | async).type" (selected)="this.updateState($event);"></ebc-type-form>
+          </div>
         </ion-slide>
         <ion-slide>
-          <div class="form-slide"><ebc-cat-form></ebc-cat-form></div>
+          <div class="form-slide">
+            <ebc-cat-form [type]="(formState | async).type"></ebc-cat-form>
+          </div>
         </ion-slide>
         <ion-slide>
-          <div class="form-slide"><ebc-select-form></ebc-select-form></div>
+          <div class="form-slide">
+            <ebc-select-form></ebc-select-form>
+          </div>
         </ion-slide>
         <ion-slide>
-          <div class="form-slide"><ebc-metadata-form></ebc-metadata-form></div>
+          <div class="form-slide">
+            <ebc-metadata-form></ebc-metadata-form>
+          </div>
         </ion-slide>
         <ion-slide>
-          <div class="form-slide"><ebc-detail-form></ebc-detail-form></div>
+          <div class="form-slide">
+            <ebc-detail-form></ebc-detail-form>
+          </div>
         </ion-slide>
         <ion-slide>
-          <div class="form-slide"><ebc-add-form></ebc-add-form></div>
+          <div class="form-slide">
+            <ebc-add-form></ebc-add-form>
+          </div>
         </ion-slide>
         <ion-slide>
-          <div class="form-slide"><ebc-pic-form></ebc-pic-form></div>
+          <div class="form-slide">
+            <ebc-pic-form></ebc-pic-form>
+          </div>
         </ion-slide>
         <ion-slide>
-          <div class="form-slide"><ebc-social-form></ebc-social-form></div>
+          <div class="form-slide">
+            <ebc-social-form></ebc-social-form>
+          </div>
         </ion-slide>
       </ion-slides>
     </ion-card-content>
