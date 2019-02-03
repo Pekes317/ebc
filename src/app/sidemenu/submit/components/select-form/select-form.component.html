@@ -7,7 +7,7 @@
       <ion-label color="medium">{{itemType}} Templates</ion-label>
       <ion-select formControlName="selectType" placeholder="Select One" (ionChange)="setPreview($event);">
         <ng-container *ngFor="let temp of templates; let i=index">
-          <ion-select-option [value]="temp.id">{{i+1}} {{temp.name}}</ion-select-option>
+          <ion-select-option [value]="{ name: temp.name, pic: temp.pic }">{{i+1}} {{temp.name}}</ion-select-option>
         </ng-container>
       </ion-select>
     </ion-item>

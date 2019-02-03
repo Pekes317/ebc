@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
+import { SubmitEvent } from '../../../../models/submit-event.model';
 import { Item } from '../../../../state/item-store/models/item.model';
 import { ItemType } from '../../../../util/item-type.enum';
 
@@ -10,6 +11,12 @@ import { ItemType } from '../../../../util/item-type.enum';
   styleUrls: ['./select-form.component.scss'],
 })
 export class SelectFormComponent implements OnInit {
+  @Input() set type(item: ItemType) {
+    this.itemType = item;
+  }
+  @Output() back: EventEmitter<boolean> = new EventEmitter();
+  @Output() selected: EventEmitter<SubmitEvent> = new EventEmitter();
+
   itemType: ItemType = ItemType.card;
   previewImg: string;
   selectForm: FormGroup;
@@ -24,9 +31,20 @@ export class SelectFormComponent implements OnInit {
     });
   }
 
-  goBack() {}
+  goBack() {
+    this.back.emit(true);
+  }
 
   setPreview(pic: Event) {}
 
-  submitTemp() {}
+  submitTemp() {
+    const tempData: SubmitEvent = {
+      data: {
+        tempName: '',
+        tempPic: '',
+      },
+    };
+
+    this.selected.emit(tempData);
+  }
 }

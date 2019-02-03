@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
+import { SubmitEvent } from '../../../../models/submit-event.model';
 import { ItemCat } from '../../../../util/item-cat.enum';
 import { ItemType } from '../../../../util/item-type.enum';
 
@@ -13,6 +14,8 @@ export class CatFormComponent implements OnInit {
   @Input() set type(item: ItemType) {
     this.itemType = item;
   }
+  @Output() back: EventEmitter<boolean> = new EventEmitter();
+  @Output() selected: EventEmitter<SubmitEvent> = new EventEmitter();
 
   catForm: FormGroup;
   catType: FormControl = new FormControl('', Validators.required);
@@ -37,7 +40,9 @@ export class CatFormComponent implements OnInit {
     });
   }
 
-  goBack() {}
+  goBack() {
+    this.back.emit(true);
+  }
 
   setLabel(type: ItemCat) {
     const catTypes = {
@@ -49,5 +54,12 @@ export class CatFormComponent implements OnInit {
     return catTypes[type];
   }
 
-  submitCat() {}
+  submitCat() {
+    const catEvent: SubmitEvent = {
+      state: {
+        cat: this.catType.value,
+      },
+    };
+    this.selected.emit(catEvent);
+  }
 }

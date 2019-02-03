@@ -8,20 +8,20 @@
       </ion-card-title>
     </ion-card-header>
     <ion-card-content padding>
-      <ion-slides #steps [options]="stepOptions">
+      <ion-slides #steps [options]="stepOptions" (ionSlideDidChange)="updateSlide();">
         <ion-slide>
           <div class="form-slide">
-            <ebc-type-form [type]="(formState | async).type" (selected)="this.updateState($event);"></ebc-type-form>
+            <ebc-type-form [type]="(formState | async).type" (selected)="updateState($event);"></ebc-type-form>
           </div>
         </ion-slide>
         <ion-slide>
           <div class="form-slide">
-            <ebc-cat-form [type]="(formState | async).type"></ebc-cat-form>
+            <ebc-cat-form [type]="(formState | async).type" (selected)="updateState($event);" (back)="prevSlide();"></ebc-cat-form>
           </div>
         </ion-slide>
-        <ion-slide>
+        <ion-slide *ngIf="(formState | async).cat === temp">
           <div class="form-slide">
-            <ebc-select-form></ebc-select-form>
+            <ebc-select-form [type]="(formState | async).type" (selected)="updateState($event);" (back)="prevSlide();"></ebc-select-form>
           </div>
         </ion-slide>
         <ion-slide>
