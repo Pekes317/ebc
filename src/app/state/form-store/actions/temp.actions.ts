@@ -9,6 +9,7 @@ export enum TempActionTypes {
   ClearTemps = '[Temp] Clear Temps',
   DeleteTemp = '[Temp] Delete Temp',
   DeleteTemps = '[Temp] Delete Temps',
+  ErrorTemps = '[Temp] Error Temps',
   GetTemps = '[Temp] GetTemps',
   LoadTemps = '[Temp] Load Temps',
   UpsertTemp = '[Temp] Upsert Temp',
@@ -43,6 +44,12 @@ export class DeleteTemps implements Action {
   readonly type = TempActionTypes.DeleteTemps;
 
   constructor(public payload: { ids: number[] }) {}
+}
+
+export class ErrorTemps implements Action {
+  readonly type = TempActionTypes.ErrorTemps;
+
+  constructor(public payload: unknown) {}
 }
 
 export class GetTemps implements Action {

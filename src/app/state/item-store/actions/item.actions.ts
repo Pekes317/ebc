@@ -27,7 +27,7 @@ export class AddItem implements Action {
 export class ErrorItems implements Action {
   readonly type = ItemActionTypes.ErrorItems;
 
-  constructor(public payload: any) {}
+  constructor(public payload: unknown) {}
 }
 
 export class GetItem implements Action {
@@ -39,7 +39,7 @@ export class GetItem implements Action {
 export class GetItems implements Action {
   readonly type = ItemActionTypes.GetItems;
 
-  constructor(public payload: { list: string, form: string }) {}
+  constructor(public payload: { list: string; form: string }) {}
 }
 
 export class GetMedia implements Action {
@@ -51,7 +51,7 @@ export class GetMedia implements Action {
 export class DeleteItem implements Action {
   readonly type = ItemActionTypes.DeleteItem;
 
-  constructor(public payload: { id: number, form: string }) {}
+  constructor(public payload: { id: number; form: string }) {}
 }
 
 export class LoadMedia implements Action {
@@ -61,11 +61,11 @@ export class LoadMedia implements Action {
 }
 
 export type ItemActions =
- LoadItems
- | AddItem
- | ErrorItems
- | GetItem
- | GetItems
- | GetMedia
- | DeleteItem
- | LoadMedia;
+  | LoadItems
+  | AddItem
+  | ErrorItems
+  | GetItem
+  | GetItems
+  | GetMedia
+  | DeleteItem
+  | LoadMedia;

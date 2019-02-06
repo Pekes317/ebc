@@ -10,17 +10,17 @@ import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 
 import { ListModel } from '../../models/route-data.model';
-import { List } from '../../util/list.enum';
-import { Item } from '../../state/item-store/models/item.model';
-import { ShareComponent } from '../../shared/share/share.component';
 import {
   DeleteItem,
   GetItems,
 } from '../../state/item-store/actions/item.actions';
+import { Item } from '../../state/item-store/models/item.model';
 import { ItemState } from '../../state/item-store/reducers';
 import * as fromCards from '../../state/item-store/reducers/card.reducer';
 import * as fromFlyers from '../../state/item-store/reducers/flyer.reducer';
+import { ShareComponent } from '../../shared/share/share.component';
 import { ItemType } from '../../util/item-type.enum';
+import { List, ListUrls } from '../../util/list.enum';
 
 @Component({
   selector: 'ebc-items',
@@ -120,13 +120,13 @@ export class ItemsPage implements OnInit {
     switch (list) {
       case List.my:
         this.delete = true;
-        return 'item';
+        return ListUrls.item;
       case List.samp:
         this.delete = false;
-        return list.toLocaleLowerCase();
+        return ListUrls.sample;
       case List.temp:
         this.delete = false;
-        return 'temp';
+        return ListUrls.temp;
     }
   }
 }
