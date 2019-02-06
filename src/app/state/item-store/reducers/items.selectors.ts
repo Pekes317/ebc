@@ -6,10 +6,10 @@ export const selectItemStore = createFeatureSelector<ItemState>('itemStore');
 
 export const selectCards = createSelector(
   selectItemStore,
-  (state: ItemState) => state.currentCards
+  (state: ItemState) => state.currentCards,
 );
 
 export const selectFlyers = createSelector(
   selectItemStore,
-  (state: ItemState) => state.currentFylers
+  (state: ItemState) => state.currentFlyers,
 );
