@@ -10,12 +10,13 @@ import {
   GetItems,
   GetMedia,
   ItemActionTypes,
-  LoadMedia
+  LoadMedia,
 } from '../actions/item.actions';
 import { DeleteCard, LoadCards } from '../actions/card.actions';
 import { DeleteFlyer, LoadFlyers } from '../actions/flyer.actions';
 import { Item } from '../models/item.model';
 import { ItemsService } from '../../../providers/items.service';
+import { ItemType } from '../../../util/item-type.enum';
 
 @Injectable()
 export class ItemEffects {
@@ -26,9 +27,9 @@ export class ItemEffects {
     exhaustMap(item =>
       this.itemService.deleteItem(item.form, item.id).pipe(
         map(() => this.deleteType(item.form, item.id)),
-        catchError(err => of(new ErrorItems(err)))
-      )
-    )
+        catchError(err => of(new ErrorItems(err))),
+      ),
+    ),
   );
 
   @Effect()
@@ -36,11 +37,11 @@ export class ItemEffects {
     ofType<GetItems>(ItemActionTypes.GetItems),
     map(action => action.payload),
     exhaustMap(table =>
-      this.itemService.getList(table.list, table.form).pipe(
+      this.itemService.getList(table.list, `${table.form}s`).pipe(
         map((items: Array<Item>) => this.loadType(table.form, items)),
-        catchError(err => of(new ErrorItems(err)))
-      )
-    )
+        catchError(err => of(new ErrorItems(err))),
+      ),
+    ),
   );
 
   @Effect()
@@ -50,9 +51,9 @@ export class ItemEffects {
     exhaustMap(page =>
       this.itemService.getOne(page.id).pipe(
         map((item: Item) => new AddItem(item)),
-        catchError(err => of(new ErrorItems(err)))
-      )
-    )
+        catchError(err => of(new ErrorItems(err))),
+      ),
+    ),
   );
 
   @Effect()
@@ -62,22 +63,24 @@ export class ItemEffects {
     exhaustMap(url =>
       this.itemService.getMedia(url).pipe(
         map((svg: { media: string }) => new LoadMedia(svg.media)),
-        catchError(err => of(new ErrorItems(err)))
-      )
-    )
+        catchError(err => of(new ErrorItems(err))),
+      ),
+    ),
   );
 
   constructor(private actions$: Actions, private itemService: ItemsService) {}
 
   private loadType(form: string, payload: Array<Item>) {
-    return form === 'Cards'
+    return form === ItemType.card
       ? new LoadCards({ cards: payload })
       : new LoadFlyers({ flyers: payload });
   }
 
   private deleteType(form: string, payload: number) {
-    return form === 'Cards'
-      ? new DeleteCard({ id: payload })
+    return form === ItemType.card
+      ? new DeleteCard({
+          id: payload,
+        })
       : new DeleteFlyer({ id: payload });
   }
 }

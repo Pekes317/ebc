@@ -32,7 +32,7 @@ export class ItemsPage implements OnInit {
   public delete = false;
   public items: Observable<Item[]>;
   public itemsPre = '';
-  public itemType = '';
+  public itemType = ItemType.card;
 
   constructor(
     private alert: AlertController,
@@ -47,7 +47,7 @@ export class ItemsPage implements OnInit {
     this.route.data.pipe(take(1)).subscribe((data: ListModel) => {
       this.dbTable = this.setTable(data.list);
       this.itemsPre = data.list;
-      this.itemType = data.itemType;
+      this.itemType = data.itemType as ItemType;
       this.itemsFetch();
       this.items =
         this.itemType === ItemType.card
@@ -103,7 +103,7 @@ export class ItemsPage implements OnInit {
 
   itemsFetch() {
     this.store.dispatch(
-      new GetItems({ list: this.dbTable, form: `${this.itemType}s` }),
+      new GetItems({ list: this.dbTable, form: this.itemType }),
     );
   }
 

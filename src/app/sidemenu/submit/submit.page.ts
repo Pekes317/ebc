@@ -7,8 +7,9 @@ import { SubmitEvent } from '../../models/submit-event.model';
 import { ItemCat } from '../../util/item-cat.enum';
 import { UpdateFormData } from '../../state/form-store/actions/form-data.actions';
 import { UpdateFormState } from '../../state/form-store/actions/form-state.actions';
+import { GetTemps } from '../../state/form-store/actions/temp.actions';
+import { State } from '../../state/form-store/reducers/form-state.reducer';
 import * as fromForm from '../../state/form-store/reducers';
-import { IonicConfig } from '@ionic/core';
 
 @Component({
   selector: 'ebc-submit',
@@ -21,6 +22,7 @@ export class SubmitPage implements OnInit {
   exist: ItemCat = ItemCat.exist;
   formPic = this.store.pipe(select(fromForm.selectPic));
   formState = this.store.pipe(select(fromForm.selectStatus));
+  formTemps = this.store.pipe(select(fromForm.selectAll));
   new: ItemCat = ItemCat.new;
   stepOptions: SwiperOptions = {
     autoHeight: true,
@@ -45,11 +47,18 @@ export class SubmitPage implements OnInit {
   async updateState(evt: SubmitEvent) {
     if (evt.state) {
       this.store.dispatch(new UpdateFormState(evt.state));
+      this.getTemps(evt.state);
     }
     if (evt.data) {
       this.store.dispatch(new UpdateFormData(evt.data));
     }
     await this.nextSlide();
+  }
+
+  private getTemps(state: Partial<State>) {
+    if (state.type) {
+      this.store.dispatch(new GetTemps(state.type));
+    }
   }
 
   private async nextSlide() {

@@ -19,7 +19,7 @@ export class TempsEffects {
     ofType<GetTemps>(TempActionTypes.GetTemps),
     map(action => action.payload),
     exhaustMap(type =>
-      this.itemService.getList(ListUrls.temp, type).pipe(
+      this.itemService.getList(ListUrls.temp, `${type}s`).pipe(
         map((items: Item[]) => new LoadTemps({ temps: items })),
         catchError(err => of(new ErrorTemps(err))),
       ),

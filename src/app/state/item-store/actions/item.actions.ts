@@ -1,5 +1,6 @@
 import { Action } from '@ngrx/store';
 import { Item } from '../models/item.model';
+import { ItemType } from '../../../util/item-type.enum';
 
 export enum ItemActionTypes {
   LoadItems = '[Item] Load Items',
@@ -39,7 +40,7 @@ export class GetItem implements Action {
 export class GetItems implements Action {
   readonly type = ItemActionTypes.GetItems;
 
-  constructor(public payload: { list: string; form: string }) {}
+  constructor(public payload: { list: string; form: ItemType }) {}
 }
 
 export class GetMedia implements Action {
