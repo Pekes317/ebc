@@ -21,32 +21,38 @@
         </ion-slide>
         <ion-slide *ngIf="(formState | async).cat === temp">
           <div class="form-slide">
-            <ebc-select-form [type]="(formState | async).type" (selected)="updateState($event);" (back)="prevSlide();"></ebc-select-form>
+            <ebc-select-form [options]="(formTemps | async)" [type]="(formState | async).type" (selected)="updateState($event);"
+              (back)="prevSlide();" (update)="updateSlide();"></ebc-select-form>
           </div>
         </ion-slide>
         <ion-slide>
           <div class="form-slide">
-            <ebc-metadata-form></ebc-metadata-form>
+            <ebc-metadata-form [type]="(formState | async).type" (metadata)="updateState($event);" (back)="prevSlide();"></ebc-metadata-form>
+          </div>
+        </ion-slide>
+        <ion-slide *ngIf="(formState | async).cat !== exist">
+          <div class="form-slide">
+            <ebc-detail-form [type]="(formState | async).type" (detail)="updateState($event);" (back)="prevSlide();"></ebc-detail-form>
           </div>
         </ion-slide>
         <ion-slide>
           <div class="form-slide">
-            <ebc-detail-form></ebc-detail-form>
+            <ebc-add-form [picOption]="hasPic" (addData)="updateState($event);" (back)="prevSlide();"></ebc-add-form>
           </div>
         </ion-slide>
-        <ion-slide>
-          <div class="form-slide">
-            <ebc-add-form></ebc-add-form>
-          </div>
-        </ion-slide>
-        <ion-slide>
+        <ion-slide *ngIf="(formState | async).pic">
           <div class="form-slide">
             <ebc-pic-form></ebc-pic-form>
           </div>
         </ion-slide>
-        <ion-slide>
+        <ion-slide *ngIf="(formState | async).social">
           <div class="form-slide">
             <ebc-social-form></ebc-social-form>
+          </div>
+        </ion-slide>
+        <ion-slide>
+          <div class="form-slide">
+            Finished
           </div>
         </ion-slide>
       </ion-slides>

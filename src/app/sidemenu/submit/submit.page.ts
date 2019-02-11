@@ -23,6 +23,7 @@ export class SubmitPage implements OnInit {
   formPic = this.store.pipe(select(fromForm.selectPic));
   formState = this.store.pipe(select(fromForm.selectStatus));
   formTemps = this.store.pipe(select(fromForm.selectAll));
+  hasPic = false;
   new: ItemCat = ItemCat.new;
   stepOptions: SwiperOptions = {
     autoHeight: true,
@@ -40,8 +41,8 @@ export class SubmitPage implements OnInit {
     this.steps.slidePrev();
   }
 
-  updateSlide() {
-    this.steps.update();
+  async updateSlide() {
+    await setTimeout(() => this.steps.updateAutoHeight(), 500);
   }
 
   async updateState(evt: SubmitEvent) {
@@ -59,6 +60,7 @@ export class SubmitPage implements OnInit {
     if (state.type) {
       this.store.dispatch(new GetTemps(state.type));
     }
+    this.setPicture(state);
   }
 
   private async nextSlide() {
@@ -66,5 +68,11 @@ export class SubmitPage implements OnInit {
     await this.steps.lockSwipeToNext(false);
     await this.steps.slideNext();
     await this.steps.lockSwipeToNext(true);
+  }
+
+  private setPicture(state: Partial<State>) {
+    if (state.cat) {
+      this.hasPic = state.cat === this.exist;
+    }
   }
 }

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
+import { SubmitEvent } from '../../../../models/submit-event.model';
 import { ItemType } from '../../../../util/item-type.enum';
 
 @Component({
@@ -9,6 +10,12 @@ import { ItemType } from '../../../../util/item-type.enum';
   styleUrls: ['./metadata-form.component.scss'],
 })
 export class MetadataFormComponent implements OnInit {
+  @Input() set type(item: ItemType) {
+    this.itemType = item;
+  }
+  @Output() back: EventEmitter<boolean> = new EventEmitter();
+  @Output() metadata: EventEmitter<SubmitEvent> = new EventEmitter();
+
   description: FormControl = new FormControl('');
   details: FormControl = new FormControl('');
   itemType: ItemType = ItemType.card;
@@ -26,9 +33,21 @@ export class MetadataFormComponent implements OnInit {
     });
   }
 
-  goBack() {}
+  goBack() {
+    this.back.emit();
+  }
 
-  submitMeta() {}
+  submitMeta() {
+    const metaData: SubmitEvent = {
+      data: {
+        desc: this.description.value,
+        details: this.details.value,
+        name: this.name.value,
+      },
+    };
+
+    this.metadata.emit(metaData);
+  }
 
   private setTitle() {
     const titleNames = {

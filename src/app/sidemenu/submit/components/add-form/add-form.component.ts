@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+
+import { SubmitEvent } from '../../../../models/submit-event.model';
 
 @Component({
   selector: 'ebc-add-form',
@@ -7,8 +9,13 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./add-form.component.scss'],
 })
 export class AddFormComponent implements OnInit {
+  @Input() set picOption(disable: boolean) {
+    this.disablePic(disable);
+  }
+  @Output() back: EventEmitter<boolean> = new EventEmitter();
+  @Output() addData: EventEmitter<SubmitEvent> = new EventEmitter();
+
   addForm: FormGroup;
-  enableCheck = false;
   picAdd: FormControl = new FormControl(false);
   socialAdd: FormControl = new FormControl(false);
   choices = [
@@ -31,15 +38,22 @@ export class AddFormComponent implements OnInit {
       pic: this.picAdd,
       social: this.socialAdd,
     });
-    this.enableConfirm();
   }
 
-  enableConfirm() {
-    const selection: boolean[] = [this.picAdd.value, this.socialAdd.value];
-    this.enableCheck = selection.some(select => select);
+  disablePic(pic: boolean) {
+    this.choices[1].display = !pic;
+    this.picAdd.setValue(pic);
   }
 
-  goBack() {}
+  goBack() {
+    this.back.emit();
+  }
 
-  next() {}
+  next() {
+    const addData: SubmitEvent = {
+      state: this.addForm.value,
+    };
+
+    this.addData.emit(addData);
+  }
 }

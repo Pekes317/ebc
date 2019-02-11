@@ -11,11 +11,15 @@ import { ItemType } from '../../../../util/item-type.enum';
   styleUrls: ['./select-form.component.scss'],
 })
 export class SelectFormComponent implements OnInit {
+  @Input() set options(temps: Item[]) {
+    this.templates = temps;
+  }
   @Input() set type(item: ItemType) {
     this.itemType = item;
   }
   @Output() back: EventEmitter<boolean> = new EventEmitter();
   @Output() selected: EventEmitter<SubmitEvent> = new EventEmitter();
+  @Output() update: EventEmitter<boolean> = new EventEmitter();
 
   itemType: ItemType = ItemType.card;
   previewImg: string;
@@ -35,14 +39,14 @@ export class SelectFormComponent implements OnInit {
     this.back.emit(true);
   }
 
-  setPreview(pic: Event) {}
+  setPreview(temp: CustomEvent) {
+    this.previewImg = temp.detail.value.tempPic;
+    this.update.emit();
+  }
 
   submitTemp() {
     const tempData: SubmitEvent = {
-      data: {
-        tempName: '',
-        tempPic: '',
-      },
+      data: this.selectType.value,
     };
 
     this.selected.emit(tempData);

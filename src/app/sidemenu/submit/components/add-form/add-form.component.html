@@ -5,7 +5,7 @@
   <ion-list lines="none">
     <ng-container *ngFor="let choice of choices">
       <ion-item *ngIf="choice.display" class="add-check">
-        <ion-checkbox color="tertiary" slot="end" [formControlName]="choice.control" (ionChange)="enableConfirm();"></ion-checkbox>
+        <ion-checkbox color="tertiary" slot="end" [formControlName]="choice.control"></ion-checkbox>
         <ion-label>{{choice.label}}</ion-label>
       </ion-item>
     </ng-container>
@@ -15,7 +15,7 @@
       <ion-button fill="clear" color="danger" (click)="goBack();">Back</ion-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-button fill="clear" color="primary" type="submit" [disabled]="!enableCheck">Next</ion-button>
+      <ion-button fill="clear" color="primary" type="submit">Next</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </form>
