@@ -40,14 +40,14 @@
             <ebc-add-form [picOption]="hasPic" (addData)="updateState($event);" (back)="prevSlide();"></ebc-add-form>
           </div>
         </ion-slide>
-        <ion-slide *ngIf="(formState | async).pic">
+        <ion-slide *ngIf="(formState | async).hasPic">
           <div class="form-slide">
-            <ebc-pic-form></ebc-pic-form>
+            <ebc-pic-form [img]="(formData | async).pic" (back)="prevSlide();" (picData)="updateState($event);"></ebc-pic-form>
           </div>
         </ion-slide>
         <ion-slide *ngIf="(formState | async).social">
           <div class="form-slide">
-            <ebc-social-form></ebc-social-form>
+            <ebc-social-form (back)="prevSlide();" (socialData)="updateState($event);" (update)="updateSlide();"></ebc-social-form>
           </div>
         </ion-slide>
         <ion-slide>

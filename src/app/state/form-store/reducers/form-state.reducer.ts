@@ -7,14 +7,14 @@ import { ItemType } from '../../../util/item-type.enum';
 
 export interface State {
   cat: ItemCat | null;
-  pic: boolean;
+  hasPic: boolean;
   social: boolean;
   type: ItemType;
 }
 
 export const initialState: State = {
   cat: null,
-  pic: false,
+  hasPic: false,
   social: false,
   type: ItemType.card,
 };

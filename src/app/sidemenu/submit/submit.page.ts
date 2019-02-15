@@ -20,7 +20,7 @@ export class SubmitPage implements OnInit {
   @ViewChild('steps') steps: IonSlides;
 
   exist: ItemCat = ItemCat.exist;
-  formPic = this.store.pipe(select(fromForm.selectPic));
+  formData = this.store.pipe(select(fromForm.selectData));
   formState = this.store.pipe(select(fromForm.selectStatus));
   formTemps = this.store.pipe(select(fromForm.selectAll));
   hasPic = false;

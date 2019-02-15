@@ -2,8 +2,8 @@
   <ion-toolbar color="white">
     <ion-title color="dark" slot="start">Add Image / Logo</ion-title>
   </ion-toolbar>
-  <ebc-img-upload></ebc-img-upload>
   <ion-item class="pic-prev">
+    <ebc-img-upload [update]="{ picFile: previewImg, newPic: hasPic }" (imgAction)="selectImg($event);"></ebc-img-upload>
     <ng-container *ngIf="previewImg; else noImg">
       <ion-img [src]="previewImg"></ion-img>
     </ng-container>
@@ -18,7 +18,7 @@
       <ion-button fill="clear" color="danger" (click)="goBack();">Back</ion-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-button fill="clear" color="primary" (click)="next();">Next</ion-button>
+      <ion-button fill="clear" color="primary" [disabled]="!hasImage" (click)="next();">Next</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-list>

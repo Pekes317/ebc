@@ -58,7 +58,7 @@ export class CatFormComponent implements OnInit {
     const catEvent: SubmitEvent = {
       state: {
         cat: this.catType.value,
-        pic: this.catType.value === ItemCat.exist,
+        hasPic: this.catType.value === ItemCat.exist,
       },
     };
     this.selected.emit(catEvent);

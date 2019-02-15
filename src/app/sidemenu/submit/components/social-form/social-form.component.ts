@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActionSheetController } from '@ionic/angular';
 import { from } from 'rxjs';
+
+import { SubmitEvent } from '../../../../models/submit-event.model';
 
 @Component({
   selector: 'ebc-social-form',
@@ -9,9 +11,15 @@ import { from } from 'rxjs';
   styleUrls: ['./social-form.component.scss'],
 })
 export class SocialFormComponent implements OnInit {
+  @Output() back: EventEmitter<boolean> = new EventEmitter();
+  @Output() socialData: EventEmitter<SubmitEvent> = new EventEmitter();
+  @Output() update: EventEmitter<boolean> = new EventEmitter();
+
   selected = '';
   socialForm: FormGroup;
-  socials: FormArray = new FormArray([new FormControl('')]);
+  socials: FormArray = new FormArray([
+    new FormControl('', Validators.required),
+  ]);
 
   constructor(private action: ActionSheetController) {}
 
@@ -64,9 +72,25 @@ export class SocialFormComponent implements OnInit {
     socailAction.present();
   }
 
-  goBack() {}
+  goBack() {
+    this.back.emit();
+  }
+
+  next() {
+    const social: SubmitEvent = {
+      data: this.socialForm.value,
+    };
+
+    this.socialData.emit(social);
+  }
+
+  removeField() {
+    const index = this.socials.length - 1;
+    this.socials.removeAt(index);
+  }
 
   private newField(type: string) {
-    this.socials.push(new FormControl(type));
+    this.socials.push(new FormControl(type, Validators.required));
+    this.update.emit();
   }
 }

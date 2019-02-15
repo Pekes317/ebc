@@ -13,7 +13,7 @@ import * as fromUser from '../../state/user-store/reducers';
 import {
   LoadPicture,
   UploadPicture,
-  UnloadPicture
+  UnloadPicture,
 } from '../../state/user-store/actions/picture.actions';
 import { UpdateUserName } from '../../state/user-store/actions/user.actions';
 import { PictureState } from '../../state/user-store/models/picture-state.model';
@@ -21,14 +21,14 @@ import { PictureState } from '../../state/user-store/models/picture-state.model'
 @Component({
   selector: 'ebc-edit',
   templateUrl: './edit.page.html',
-  styleUrls: ['./edit.page.scss']
+  styleUrls: ['./edit.page.scss'],
 })
 export class EditPage implements OnDestroy, OnInit {
   confirm: FormControl = new FormControl('', Validators.required);
   editForm: FormGroup;
   displayName: FormControl = new FormControl('');
   newPicture: Observable<PictureState> = this.store.pipe(
-    select(fromUser.selectPic)
+    select(fromUser.selectPic),
   );
   passwordForm: FormGroup;
   password: FormControl = new FormControl('', Validators.required);
@@ -41,19 +41,19 @@ export class EditPage implements OnDestroy, OnInit {
     private form: FormHandlerService,
     private store: Store<fromUser.UserState>,
     private toast: ToastController,
-    private user: UsersDataService
+    private user: UsersDataService,
   ) {}
 
   ngOnInit() {
     this.editForm = new FormGroup({
-      displayName: this.displayName
+      displayName: this.displayName,
     });
     this.passwordForm = new FormGroup(
       {
         password: this.password,
-        confirm: this.confirm
+        confirm: this.confirm,
       },
-      this.form.areEqual
+      this.form.areEqual,
     );
   }
 
@@ -61,20 +61,20 @@ export class EditPage implements OnDestroy, OnInit {
     this.store.dispatch(new UnloadPicture());
   }
 
-  editInfo(info) {
+  editInfo(info: FormGroup) {
     const input = info.value;
     this.user.updateUser(input).subscribe((user: UserInfo) => {
       this.store.dispatch(
-        new UpdateUserName({ displayName: user.displayName })
+        new UpdateUserName({ displayName: user.displayName }),
       );
       this.profileUpdated('Username');
       this.editForm.reset();
     });
   }
 
-  editPass(pass) {
+  editPass(pass: FormGroup) {
     const newPass = {
-      password: pass.value.password
+      password: pass.value.password,
     };
     this.user.updateUser(newPass).subscribe(() => {
       this.profileUpdated('Password');
@@ -86,10 +86,17 @@ export class EditPage implements OnDestroy, OnInit {
     const errMess = await this.toast.create({
       message: message,
       position: 'top',
-      duration: 5000
+      duration: 5000,
     });
 
     errMess.present();
+  }
+
+  imgTrigger(newImg: PictureState) {
+    if (newImg.newPic) {
+      return this.picMenu(newImg);
+    }
+    return this.savePic(newImg);
   }
 
   picMenu(img: PictureState) {
@@ -101,7 +108,7 @@ export class EditPage implements OnDestroy, OnInit {
     const editSuccess = await this.toast.create({
       message: `Your ${action} has been updated`,
       position: 'top',
-      duration: 5000
+      duration: 5000,
     });
 
     editSuccess.present();
@@ -110,19 +117,12 @@ export class EditPage implements OnDestroy, OnInit {
   savePic(img: PictureState) {
     const picOpt: UploadOpts = {
       upload_preset: 'usersPic',
-      tags: ['profile']
+      tags: ['profile'],
     };
     const picUpload: UploadImg = {
       img: img.picFile,
-      opts: picOpt
+      opts: picOpt,
     };
     this.store.dispatch(new UploadPicture(picUpload));
-  }
-
-  protected imgTrigger(newImg: PictureState) {
-    if (newImg.newPic) {
-      return this.picMenu(newImg);
-    }
-    return this.savePic(newImg);
   }
 }

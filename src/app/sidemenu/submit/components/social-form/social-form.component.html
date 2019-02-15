@@ -1,4 +1,4 @@
-<form class="social-form" [formGroup]="socialForm">
+<form class="social-form" [formGroup]="socialForm" (ngSubmit)="next();">
   <ion-toolbar color="white">
     <ion-title color="dark" slot="start">Add Social Media / Other Links</ion-title>
   </ion-toolbar>
@@ -13,11 +13,17 @@
       <ion-button class="social-add" color="success" expand="full" shape="round" (click)="addField();">
         <ion-icon name="add"></ion-icon>
       </ion-button>
+      <ion-button class="social-add" color="warning" expand="full" shape="round" (click)="removeField();">
+        <ion-icon name="remove"></ion-icon>
+      </ion-button>
     </ion-list>
   </ng-container>
   <ion-toolbar color="white">
     <ion-buttons slot="start">
       <ion-button fill="clear" color="danger" (click)="goBack();">Back</ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" color="primary" type="submit" [disabled]="socialForm.invalid">Next</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </form>
