@@ -1,0 +1,5 @@
+@import '../../../../../theme//mixins.scss';
+
+.confirm-modal {
+    @include heading;
+}
