@@ -13,6 +13,7 @@ import { SocialFormComponent } from './social-form/social-form.component';
 import { SubmitModalComponent } from './submit-modal/submit-modal.component';
 import { TypeFormComponent } from './type-form/type-form.component';
 import { SharedModule } from '../../../shared/shared.module';
+import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import { SharedModule } from '../../../shared/shared.module';
   declarations: [
     AddFormComponent,
     CatFormComponent,
+    ConfirmModalComponent,
     DetailFormComponent,
     MetadataFormComponent,
     PicFormComponent,
@@ -44,5 +46,6 @@ import { SharedModule } from '../../../shared/shared.module';
     SubmitModalComponent,
     TypeFormComponent,
   ],
+  entryComponents: [ConfirmModalComponent],
 })
 export class ComponentsModule {}

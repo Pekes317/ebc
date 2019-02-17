@@ -1,8 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonSlides } from '@ionic/angular';
+import { IonSlides, ModalController } from '@ionic/angular';
 import { select, Store } from '@ngrx/store';
+import { zip } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { SwiperOptions } from 'swiper';
 
+import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
 import { SubmitEvent } from '../../models/submit-event.model';
 import { ItemCat } from '../../util/item-cat.enum';
 import { UpdateFormData } from '../../state/form-store/actions/form-data.actions';
@@ -31,10 +34,26 @@ export class SubmitPage implements OnInit {
   };
   temp: ItemCat = ItemCat.temp;
 
-  constructor(private store: Store<fromForm.FormStore>) {}
+  constructor(
+    private modelCtl: ModalController,
+    private store: Store<fromForm.FormStore>,
+  ) {}
 
   ngOnInit() {
     this.steps.lockSwipeToNext(true);
+  }
+
+  confirmSubmission() {
+    zip(this.formData, this.formState)
+      .pipe(map(form => ({ formData: form[0], formState: form[1] })))
+      .subscribe(async form => {
+        const modal = await this.modelCtl.create({
+          component: ConfirmModalComponent,
+          componentProps: form,
+        });
+
+        modal.present();
+      });
   }
 
   prevSlide() {

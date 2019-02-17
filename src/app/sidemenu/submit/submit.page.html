@@ -8,94 +8,55 @@
       </ion-card-title>
     </ion-card-header>
     <ion-card-content padding>
-      <ion-slides
-        #steps
-        [options]="stepOptions"
-        (ionSlideDidChange)="updateSlide()"
-      >
+      <ion-slides #steps [options]="stepOptions" (ionSlideDidChange)="updateSlide()">
         <ion-slide>
           <div class="form-slide">
-            <ebc-type-form
-              [type]="(formState | async).type"
-              (selected)="updateState($event)"
-            ></ebc-type-form>
+            <ebc-type-form [type]="(formState | async).type" (selected)="updateState($event)"></ebc-type-form>
           </div>
         </ion-slide>
         <ion-slide>
           <div class="form-slide">
-            <ebc-cat-form
-              [type]="(formState | async).type"
-              (selected)="updateState($event)"
-              (back)="prevSlide()"
-            ></ebc-cat-form>
+            <ebc-cat-form [type]="(formState | async).type" (selected)="updateState($event)" (back)="prevSlide()"></ebc-cat-form>
           </div>
         </ion-slide>
         <ion-slide *ngIf="(formState | async).cat === temp">
           <div class="form-slide">
-            <ebc-select-form
-              [options]="formTemps | async"
-              [type]="(formState | async).type"
-              (selected)="updateState($event)"
-              (back)="prevSlide()"
-              (update)="updateSlide()"
-            ></ebc-select-form>
+            <ebc-select-form [options]="formTemps | async" [type]="(formState | async).type" (selected)="updateState($event)"
+              (back)="prevSlide()" (update)="updateSlide()"></ebc-select-form>
           </div>
         </ion-slide>
         <ion-slide>
           <div class="form-slide">
-            <ebc-metadata-form
-              [type]="(formState | async).type"
-              (metadata)="updateState($event)"
-              (back)="prevSlide()"
-            ></ebc-metadata-form>
+            <ebc-metadata-form [type]="(formState | async).type" (metadata)="updateState($event)" (back)="prevSlide()"></ebc-metadata-form>
           </div>
         </ion-slide>
         <ion-slide *ngIf="(formState | async).cat !== exist">
           <div class="form-slide">
-            <ebc-detail-form
-              [type]="(formState | async).type"
-              (detail)="updateState($event)"
-              (back)="prevSlide()"
-            ></ebc-detail-form>
+            <ebc-detail-form [type]="(formState | async).type" (detail)="updateState($event)" (back)="prevSlide()"></ebc-detail-form>
           </div>
         </ion-slide>
         <ion-slide>
           <div class="form-slide">
-            <ebc-add-form
-              [picOption]="hasPic"
-              (addData)="updateState($event)"
-              (back)="prevSlide()"
-            ></ebc-add-form>
+            <ebc-add-form [picOption]="hasPic" (addData)="updateState($event)" (back)="prevSlide()"></ebc-add-form>
           </div>
         </ion-slide>
         <ion-slide *ngIf="(formState | async).hasPic">
           <div class="form-slide">
-            <ebc-pic-form
-              [img]="(formData | async).pic"
-              (back)="prevSlide()"
-              (picData)="updateState($event)"
-            ></ebc-pic-form>
+            <ebc-pic-form [img]="(formData | async).pic" (back)="prevSlide()" (picData)="updateState($event)"></ebc-pic-form>
           </div>
         </ion-slide>
         <ion-slide *ngIf="(formState | async).social">
           <div class="form-slide">
-            <ebc-social-form
-              (back)="prevSlide()"
-              (socialData)="updateState($event)"
-              (update)="updateSlide()"
-            ></ebc-social-form>
+            <ebc-social-form (back)="prevSlide()" (socialData)="updateState($event)" (update)="updateSlide()"></ebc-social-form>
           </div>
         </ion-slide>
         <ion-slide>
           <div class="form-slide final-btn">
-            <ion-button color="primary" expand="full"
-              >Confirm {{ (formState | async).type }} Submission</ion-button
-            >
+            <ion-button color="primary" expand="full" (click)="confirmSubmission();">Confirm {{ (formState |
+              async).type }} Submission</ion-button>
             <ion-toolbar color="white">
               <ion-buttons slot="start">
-                <ion-button fill="clear" color="danger" (click)="prevSlide()"
-                  >Back</ion-button
-                >
+                <ion-button fill="clear" color="danger" (click)="prevSlide()">Back</ion-button>
               </ion-buttons>
             </ion-toolbar>
           </div>
