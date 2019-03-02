@@ -10,7 +10,6 @@ import { MetadataFormComponent } from './metadata-form/metadata-form.component';
 import { PicFormComponent } from './pic-form/pic-form.component';
 import { SelectFormComponent } from './select-form/select-form.component';
 import { SocialFormComponent } from './social-form/social-form.component';
-import { SubmitModalComponent } from './submit-modal/submit-modal.component';
 import { TypeFormComponent } from './type-form/type-form.component';
 import { SharedModule } from '../../../shared/shared.module';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
@@ -32,7 +31,6 @@ import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
     PicFormComponent,
     SelectFormComponent,
     SocialFormComponent,
-    SubmitModalComponent,
     TypeFormComponent,
   ],
   exports: [
@@ -43,7 +41,6 @@ import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
     PicFormComponent,
     SelectFormComponent,
     SocialFormComponent,
-    SubmitModalComponent,
     TypeFormComponent,
   ],
   entryComponents: [ConfirmModalComponent],

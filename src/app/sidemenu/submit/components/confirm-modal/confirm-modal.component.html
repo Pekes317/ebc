@@ -10,7 +10,28 @@
 </ion-header>
 
 <ion-content class="confirm-modal" padding>
-  <p>
-    confirm-modal works!
-  </p>
+  <ion-list>
+    <ion-list-header>
+      <ion-label color="primary">
+        <h2 class="confirm-header">Please Verify</h2>
+      </ion-label>
+    </ion-list-header>
+    <ion-item>
+      <ion-label class="label-bold">Title:</ion-label>
+      {{formData.name}}
+    </ion-item>
+    <ion-item>
+      <ion-label class="label-bold">Description:</ion-label>
+      {{formData.desc}}
+    </ion-item>
+    <ion-item>
+      <ion-label class="label-bold">Instructions:</ion-label>
+      {{formData.details}}
+    </ion-item>
+    <ion-list-header color="light">
+      <ion-label color="tertiary">
+        <h2 class="label-bold">Contact Info</h2>
+      </ion-label>
+    </ion-list-header>
+  </ion-list>
 </ion-content>

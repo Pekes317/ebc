@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
 import { SubmitEvent } from '../../../../models/submit-event.model';
@@ -10,7 +17,7 @@ import { ItemType } from '../../../../util/item-type.enum';
   templateUrl: './detail-form.component.html',
   styleUrls: ['./detail-form.component.scss'],
 })
-export class DetailFormComponent implements OnInit {
+export class DetailFormComponent implements OnChanges, OnInit {
   @Input() set type(item: ItemType) {
     this.itemType = item;
   }
@@ -20,6 +27,7 @@ export class DetailFormComponent implements OnInit {
   detailForm: FormGroup;
   email: FormControl = new FormControl('', this.formValid.emailValidator);
   itemType: ItemType = ItemType.card;
+  placeholderText = 'Contact Name';
   phone: FormControl = new FormControl('', this.formValid.phoneValidator);
   title: FormControl = new FormControl('');
 
@@ -31,6 +39,11 @@ export class DetailFormComponent implements OnInit {
       phone: this.phone,
       title: this.title,
     });
+  }
+
+  ngOnChanges() {
+    this.placeholderText =
+      this.itemType === ItemType.card ? 'Contact Name' : 'Event Name or Title';
   }
 
   goBack() {

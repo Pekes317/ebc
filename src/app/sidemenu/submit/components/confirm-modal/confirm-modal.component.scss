@@ -2,4 +2,19 @@
 
 .confirm-modal {
     @include heading;
+
+    .confirm-header {
+        font-size: 1.2rem;
+        font-weight: 600;
+    }
+
+    .label-bold {
+        font-weight: 600;
+    }
+
+    .list-divider {
+        border-bottom: 1px solid var(--ion-color-dark);
+        border-top: 1px solid var(--ion-color-dark);
+        padding-bottom: 1rem;
+    }
 }

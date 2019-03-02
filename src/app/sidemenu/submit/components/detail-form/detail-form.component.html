@@ -1,29 +1,28 @@
-<form class="detail-form" [formGroup]="detailForm" (ngSubmit)="submitDetail();">
+<form class="detail-form" [formGroup]="detailForm" (ngSubmit)="submitDetail()">
   <ion-toolbar color="white">
-    <ion-title color="dark" slot="start">Info Goes on {{itemType}}</ion-title>
+    <ion-title color="dark" slot="start">Info Goes on {{ itemType }}</ion-title>
   </ion-toolbar>
   <ion-list>
     <ion-item>
-      <ion-label position="stacked">On {{itemType}} Name or Title</ion-label>
-      <ion-input color="medium" clear-input="true" clear-on-edit="true" [placeholder]="itemType+ ' Title'"
-        formControlName="title">
+      <ion-label position="stacked">On {{ itemType }} Name or Title</ion-label>
+      <ion-input color="medium" clear-input="true" clear-on-edit="true" [placeholder]="placeholderText" formControlName="title">
       </ion-input>
     </ion-item>
     <ion-item [class.myError]="!phone.valid && phone.touched">
       <ion-label position="stacked">Phone</ion-label>
-      <ion-input color="medium" clear-input="true" clear-on-edit="true" type="tel" [placeholder]="itemType+ ' Info'"
+      <ion-input color="medium" clear-input="true" clear-on-edit="true" type="tel" placeholder="Contact Phone Info"
         formControlName="phone">
       </ion-input>
     </ion-item>
     <ion-item [class.myError]="!email.valid && email.touched">
       <ion-label position="stacked">Email</ion-label>
-      <ion-input color="medium" clear-on-edit="true" placeholder="Where does your Interactive Info Go?" formControlName="email">
+      <ion-input color="medium" clear-on-edit="true" placeholder="Contact Email Info" formControlName="email">
       </ion-input>
     </ion-item>
   </ion-list>
   <ion-toolbar color="white">
     <ion-buttons slot="start">
-      <ion-button fill="clear" color="danger" (click)="goBack();">Back</ion-button>
+      <ion-button fill="clear" color="danger" (click)="goBack()">Back</ion-button>
     </ion-buttons>
     <ion-buttons slot="end">
       <ion-button fill="clear" color="primary" type="submit">Next</ion-button>
