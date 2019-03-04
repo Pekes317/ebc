@@ -2,7 +2,7 @@
   <ion-toolbar color="tertiary">
     <ion-title>Submit Confirmation</ion-title>
     <ion-buttons slot="end">
-      <ion-button shape="round" icon-only (click)="closeModal();">
+      <ion-button shape="round" icon-only (click)="closeModal()">
         <ion-icon name="close"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -16,22 +16,81 @@
         <h2 class="confirm-header">Please Verify</h2>
       </ion-label>
     </ion-list-header>
+    <ion-item *ngIf="formState.hasPic">
+      <ion-label class="label-bold">Uploaded Image:</ion-label>
+      <ion-thumbnail>
+        <ion-img [src]="formData.pic"></ion-img>
+      </ion-thumbnail>
+    </ion-item>
     <ion-item>
       <ion-label class="label-bold">Title:</ion-label>
-      {{formData.name}}
+      {{ formData.name }}
     </ion-item>
     <ion-item>
       <ion-label class="label-bold">Description:</ion-label>
-      {{formData.desc}}
+      <div class="default-desc" *ngIf="isDefault else desc">
+        <span>{{defaultDesc}}</span>
+        <ion-note color="warning">Using Default</ion-note>
+      </div>
+      <ng-template #desc>
+        {{formData.desc}}
+      </ng-template>
     </ion-item>
     <ion-item>
       <ion-label class="label-bold">Instructions:</ion-label>
-      {{formData.details}}
+      {{ formData.details }}
     </ion-item>
-    <ion-list-header color="light">
+    <ion-item>
+      <ion-label class="label-bold">Type:</ion-label>
+      {{ formState.type }}
+    </ion-item>
+    <ion-list-header class="list-divider" color="light">
       <ion-label color="tertiary">
         <h2 class="label-bold">Contact Info</h2>
       </ion-label>
     </ion-list-header>
+    <ion-item>
+      <ion-label class="label-bold">
+        {{ formState.type === 'Card' ? 'Contact Name' : 'Event Name or Title' }}:
+      </ion-label>
+      {{ formData.title }}
+    </ion-item>
+    <ion-item>
+      <ion-label class="label-bold">Contact Phone</ion-label>
+      {{ formData.phone }}
+    </ion-item>
+    <ion-item>
+      <ion-label class="label-bold">Contact Email</ion-label>
+      {{ formData.email }}
+    </ion-item>
+    <ng-container *ngIf="formState.cat === isTemp">
+      <ion-list-header class="list-divider" color="light">
+        <ion-label color="tertiary">
+          <h2 class="label-bold">Template Info</h2>
+        </ion-label>
+      </ion-list-header>
+      <ion-item>
+        <ion-label class="label-bold">Template Name:</ion-label>
+        {{ formData.tempName }}
+      </ion-item>
+      <ion-item>
+        <ion-label class="label-bold">Template Sample Image:</ion-label>
+        <ion-thumbnail>
+          <ion-img [src]="formData.tempPic"></ion-img>
+        </ion-thumbnail>
+      </ion-item>
+    </ng-container>
+    <ng-container *ngIf="formState.social">
+      <ion-list-header class="list-divider" color="light">
+        <ion-label color="tertiary">
+          <h2 class="label-bold">Socials Info</h2>
+        </ion-label>
+      </ion-list-header>
+      <ng-container *ngFor="let soical of formData.socials">
+        <ion-item>
+          {{ soical }}
+        </ion-item>
+      </ng-container>
+    </ng-container>
   </ion-list>
 </ion-content>

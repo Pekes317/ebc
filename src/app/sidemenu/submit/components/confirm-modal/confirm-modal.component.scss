@@ -8,13 +8,18 @@
         font-weight: 600;
     }
 
+    .default-desc {
+        align-items: flex-end;
+        display: flex;
+        flex-direction: column;
+    }
+
     .label-bold {
         font-weight: 600;
     }
 
     .list-divider {
-        border-bottom: 1px solid var(--ion-color-dark);
-        border-top: 1px solid var(--ion-color-dark);
-        padding-bottom: 1rem;
+        border-bottom: 1px inset var(--ion-color-light-shade);
+        padding-bottom: 1.25rem;
     }
 }

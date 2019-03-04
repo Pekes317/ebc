@@ -25,7 +25,7 @@ export class SocialFormComponent implements OnInit {
 
   ngOnInit() {
     this.socialForm = new FormGroup({
-      social: this.socials,
+      socials: this.socials,
     });
   }
 
