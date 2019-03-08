@@ -10,6 +10,7 @@ import { SubmitEvent } from '../../models/submit-event.model';
 import { ItemCat } from '../../util/item-cat.enum';
 import {
   ResetFormData,
+  SaveFormData,
   UpdateFormData,
 } from '../../state/form-store/actions/form-data.actions';
 import {
@@ -61,6 +62,12 @@ export class SubmitPage implements OnDestroy, OnInit {
         const modal = await this.modelCtl.create({
           component: ConfirmModalComponent,
           componentProps: form,
+        });
+
+        modal.onDidDismiss().then(item => {
+          if (item.data) {
+            this.store.dispatch(new SaveFormData(item.data));
+          }
         });
 
         modal.present();

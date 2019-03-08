@@ -93,4 +93,12 @@
       </ng-container>
     </ng-container>
   </ion-list>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="danger" fill="solid" (click)="closeModal();">Cancel</ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button color="primary" fill="solid" (click)="setItem();">Submit</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-content>
