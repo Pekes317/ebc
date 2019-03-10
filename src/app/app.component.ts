@@ -13,12 +13,12 @@ import { UsersDataService } from './providers/users-data.service';
 import * as fromUser from './state/user-store/reducers';
 import {
   LoadUser,
-  RedirectUser
+  RedirectUser,
 } from './state/user-store/actions/user.actions';
 
 @Component({
   selector: 'ebc-root',
-  templateUrl: 'app.component.html'
+  templateUrl: 'app.component.html',
 })
 export class AppComponent implements OnInit {
   constructor(
@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
     private statusBar: StatusBar,
     private storage: Storage,
     private store: Store<fromUser.State>,
-    private user: UsersDataService
+    private user: UsersDataService,
   ) {}
 
   ngOnInit() {
@@ -49,11 +49,11 @@ export class AppComponent implements OnInit {
 
       this.deeplinks
         .route({
-          '/card/:id': 'deep'
+          '/card/:id': 'deep',
         })
         .subscribe(
           match => console.log('Successfully matched route', match),
-          nomatch => console.log('Successfully matched route', nomatch)
+          nomatch => console.log('Successfully matched route', nomatch),
         );
     });
   }
@@ -65,7 +65,7 @@ export class AppComponent implements OnInit {
         const authUser = {
           displayName: user.displayName,
           email: user.email,
-          photoUrl: user.photoURL
+          photoUrl: user.photoURL,
         };
         this.setAuthState(true, token, authUser);
       } else {
@@ -92,7 +92,6 @@ export class AppComponent implements OnInit {
     const push: Subscription = this.pushStream();
     const refresh = this.refreshStream();
     if (!on) {
-      console.log('Notification Off');
       push.unsubscribe();
       refresh.unsubscribe();
       // this.removeDevice();
@@ -137,26 +136,25 @@ export class AppComponent implements OnInit {
       .onTokenRefresh()
       .subscribe(
         token => this.user.notifyUpdate(token),
-        err => console.log(err)
+        err => console.log(err),
       );
   }
 
-  private registerPermissions() {
-    this.firebase
-      .grantPermission()
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
-    this.firebase
-      .getToken()
-      .then(token => this.user.notifyEnroll(token))
-      .catch(err => console.log(err));
+  private async registerPermissions() {
+    try {
+      await this.firebase.grantPermission();
+      const token = await this.firebase.getToken();
+      this.user.notifyEnroll(token);
+    } catch (error) {
+      this.firebase.logError(error);
+    }
   }
 
   private setAuthState(status: boolean, authToken?: string, user?: any) {
     if (status) {
       const authUser = {
         ...user,
-        token: authToken
+        token: authToken,
       };
       this.store.dispatch(new LoadUser(authUser));
       this.store.dispatch(new RedirectUser('/sidemenu'));

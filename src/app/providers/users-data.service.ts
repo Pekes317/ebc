@@ -4,31 +4,21 @@ import { Storage } from '@ionic/storage';
 import { Events } from '@ionic/angular';
 import { catchError } from 'rxjs/operators';
 
-import { User } from '../models/user.model';
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UsersDataService {
   myApi = 'https://ebc.beezleeart.com';
-  myUser: User;
 
   constructor(
     public events: Events,
     public http: HttpClient,
-    public storage: Storage
+    public storage: Storage,
   ) {}
-
-  getUser() {
-    return this.storage
-      .get('ebcUser')
-      .then(user => JSON.parse(user))
-      .catch(err => console.log(err));
-  }
 
   notifyEnroll(token: string) {
     const deviceData = {
-      token: token
+      token: token,
     };
 
     this.http
@@ -54,24 +44,12 @@ export class UsersDataService {
       .catch(err => console.log(err));
   }
 
-  setUser(userUpdate: any) {
-    if (userUpdate) {
-      this.myUser = {
-        displayName: userUpdate.displayName,
-        email: userUpdate.email,
-        photoUrl: userUpdate.photoURL
-      };
-    }
-    this.storage.set('ebcUser', this.myUser);
-    this.events.publish('myUser', this.myUser);
-  }
-
   updateUser(newUser: any) {
     return this.http.post(`${this.myApi}/api/auth/update`, newUser).pipe(
       catchError((err, caught) => {
         console.log(err);
         return caught;
-      })
+      }),
     );
   }
 
@@ -91,7 +69,7 @@ export class UsersDataService {
 
   private upDev(id: number, data: string) {
     const newToken = {
-      token: data
+      token: data,
     };
     console.log(newToken, id);
   }

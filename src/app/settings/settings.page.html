@@ -1,9 +1,26 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>settings</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ebc-navbar back="true" color="tertiary">Settings</ebc-navbar>
 
-<ion-content padding>
-
+<ion-content class="settings">
+  <ion-card>
+    <ion-card-header>
+      <ion-text color="medium">
+        <h3>App Settings</h3>
+      </ion-text>
+    </ion-card-header>
+    <ion-card-content>
+      <form>
+        <ion-list lines="none">
+          <ion-item>
+            <ion-label>Notification Messages</ion-label>
+            <ion-toggle color="secondary"></ion-toggle>
+          </ion-item>
+        </ion-list>
+        <ion-toolbar color="white">
+          <ion-buttons slot="end">
+            <ion-button color="primary" fill="outline">Save</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </form>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

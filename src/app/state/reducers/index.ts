@@ -3,20 +3,23 @@ import {
   ActionReducerMap,
   createFeatureSelector,
   createSelector,
-  MetaReducer
+  MetaReducer,
 } from '@ngrx/store';
 import { storeFreeze } from 'ngrx-store-freeze';
 import * as fromRouter from '@ngrx/router-store';
 
+import * as fromAppSetting from './app-setting.reducer';
 import { environment } from '../../../environments/environment';
 import { RouterState } from '../shared/router-state-util';
 
 export interface State {
+  app: fromAppSetting.State;
   router: fromRouter.RouterReducerState<RouterState>;
 }
 
 export const reducers: ActionReducerMap<State> = {
-  router: fromRouter.routerReducer
+  app: fromAppSetting.reducer,
+  router: fromRouter.routerReducer,
 };
 
 // console.log all actions
@@ -39,5 +42,5 @@ export const routerState = createFeatureSelector<
 
 export const getRouter = createSelector(
   routerState,
-  (route: fromRouter.RouterReducerState<RouterState>) => route.state
+  (route: fromRouter.RouterReducerState<RouterState>) => route.state,
 );
