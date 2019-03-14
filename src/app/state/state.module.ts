@@ -2,36 +2,37 @@ import {
   ModuleWithProviders,
   NgModule,
   Optional,
-  SkipSelf
+  SkipSelf,
 } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import {
   RouterStateSerializer,
-  StoreRouterConnectingModule
+  StoreRouterConnectingModule,
 } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { environment } from '../../environments/environment';
+import { AppSettingEffect } from './effects/app-setting.effects';
 import { RouterStateUtil } from './shared/router-state-util';
 import { metaReducers, reducers } from './reducers';
 import { UserStoreModule } from './user-store/user-store.module';
 
 @NgModule({
   imports: [
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([AppSettingEffect]),
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
     UserStoreModule,
-    !environment.production ? StoreDevtoolsModule.instrument() : []
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],
-  declarations: []
+  declarations: [],
 })
 export class StateModule {
   constructor(@Optional() @SkipSelf() parentModule: StateModule) {
     if (parentModule) {
       throw new Error(
-        'StateModule is already loaded. Import it in the AppModule only'
+        'StateModule is already loaded. Import it in the AppModule only',
       );
     }
   }
@@ -39,7 +40,9 @@ export class StateModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: StateModule,
-      providers: [{ provide: RouterStateSerializer, useClass: RouterStateUtil }]
+      providers: [
+        { provide: RouterStateSerializer, useClass: RouterStateUtil },
+      ],
     };
   }
 }

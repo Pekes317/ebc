@@ -16,6 +16,12 @@ export class UsersDataService {
     public storage: Storage,
   ) {}
 
+  async checkDevice() {
+    const device = await this.storage.get('device');
+    console.log(device ? true : false);
+    return device ? true : false;
+  }
+
   notifyEnroll(token: string) {
     const deviceData = {
       token: token,

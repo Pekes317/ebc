@@ -13,23 +13,28 @@ const routes: Routes = [
       {
         path: 'item/:list/:form/:id',
         loadChildren: './item/item.module#ItemPageModule',
-        data: { inState: true }
+        data: { inState: true },
+      },
+      {
+        path: 'ebc/:form/:id',
+        loadChildren: './item/item.module#ItemPageModule',
+        data: { inState: false },
       },
       { path: 'list', loadChildren: './list/list.module#ListPageModule' },
       {
         path: 'profile',
-        loadChildren: './profile/profile.module#ProfilePageModule'
+        loadChildren: './profile/profile.module#ProfilePageModule',
       },
       {
         path: 'submit',
-        loadChildren: './submit/submit.module#SubmitPageModule'
-      }
-    ]
-  }
+        loadChildren: './submit/submit.module#SubmitPageModule',
+      },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class SidemenuRoutingModule {}

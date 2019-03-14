@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { Contact } from '@ionic-native/contacts/ngx';
 import { select, Store } from '@ngrx/store';
@@ -41,7 +41,7 @@ export class ItemPage implements OnInit {
       .subscribe(data => (this.inState = data.inState));
     this.route.params.pipe(take(1)).subscribe(params => {
       this.itemId = params.id;
-      this.type = params.form.substr(0, params.form.length - 1);
+      this.type = params.form;
       this.getItem(params);
     });
     this.getMedia();
@@ -51,7 +51,7 @@ export class ItemPage implements OnInit {
     this.selected = contact;
   }
 
-  getItem(params) {
+  getItem(params: Params) {
     if (this.inState) {
       this.itemState =
         params.form === 'card'
@@ -94,7 +94,6 @@ export class ItemPage implements OnInit {
       this.share.show = true;
       this.share.name = this.selected.name;
     }
-    console.log(this.share);
   }
 
   async sentMsg(type: string) {
