@@ -1,16 +1,8 @@
-import { DeeplinkMatch } from '@ionic-native/deeplinks/ngx';
 import { Action } from '@ngrx/store';
 
 export enum AppSettingActionTypes {
-  DeepLinkAppSetting = '[AppSetting] DeepLink AppSetting',
   LoadAppSettings = '[AppSetting] Load AppSettings',
   NotifyAppSetting = '[AppSetting] Notify AppSettings',
-}
-
-export class DeepLinkAppSetting implements Action {
-  readonly type = AppSettingActionTypes.DeepLinkAppSetting;
-
-  constructor(public payload: DeeplinkMatch) {}
 }
 
 export class LoadAppSettings implements Action {
@@ -23,7 +15,4 @@ export class NotifyAppSetting implements Action {
   constructor(public payload: boolean) {}
 }
 
-export type AppSettingActions =
-  | DeepLinkAppSetting
-  | LoadAppSettings
-  | NotifyAppSetting;
+export type AppSettingActions = LoadAppSettings | NotifyAppSetting;

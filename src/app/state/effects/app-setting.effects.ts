@@ -27,6 +27,13 @@ export class AppSettingEffect {
     ),
   );
 
+  @Effect({ dispatch: false })
+  onNotify$ = this.actions$.pipe(
+    ofType<NotifyAppSetting>(AppSettingActionTypes.NotifyAppSetting),
+    map(action => action.payload),
+    exhaustMap(notify => this.userService.setNotify(notify)),
+  );
+
   constructor(
     private actions$: Actions,
     private userService: UsersDataService,

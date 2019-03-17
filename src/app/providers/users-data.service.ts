@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { Events } from '@ionic/angular';
+import { Firebase } from '@ionic-native/firebase/ngx';
 import { catchError } from 'rxjs/operators';
+
+import { StorageKeys } from '../util/config';
 
 @Injectable({
   providedIn: 'root',
@@ -11,15 +13,18 @@ export class UsersDataService {
   myApi = 'https://ebc.beezleeart.com';
 
   constructor(
-    public events: Events,
+    public firebase: Firebase,
     public http: HttpClient,
     public storage: Storage,
   ) {}
 
   async checkDevice() {
-    const device = await this.storage.get('device');
-    console.log(device ? true : false);
-    return device ? true : false;
+    let device = await this.storage.get(StorageKeys.notify);
+    if (device === undefined || device === null) {
+      device = true;
+      await this.storage.set(StorageKeys.notify, true);
+    }
+    return device;
   }
 
   notifyEnroll(token: string) {
@@ -29,54 +34,63 @@ export class UsersDataService {
 
     this.http
       .post(`${this.myApi}/api/mobile/register`, deviceData)
-      .subscribe((id: number) => this.saveDev(id), err => console.log(err));
+      .subscribe(
+        (id: number) => this.saveDev(id, token),
+        err => this.firebase.logError(err),
+      );
   }
 
-  notifyRemove(id: string) {
+  notifyRemove() {
     this.storage
-      .get('device')
-      .then(() => {
+      .get(StorageKeys.device)
+      .then(device => {
         this.http
-          .delete(`${this.myApi}/api/obj/equipment/${id}`)
+          .delete(`${this.myApi}/api/obj/equipment/${device.id}`)
           .subscribe(() => this.removeDev());
       })
-      .catch(err => console.log(err));
+      .catch(err => this.firebase.logError(err));
   }
 
   notifyUpdate(token: string) {
     this.storage
-      .get('device')
-      .then(id => this.upDev(id, token))
-      .catch(err => console.log(err));
+      .get(StorageKeys.device)
+      .then(id => this.saveDev(id, token))
+      .catch(err => this.firebase.logError(err));
+  }
+
+  async setNotify(isOn: boolean) {
+    await this.storage.set(StorageKeys.notify, isOn);
+    if (isOn) {
+      await this.notifyOn();
+    }
   }
 
   updateUser(newUser: any) {
     return this.http.post(`${this.myApi}/api/auth/update`, newUser).pipe(
       catchError((err, caught) => {
-        console.log(err);
+        this.firebase.logError(err);
         return caught;
       }),
     );
   }
 
+  private async notifyOn() {
+    if (!this.firebase.hasPermission) {
+      await this.firebase.grantPermission();
+    }
+    const token = await this.firebase.getToken();
+    this.notifyEnroll(token);
+  }
+
   private removeDev() {
     this.storage
-      .remove('device')
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
+      .remove(StorageKeys.device)
+      .catch(err => this.firebase.logError(err));
   }
 
-  private saveDev(id: number) {
+  private saveDev(id: number, token: string) {
     this.storage
-      .set('device', id)
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
-  }
-
-  private upDev(id: number, data: string) {
-    const newToken = {
-      token: data,
-    };
-    console.log(newToken, id);
+      .set(StorageKeys.device, { id, token })
+      .catch(err => this.firebase.logError(err));
   }
 }

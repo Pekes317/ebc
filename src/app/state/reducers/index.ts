@@ -36,6 +36,8 @@ export const metaReducers: MetaReducer<State>[] = !environment.production
   ? [logger, storeFreeze]
   : [];
 
+export const appState = createFeatureSelector<fromAppSetting.State>('app');
+
 export const routerState = createFeatureSelector<
   fromRouter.RouterReducerState<RouterState>
 >('router');
@@ -43,4 +45,9 @@ export const routerState = createFeatureSelector<
 export const getRouter = createSelector(
   routerState,
   (route: fromRouter.RouterReducerState<RouterState>) => route.state,
+);
+
+export const getSettings = createSelector(
+  appState,
+  (state: fromAppSetting.State) => state,
 );

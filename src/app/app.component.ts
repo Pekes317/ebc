@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { Events, Platform } from '@ionic/angular';
+import { Platform } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
-import { Deeplinks } from '@ionic-native/deeplinks/ngx';
+import { Deeplinks, DeeplinkMatch } from '@ionic-native/deeplinks/ngx';
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
+import { select, Store } from '@ngrx/store';
 
 import { UsersDataService } from './providers/users-data.service';
-import * as fromUser from './state/user-store/reducers';
+import * as fromRoot from './state/reducers';
 import {
   LoadUser,
   RedirectUser,
@@ -21,23 +20,26 @@ import {
   templateUrl: 'app.component.html',
 })
 export class AppComponent implements OnInit {
+  private appSettings = this.store.pipe(select(fromRoot.getSettings));
+  private deeplink: DeeplinkMatch | null = null;
+  private hasDeeplink = false;
+
   constructor(
     private fireAuth: AngularFireAuth,
     private platform: Platform,
     private deeplinks: Deeplinks,
-    private events: Events,
     private firebase: Firebase,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private storage: Storage,
-    private store: Store<fromUser.State>,
+    private store: Store<fromRoot.State>,
     private user: UsersDataService,
   ) {}
 
   ngOnInit() {
     this.initializeApp();
     this.authCheck();
-    this.myEvents();
+    this.checkSettings();
   }
 
   initializeApp() {
@@ -49,11 +51,14 @@ export class AppComponent implements OnInit {
 
       this.deeplinks
         .route({
-          '/card/:id': 'deep',
+          '/card/:id': '/sidemenu/ebc/',
         })
         .subscribe(
-          match => console.log('Successfully matched route', match),
-          nomatch => console.log('Successfully matched route', nomatch),
+          match => {
+            this.deeplink = match;
+            this.hasDeeplink = true;
+          },
+          nomatch => this.firebase.logError(`No route matched ${nomatch}`),
         );
     });
   }
@@ -72,81 +77,17 @@ export class AppComponent implements OnInit {
         this.setAuthState(false);
       }
     });
-
-    this.storage
-      .get('notify')
-      .then(res => this.noitified(res))
-      .catch(err => console.log(err));
   }
 
-  myEvents() {
-    this.events.subscribe('alerts', fire => {
-      if (fire) {
-        this.registerDevice();
-      }
-      this.noitified(fire);
+  private checkSettings() {
+    this.appSettings.subscribe(settings => {
+      this.setNotify(settings.notify);
     });
   }
 
-  noitified(on: boolean) {
-    const push: Subscription = this.pushStream();
-    const refresh = this.refreshStream();
-    if (!on) {
-      push.unsubscribe();
-      refresh.unsubscribe();
-      // this.removeDevice();
-    }
-    this.firebase
-      .hasPermission()
-      .then(enabled => console.log(enabled))
-      .catch(err => console.log(err));
-  }
-
-  registerDevice() {
-    this.storage
-      .get('device')
-      .then(id => {
-        if (!id) {
-          this.registerPermissions();
-        }
-      })
-      .catch(err => console.log(err));
-  }
-
-  removeDevice() {
-    this.storage
-      .get('device')
-      .then(id => this.user.notifyRemove(id))
-      .catch(err => console.log(err));
-    this.firebase.unregister();
-  }
-
-  private pushStream() {
-    return this.firebase.onNotificationOpen().subscribe(data => {
-      if (data.wasTapped) {
-        console.log('Received in background');
-      } else {
-        console.log('Received in foreground');
-      }
-    });
-  }
-
-  private refreshStream() {
-    return this.firebase
-      .onTokenRefresh()
-      .subscribe(
-        token => this.user.notifyUpdate(token),
-        err => console.log(err),
-      );
-  }
-
-  private async registerPermissions() {
-    try {
-      await this.firebase.grantPermission();
-      const token = await this.firebase.getToken();
-      this.user.notifyEnroll(token);
-    } catch (error) {
-      this.firebase.logError(error);
+  private isRedirected() {
+    if (this.hasDeeplink) {
+      console.log(this.deeplink);
     }
   }
 
@@ -160,6 +101,16 @@ export class AppComponent implements OnInit {
       this.store.dispatch(new RedirectUser('/sidemenu'));
     } else {
       this.store.dispatch(new RedirectUser('/login'));
+    }
+    this.isRedirected();
+  }
+
+  private setNotify(notify: boolean) {
+    if (notify) {
+      this.firebase
+        .onTokenRefresh()
+        .subscribe(token => this.user.notifyUpdate(token));
+      this.firebase.onNotificationOpen();
     }
   }
 }
